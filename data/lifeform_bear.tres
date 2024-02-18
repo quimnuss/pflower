@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="LifeformAnimalResource" load_steps=5 format=3 uid="uid://bt2m0w2tchcwy"]
+
+[ext_resource type="Script" path="res://data/lifeform_animal_resource.gd" id="1_3cufi"]
+[ext_resource type="Texture2D" uid="uid://md4ykrlp1l5g" path="res://art/lifeforms/outline/MiniBear.png" id="1_7ctno"]
+[ext_resource type="AnimationLibrary" uid="uid://cnfrav1iraafw" path="res://scenes/actors/animations/bear_animation_library.tres" id="2_kmpgw"]
+[ext_resource type="SpriteFrames" uid="uid://brm8jts6qg1ow" path="res://scenes/actors/animations/deprecated/bear_sprite_frames.tres" id="3_re2rl"]
+
+[resource]
+script = ExtResource("1_3cufi")
+lifeform_type = "animal"
+mobility_type = "run"
+name = "bear"
+species = 2
+scale = 1.0
+speed = 40.0
+spriteframes = ExtResource("3_re2rl")
+animation_library = ExtResource("2_kmpgw")
+texture = ExtResource("1_7ctno")
+texture_shape = Vector2i(10, 8)
+texture_coords = Vector2i(0, 0)
+region = Rect2i(0, 0, 0, 0)

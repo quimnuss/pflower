@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LifeformAnimalResource" load_steps=3 format=3 uid="uid://sa3njq020ysu"]
+
+[ext_resource type="Texture2D" uid="uid://crdbn81g6qxjc" path="res://art/lifeforms/veggies.png" id="1_otbck"]
+[ext_resource type="Script" path="res://data/lifeform_animal_resource.gd" id="2_03nt4"]
+
+[resource]
+script = ExtResource("2_03nt4")
+lifeform_type = "flora"
+mobility_type = "static"
+name = "carrot"
+species = 1
+scale = 0.5
+speed = 0.0
+texture = ExtResource("1_otbck")
+texture_shape = Vector2i(12, 6)
+texture_coords = Vector2i(0, 0)
+region = Rect2i(0, 0, 0, 0)

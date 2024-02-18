@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LifeformAnimalResource" load_steps=3 format=3 uid="uid://d26ik1uqudta4"]
+
+[ext_resource type="Texture2D" uid="uid://d4i1wompjrt8l" path="res://art/lifeforms/fruit.png" id="1_kpcwo"]
+[ext_resource type="Script" path="res://data/lifeform_animal_resource.gd" id="2_xo2eb"]
+
+[resource]
+script = ExtResource("2_xo2eb")
+lifeform_type = "flora"
+mobility_type = "static"
+name = "berry"
+species = 11
+scale = 0.8
+speed = 100.0
+texture = ExtResource("1_kpcwo")
+texture_shape = Vector2i(38, 6)
+texture_coords = Vector2i(15, 3)
+region = Rect2i(0, 0, 0, 0)
