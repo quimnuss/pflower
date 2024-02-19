@@ -15,8 +15,8 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="13_3eo3j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pqhh5"]
-radius = 8.0
-height = 16.0
+radius = 12.0
+height = 24.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_sif72"]
 font_size = 7
@@ -42,7 +42,8 @@ motion_mode = 1
 script = ExtResource("1_su0uu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
 texture = ExtResource("2_qchi3")
 hframes = 7
 vframes = 7
@@ -55,7 +56,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_pqhh5")
 script = ExtResource("4_2tbgm")
 

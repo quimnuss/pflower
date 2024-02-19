@@ -60,17 +60,17 @@ func _input(event):
 func _process(delta):
     var tile : Vector2i = tilemap.local_to_map(self.position)
     var tiledata : TileData = tilemap.get_cell_tile_data(1,tile)
-    tilemap.set_cells_terrain_connect(1, [tile], 1, tile_type, false)
+    tilemap.set_cells_terrain_connect(1, [tile], 0, tile_type, false)
 
 func _physics_input_process(delta):
 
     var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
     if input_direction:
-        #velocity = Vector2(speed,speed)*input_direction
-        velocity = velocity.move_toward(Vector2(speed,speed)*input_direction, delta * speed)
+        velocity = Vector2(speed,speed)*input_direction
+        #velocity = velocity.move_toward(Vector2(speed,speed)*input_direction, delta * speed)
     else: # stop
-        #velocity = Vector2(0,0)
-        velocity = velocity.move_toward(Vector2(0,0), delta*speed)
+        velocity = Vector2(0,0)
+        #velocity = velocity.move_toward(Vector2(0,0), delta*speed)
 
     # this logic should be in the state machine somehow
     if velocity.x < -0.01:
