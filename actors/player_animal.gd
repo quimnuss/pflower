@@ -8,42 +8,38 @@ const JUMP_VELOCITY = -400.0
 const MOVING_THRESHOLD = 0.05
 const WAIT_FOR_KILLER_TIMEOUT = 6
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@export var tilemap : TileMap
 
 @export var resource : LifeformAnimalResource = preload("res://data/lifeform_bear.tres")
 
 @onready var state_machine = $StateChart
-@onready var movement = $Movement
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
 @onready var highlight = $Highlight
 
-
-
-signal selected
 signal dying
-
-
-var debug = false
-
-#TODO handle unselectable spawn
-var is_selected = false
-
-var sensed_predators : Array[Animal] = []
-var predator_sensed_count = 0
 
 static func New(resource : Resource):
     var player : Animal = Animal.new()
+    from_resource(player, resource)
+
+static func from_resource(player : Animal, resource : Resource):
     player.set_name.call_deferred(resource.name)
     player.set_scale(Vector2(resource.scale,resource.scale))
     player.speed = resource.speed
-    player.species = resource.species
 
+    if resource.mobility_type == 'fly':
+        player.set_collision_mask_value(2,false)
 
 func _ready():
 
-    if resource.mobility_type == 'fly':
-        self.set_collision_mask_value(2,false)
+    from_resource(self, resource)
+
+    if get_parent() == get_tree().root:
+        print("I'm the main scene.")
+    else:
+        print("I'm an instance in another scene.")
+
     sprite.set_texture(resource.texture)
     sprite.hframes = resource.texture_shape[0]
     sprite.vframes = resource.texture_shape[1]
@@ -52,16 +48,19 @@ func _ready():
         animation_player.remove_animation_library(library)
     animation_player.add_animation_library("animal",resource.animation_library)
 
-    movement.pawn = self
     $StateChartDebugger.visible = false
-    input_pickable = true
 
-    if get_parent() == get_tree().root:
-        $NavigationRegion2D.set_enabled(true)
-        set_selected(true)
-    else:
-        set_selected(false)
+var tile_type = 1
 
+func _input(event):
+    if event.is_action_pressed("ui_jump"):
+        tile_type = (tile_type+1)%2
+        prints("changed tile type",tile_type)
+
+func _process(delta):
+    var tile : Vector2i = tilemap.local_to_map(self.position)
+    var tiledata : TileData = tilemap.get_cell_tile_data(1,tile)
+    tilemap.set_cells_terrain_connect(1, [tile], 1, tile_type, false)
 
 func _physics_input_process(delta):
 
@@ -81,29 +80,6 @@ func _physics_input_process(delta):
 
     move_and_slide()
 
-func set_target_lifeform(target_lifeform : Node2D):
-    self.movement.target_lifeform = target_lifeform
-
-func set_selected(turn_on):
-    set_highlight(turn_on)
-    is_selected = turn_on
-    if is_selected:
-        state_machine.send_event("posess")
-    else:
-        state_machine.send_event("unposess")
-    # how to deal with deselect on click?
-        selected.emit(self)
-
-func get_selected():
-    return is_selected
-
-func set_highlight(turn_on = true, blueish = false):
-    highlight.visible = turn_on
-    if blueish:
-        highlight.modulate = Color(0, 0, 1) # blue shade
-
-func _on_idle_state_entered():
-    state_machine.set_expression_property("predator_sensed_count", predator_sensed_count)
 
 func _on_run_anim_state_physics_processing(delta):
     _physics_input_process(delta)

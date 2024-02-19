@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqnfq144njjq2"]
+[gd_scene load_steps=3 format=3 uid="uid://bqnfq144njjq2"]
 
 [ext_resource type="TileSet" uid="uid://3wqiompnxjn0" path="res://actors/pflower_tileset.tres" id="1_eq813"]
+[ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_3xuic"]
 
 [node name="MainGame" type="Node2D"]
 
@@ -23,3 +24,9 @@ layer_3/name = "Air"
 layer_3/y_sort_enabled = true
 layer_3/z_index = 10
 layer_3/tile_data = PackedInt32Array()
+
+[node name="Animal" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("2_3xuic")]
+z_index = 5
+position = Vector2(397, 193)
+motion_mode = 0
+tilemap = NodePath("../TileMap")

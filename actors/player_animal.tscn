@@ -1,0 +1,180 @@
+[gd_scene load_steps=19 format=3 uid="uid://b215hr3wjtjj2"]
+
+[ext_resource type="Script" path="res://actors/player_animal.gd" id="1_su0uu"]
+[ext_resource type="Texture2D" uid="uid://bh3kruda7jagj" path="res://assets/lifeforms/outline/MiniDeer2.png" id="2_qchi3"]
+[ext_resource type="AnimationLibrary" uid="uid://qr4hkr5vsu6l" path="res://imports/animations/stag_animation_library.tres" id="3_48afk"]
+[ext_resource type="Script" path="res://imports/components/draggable.gd" id="4_2tbgm"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="5_tfg4b"]
+[ext_resource type="Texture2D" uid="uid://bwmrywg6b78xc" path="res://imports/Generic Status Icons.png" id="6_m10ie"]
+[ext_resource type="Texture2D" uid="uid://ddidvo4s4pjl" path="res://imports/Egg item.png" id="7_8bs3n"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="8_3yw8c"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="9_6lq8t"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="10_6ful7"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="11_s5ec2"]
+[ext_resource type="Resource" uid="uid://brea607hp7eq3" path="res://imports/StateConditions/is_moving.tres" id="12_c1cd1"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="13_3eo3j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pqhh5"]
+radius = 8.0
+height = 16.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_sif72"]
+font_size = 7
+font_color = Color(0.658824, 0.619608, 0.909804, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2t43"]
+atlas = ExtResource("6_m10ie")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6yiv"]
+atlas = ExtResource("6_m10ie")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="Resource" id="Resource_83iit"]
+script = ExtResource("13_3eo3j")
+guard = ExtResource("12_c1cd1")
+
+[node name="Animal" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 4
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_su0uu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_qchi3")
+hframes = 7
+vframes = 7
+frame = 42
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"stag_animation_library": ExtResource("3_48afk")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_pqhh5")
+script = ExtResource("4_2tbgm")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+target_desired_distance = 5.0
+path_max_distance = 200.0
+radius = 20.0
+debug_use_custom = true
+debug_path_custom_color = Color(0.0235294, 1, 1, 0.792157)
+debug_path_custom_point_size = 1.0
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("5_tfg4b")]
+visible = false
+top_level = true
+offset_left = 304.0
+offset_top = 136.0
+offset_right = 156.0
+offset_bottom = 218.0
+scale = Vector2(0.500511, 0.500511)
+initial_node_to_watch = NodePath("../StateChart")
+
+[node name="DebugLabel" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -43.0
+offset_right = 20.0
+offset_bottom = -20.0
+label_settings = SubResource("LabelSettings_sif72")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusBar" type="HBoxContainer" parent="."]
+offset_left = -4.0
+offset_top = -20.0
+offset_right = 64.0
+offset_bottom = 12.0
+scale = Vector2(0.15, 0.15)
+alignment = 1
+
+[node name="Dying" type="TextureRect" parent="StatusBar"]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_v2t43")
+
+[node name="Hunting" type="TextureRect" parent="StatusBar"]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_q6yiv")
+
+[node name="Highlight" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -24)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_8bs3n")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("8_3yw8c")
+
+[node name="Animation" type="Node" parent="StateChart"]
+script = ExtResource("9_6lq8t")
+initial_state = NodePath("IdleAnim")
+
+[node name="ToDeath" type="Node" parent="StateChart/Animation"]
+script = ExtResource("10_6ful7")
+to = NodePath("../DeathAnim")
+event = &"death"
+
+[node name="ToAttack" type="Node" parent="StateChart/Animation"]
+script = ExtResource("10_6ful7")
+to = NodePath("../AttackAnim")
+event = &"eat_anim"
+
+[node name="IdleAnim" type="Node" parent="StateChart/Animation"]
+script = ExtResource("11_s5ec2")
+animation_player = NodePath("../../../AnimationPlayer")
+animation_name = &"animal/idle"
+
+[node name="ToRun" type="Node" parent="StateChart/Animation/IdleAnim"]
+script = ExtResource("10_6ful7")
+to = NodePath("../../RunAnim")
+event = &"velocity_update"
+guard = ExtResource("12_c1cd1")
+
+[node name="ToRun2" type="Node" parent="StateChart/Animation/IdleAnim"]
+script = ExtResource("10_6ful7")
+to = NodePath("../../RunAnim")
+event = &"is_moving"
+
+[node name="RunAnim" type="Node" parent="StateChart/Animation"]
+script = ExtResource("11_s5ec2")
+animation_player = NodePath("../../../AnimationPlayer")
+animation_name = &"animal/run"
+
+[node name="ToIdle" type="Node" parent="StateChart/Animation/RunAnim"]
+script = ExtResource("10_6ful7")
+to = NodePath("../../IdleAnim")
+event = &"velocity_update"
+guard = SubResource("Resource_83iit")
+
+[node name="ToIdle2" type="Node" parent="StateChart/Animation/RunAnim"]
+script = ExtResource("10_6ful7")
+to = NodePath("../../IdleAnim")
+event = &"stopped"
+
+[node name="AttackAnim" type="Node" parent="StateChart/Animation"]
+script = ExtResource("11_s5ec2")
+animation_player = NodePath("../../../AnimationPlayer")
+animation_name = &"animal/eat"
+
+[node name="ToIdle" type="Node" parent="StateChart/Animation/AttackAnim"]
+script = ExtResource("10_6ful7")
+to = NodePath("../../IdleAnim")
+delay_seconds = 3.0
+
+[node name="DeathAnim" type="Node" parent="StateChart/Animation"]
+script = ExtResource("11_s5ec2")
+animation_player = NodePath("../../../AnimationPlayer")
+animation_name = &"animal/die"
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="state_physics_processing" from="StateChart/Animation/IdleAnim" to="." method="_on_idle_anim_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Animation/RunAnim" to="." method="_on_run_anim_state_physics_processing"]

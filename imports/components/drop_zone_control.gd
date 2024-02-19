@@ -1,6 +1,5 @@
 extends TextureRect
 
-signal drop_received(amount : float, species : Constants.Species)
 
 func _on_mouse_entered():
     self.visible = true
@@ -22,7 +21,4 @@ func _drop_data(_position: Vector2, drop: Variant) -> void:
     elif not drop.is_negative:
         amount = 0.1
 
-    var species : Constants.Species = drop.species
-    prints("dropzone will emit",species,amount)
-    drop_received.emit(amount, species)
 
