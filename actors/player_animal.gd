@@ -60,7 +60,8 @@ func _input(event):
 func _process(delta):
     var tile : Vector2i = tilemap.local_to_map(self.position)
     var tiledata : TileData = tilemap.get_cell_tile_data(1,tile)
-    tilemap.set_cells_terrain_connect(1, [tile], 0, tile_type, false)
+    #tilemap.set_cells_terrain_connect(1, [tile], 0, tile_type, false)
+    tilemap.set_cells_terrain_connect(1, [tile], 1, tile_type, false)
 
 func _physics_input_process(delta):
 
