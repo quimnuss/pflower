@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqnfq144njjq2"]
+[gd_scene load_steps=5 format=3 uid="uid://bqnfq144njjq2"]
 
 [ext_resource type="TileSet" uid="uid://3wqiompnxjn0" path="res://actors/pflower_tileset.tres" id="1_eq813"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_3xuic"]
+[ext_resource type="Script" path="res://scenes/tilemap.gd" id="2_jhxhl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lkjd6"]
 
@@ -26,6 +27,7 @@ layer_3/name = "Air"
 layer_3/y_sort_enabled = true
 layer_3/z_index = 10
 layer_3/tile_data = PackedInt32Array()
+script = ExtResource("2_jhxhl")
 
 [node name="Animal" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("2_3xuic")]
 z_index = 5

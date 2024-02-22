@@ -8,6 +8,8 @@ const JUMP_VELOCITY = -400.0
 const MOVING_THRESHOLD = 0.05
 const WAIT_FOR_KILLER_TIMEOUT = 6
 
+var tile_type = 1
+
 @export var tilemap : TileMap
 
 @export var resource : LifeformAnimalResource = preload("res://data/lifeform_bear.tres")
@@ -50,18 +52,16 @@ func _ready():
 
     $StateChartDebugger.visible = false
 
-var tile_type = 1
-
 func _input(event):
     if event.is_action_pressed("ui_jump"):
         tile_type = (tile_type+1)%2
-        prints("changed tile type",tile_type)
+        prints("changed tile type", 1 + tile_type)
 
 func _process(delta):
     var tile : Vector2i = tilemap.local_to_map(self.position)
     var tiledata : TileData = tilemap.get_cell_tile_data(1,tile)
     #tilemap.set_cells_terrain_connect(1, [tile], 0, tile_type, false)
-    tilemap.set_cells_terrain_connect(1, [tile], 1, tile_type, false)
+    tilemap.set_tile(tile,1+tile_type)
 
 func _physics_input_process(delta):
 
