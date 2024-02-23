@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqnfq144njjq2"]
+[gd_scene load_steps=6 format=3 uid="uid://bqnfq144njjq2"]
 
 [ext_resource type="TileSet" uid="uid://3wqiompnxjn0" path="res://actors/pflower_tileset.tres" id="1_eq813"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_3xuic"]
 [ext_resource type="Script" path="res://scenes/tilemap.gd" id="2_jhxhl"]
+[ext_resource type="Resource" uid="uid://crgbo8a84f4jd" path="res://data/lifeform_fox.tres" id="4_necrv"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lkjd6"]
 
@@ -34,6 +35,14 @@ z_index = 5
 position = Vector2(397, 193)
 motion_mode = 0
 tilemap = NodePath("../TileMap")
+
+[node name="Animal2" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("2_3xuic")]
+z_index = 5
+position = Vector2(397, 193)
+motion_mode = 0
+tilemap = NodePath("../TileMap")
+resource = ExtResource("4_necrv")
+player_num = 1
 
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2(320, 512)

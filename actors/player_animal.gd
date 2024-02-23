@@ -19,6 +19,8 @@ var tile_type = 1
 @onready var sprite = $Sprite2D
 @onready var highlight = $Highlight
 
+@export var player_num : int = 0
+
 signal dying
 
 static func New(_resource : Resource) -> Animal:
@@ -54,7 +56,8 @@ func _ready():
     $StateChartDebugger.visible = false
 
 func _input(event):
-    if event.is_action_pressed("ui_jump"):
+    if player_num == 0 and (event.is_action_pressed("ui_jump") or event.is_action_pressed("ui_switch_skill")) \
+    or player_num == 1 and event.is_action_pressed("ui_switch_skill_2") :
         tile_type = (tile_type+1)%2
         prints("changed tile type", 1 + tile_type)
 
@@ -66,7 +69,11 @@ func _process(_delta):
 
 func _physics_input_process(_delta):
 
-    var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+    var input_direction : Vector2
+    if player_num == 0:
+        input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+    else:
+        input_direction = Input.get_vector("ui_left_2", "ui_right_2", "ui_up_2", "ui_down_2")
     if input_direction:
         velocity = Vector2(speed,speed)*input_direction
         #velocity = velocity.move_toward(Vector2(speed,speed)*input_direction, delta * speed)
