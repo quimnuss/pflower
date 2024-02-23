@@ -21,21 +21,22 @@ var tile_type = 1
 
 signal dying
 
-static func New(resource : Resource):
+static func New(_resource : Resource) -> Animal:
     var player : Animal = Animal.new()
-    from_resource(player, resource)
+    from_resource(player, _resource)
+    return player
 
-static func from_resource(player : Animal, resource : Resource):
-    player.set_name.call_deferred(resource.name)
-    player.set_scale(Vector2(resource.scale,resource.scale))
-    player.speed = resource.speed
+static func from_resource(player : Animal, _resource : Resource):
+    player.set_name.call_deferred(_resource.name)
+    player.set_scale(Vector2(_resource.scale,_resource.scale))
+    player.speed = _resource.speed
 
-    if resource.mobility_type == 'fly':
+    if _resource.mobility_type == 'fly':
         player.set_collision_mask_value(2,false)
 
 func _ready():
 
-    from_resource(self, resource)
+    Animal.from_resource(self, resource)
 
     if get_parent() == get_tree().root:
         print("I'm the main scene.")
@@ -57,13 +58,13 @@ func _input(event):
         tile_type = (tile_type+1)%2
         prints("changed tile type", 1 + tile_type)
 
-func _process(delta):
+func _process(_delta):
     var tile : Vector2i = tilemap.local_to_map(self.position)
-    var tiledata : TileData = tilemap.get_cell_tile_data(1,tile)
+    var _tiledata : TileData = tilemap.get_cell_tile_data(1,tile)
     #tilemap.set_cells_terrain_connect(1, [tile], 0, tile_type, false)
     tilemap.set_tile(tile,1+tile_type)
 
-func _physics_input_process(delta):
+func _physics_input_process(_delta):
 
     var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
     if input_direction:
