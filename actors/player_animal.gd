@@ -19,7 +19,12 @@ var tile_type = 1
 @onready var sprite = $Sprite2D
 @onready var highlight = $Highlight
 
-@export var player_num : int = 0
+@export var player_num : int = 0 :
+    set(value):
+        player_num_str = str(value)
+        player_num = value
+
+var player_num_str : String = '0'
 
 signal dying
 
@@ -56,8 +61,7 @@ func _ready():
     $StateChartDebugger.visible = false
 
 func _input(event):
-    if player_num == 0 and (event.is_action_pressed("ui_jump") or event.is_action_pressed("ui_switch_skill")) \
-    or player_num == 1 and event.is_action_pressed("ui_switch_skill_2") :
+    if event.is_action_pressed("jump_" + player_num_str) or event.is_action_pressed("switch_skill_" + player_num_str):
         tile_type = (tile_type+1)%2
         prints("changed tile type", 1 + tile_type)
 
@@ -65,15 +69,10 @@ func _process(_delta):
     var tile : Vector2i = tilemap.local_to_map(self.position)
     var _tiledata : TileData = tilemap.get_cell_tile_data(1,tile)
     #tilemap.set_cells_terrain_connect(1, [tile], 0, tile_type, false)
-    tilemap.set_tile(tile,1+tile_type)
+    tilemap.try_set_tile(tile,1+tile_type)
 
 func _physics_input_process(_delta):
-
-    var input_direction : Vector2
-    if player_num == 0:
-        input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-    else:
-        input_direction = Input.get_vector("ui_left_2", "ui_right_2", "ui_up_2", "ui_down_2")
+    var input_direction : Vector2 = Input.get_vector("move_left_" + player_num_str, "move_right_" + player_num_str, "move_up_" + player_num_str, "move_down_" + player_num_str)
     if input_direction:
         velocity = Vector2(speed,speed)*input_direction
         #velocity = velocity.move_toward(Vector2(speed,speed)*input_direction, delta * speed)
