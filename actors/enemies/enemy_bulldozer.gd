@@ -24,12 +24,7 @@ func _ready():
 
 
 func _process(delta):
-    if global_position == last_position:
-        return
-    last_position = global_position
-    set_ground_tile.emit(global_position)
-    if is_root_scene:
-        tilemap.try_set_tile(global_position, PfTileMap.TileType.GROUND)
+    pass
 
 
 func _physics_process(delta):

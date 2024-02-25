@@ -74,8 +74,6 @@ func _input(event):
 
 
 func _process(_delta):
-    #tilemap.set_cells_terrain_connect(1, [tile], 0, tile_type, false)
-    #tilemap.try_set_tile(self.global_position, 1 + tile_type)
     pass
 
 

@@ -16,10 +16,6 @@ var unstable_tiles: Dictionary
 signal tile_changed(tile_coords: Vector2i, previous_tile_type: TileType, tile_type: TileType)
 
 
-func _ready():
-    pass
-
-
 func set_tile_consequences(tile_coords: Vector2i, tile_type: TileType):
     pass
 
@@ -51,19 +47,6 @@ func set_tile(tile_coords: Vector2i, tile_type: TileType):
         tile_changed.emit(tile_coords, previous_tile_type, tile_type)
 
 
-func try_set_tile(tile_coords: Vector2i, tile_type: TileType, timer_to_ground: bool = true):
-    #var tile_coords: Vector2i = self.local_to_map(world_position)
-    var paint_coords: Vector2i = tile_coords
-    #last_tile = paint_coords
-    set_tile_consequences(paint_coords, tile_type)
-    set_tile(paint_coords, tile_type)
-
-    if not timer_to_ground:
-        return
-
-    cooldown_tile(paint_coords)
-
-
 func reset_tile(timer: Timer, tile_coords: Vector2i):
     timer.queue_free()
     unstable_tiles[tile_coords] = null
@@ -78,10 +61,21 @@ func invalidate_timer(tile_coords: Vector2i):
         tile_timer.queue_free()
 
 
+func get_near_cells(tile_coords: Vector2i):
+    var TILE_DISTANCE: int = 2
+    var near_cells: Array[Vector2i] = []
+    for dx in range(-TILE_DISTANCE, TILE_DISTANCE + 1):
+        for dy in range(-TILE_DISTANCE, TILE_DISTANCE + 1):
+            var cell_coords: Vector2i = tile_coords + Vector2i(dx, dy)
+            # TODO check out of map
+            near_cells.append(cell_coords)
+    return near_cells
+
+
 func tile_sinergy(sinergy_type: TileType, tile_coords: Vector2i) -> bool:
-    for cell: Vector2i in self.get_surrounding_cells(tile_coords):
+    for cell: Vector2i in self.get_near_cells(tile_coords):
         var neighbour_tile_data: TileData = self.get_cell_tile_data(TERRAIN_LAYER, cell)
-        if sinergy_type == neighbour_tile_data.terrain:
+        if neighbour_tile_data and sinergy_type == neighbour_tile_data.terrain:
             return true
     return false
 
@@ -107,8 +101,3 @@ func cooldown_timeout(timer: Timer, tile_coords: Vector2i):
     var has_sinergy: bool = check_tile_survival(tile_coords)
     if not has_sinergy:
         reset_tile(timer, tile_coords)
-
-
-func _on_enemy_bulldozer_set_ground_tile(new_position):
-    var tile_coords: Vector2i = self.local_to_map(new_position)
-    set_tile(tile_coords, TileType.GROUND)
