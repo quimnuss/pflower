@@ -16,8 +16,22 @@ var unstable_tiles: Dictionary
 signal tile_changed(tile_coords: Vector2i, previous_tile_type: TileType, tile_type: TileType)
 
 
+func _ready():
+    pass
+
+
 func set_tile_consequences(tile_coords: Vector2i, tile_type: TileType):
     pass
+
+
+func cooldown_tile(tile_coords: Vector2i):
+    var nochtile = unstable_tiles.get(tile_coords, null)
+    if nochtile:
+        nochtile = nochtile as Timer
+        nochtile.start(COOLDOWN)
+        return
+    else:
+        add_tile_timer(tile_coords)
 
 
 func add_tile_timer(tile_coords: Vector2i):
@@ -31,14 +45,14 @@ func add_tile_timer(tile_coords: Vector2i):
 
 func set_tile(tile_coords: Vector2i, tile_type: TileType):
     var tile_data: TileData = self.get_cell_tile_data(TERRAIN_LAYER, tile_coords)
-    var previous_tile_type: TileType = tile_data.terrain if tile_data else TileType.GROUND
-    if previous_tile_type != tile_type or not tile_data:
+    var previous_tile_type: TileType = tile_data.terrain  #if tile_data else TileType.GROUND
+    if previous_tile_type != tile_type:  # or not tile_data:
         self.set_cells_terrain_connect(TERRAIN_LAYER, [tile_coords], TERRAIN_SET, tile_type, false)
         tile_changed.emit(tile_coords, previous_tile_type, tile_type)
 
 
-func try_set_tile(world_position: Vector2, tile_type: TileType, timer_to_ground: bool = true):
-    var tile_coords: Vector2i = self.local_to_map(world_position)
+func try_set_tile(tile_coords: Vector2i, tile_type: TileType, timer_to_ground: bool = true):
+    #var tile_coords: Vector2i = self.local_to_map(world_position)
     var paint_coords: Vector2i = tile_coords
     #last_tile = paint_coords
     set_tile_consequences(paint_coords, tile_type)
@@ -47,19 +61,21 @@ func try_set_tile(world_position: Vector2, tile_type: TileType, timer_to_ground:
     if not timer_to_ground:
         return
 
-    var nochtile = unstable_tiles.get(paint_coords, null)
-    if nochtile:
-        nochtile = nochtile as Timer
-        nochtile.start(COOLDOWN)
-        return
-    else:
-        add_tile_timer(paint_coords)
+    cooldown_tile(paint_coords)
 
 
 func reset_tile(timer: Timer, tile_coords: Vector2i):
     timer.queue_free()
     unstable_tiles[tile_coords] = null
     set_tile(tile_coords, TileType.GROUND)
+
+
+func invalidate_timer(tile_coords: Vector2i):
+    var tile_timer: Timer = unstable_tiles.get(tile_coords)
+    if tile_timer:
+        tile_timer.stop()
+        unstable_tiles[tile_coords] = null
+        tile_timer.queue_free()
 
 
 func tile_sinergy(sinergy_type: TileType, tile_coords: Vector2i) -> bool:

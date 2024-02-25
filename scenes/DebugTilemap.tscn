@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvhvixvvtky7u"]
+
+[ext_resource type="Texture2D" uid="uid://boksn1afvgnao" path="res://icon.svg" id="1_28ywb"]
+[ext_resource type="TileSet" uid="uid://3wqiompnxjn0" path="res://actors/pflower_tileset.tres" id="1_alm48"]
+[ext_resource type="Script" path="res://scenes/cursor_face.gd" id="2_cviki"]
+[ext_resource type="Script" path="res://actors/tilemap.gd" id="2_mma3t"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e3mas"]
+radius = 62.0
+height = 124.0
+
+[node name="DebugTilemap" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
+tile_set = ExtResource("1_alm48")
+collision_visibility_mode = 1
+format = 2
+layer_0/name = "Background"
+layer_0/y_sort_enabled = true
+layer_0/z_index = 1
+layer_1/name = "Terrain"
+layer_1/y_sort_enabled = true
+layer_1/z_index = 2
+layer_1/tile_data = PackedInt32Array(524305, 131078, 1)
+layer_2/name = "Objects"
+layer_2/y_sort_enabled = true
+layer_2/z_index = 5
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "Air"
+layer_3/y_sort_enabled = true
+layer_3/z_index = 10
+layer_3/tile_data = PackedInt32Array()
+script = ExtResource("2_mma3t")
+
+[node name="CursorFace" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(312, 234)
+scale = Vector2(0.132812, 0.132812)
+texture = ExtResource("1_28ywb")
+script = ExtResource("2_cviki")
+
+[node name="Area2D" type="Area2D" parent="CursorFace"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CursorFace/Area2D"]
+shape = SubResource("CapsuleShape2D_e3mas")
+
+[connection signal="body_shape_entered" from="CursorFace/Area2D" to="CursorFace" method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="CursorFace/Area2D" to="CursorFace" method="_on_area_2d_body_shape_exited"]

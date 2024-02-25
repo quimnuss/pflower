@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr58cstf8m327"]
+[gd_scene load_steps=4 format=3 uid="uid://cr58cstf8m327"]
 
 [ext_resource type="Script" path="res://actors/enemies/enemy_bulldozer.gd" id="1_81ume"]
 [ext_resource type="SpriteFrames" uid="uid://dwbwy34rjug3o" path="res://actors/enemies/bulldozer/bulldozer_spriteframes.tres" id="1_u7gqk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_64p87"]
+radius = 8.96269
+height = 32.0465
 
 [node name="EnemyBulldozer" type="Node2D"]
 script = ExtResource("1_81ume")
@@ -12,3 +16,14 @@ sprite_frames = ExtResource("1_u7gqk")
 autoplay = "default"
 frame_progress = 0.593739
 flip_h = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.19209e-07, 8)
+rotation = 1.58301
+shape = SubResource("CapsuleShape2D_64p87")
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

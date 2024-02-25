@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b215hr3wjtjj2"]
+[gd_scene load_steps=20 format=3 uid="uid://b215hr3wjtjj2"]
 
 [ext_resource type="Script" path="res://actors/player_animal.gd" id="1_su0uu"]
 [ext_resource type="Texture2D" uid="uid://bh3kruda7jagj" path="res://assets/lifeforms/outline/MiniDeer2.png" id="2_qchi3"]
@@ -13,6 +13,10 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="11_s5ec2"]
 [ext_resource type="Resource" uid="uid://brea607hp7eq3" path="res://imports/StateConditions/is_moving.tres" id="12_c1cd1"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="13_3eo3j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrr2r"]
+radius = 8.96269
+height = 32.0465
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pqhh5"]
 radius = 12.0
@@ -37,7 +41,6 @@ guard = ExtResource("12_c1cd1")
 [node name="Animal" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 4
-collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_su0uu")
 
@@ -49,6 +52,15 @@ hframes = 7
 vframes = 7
 frame = 42
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, -4)
+rotation = 1.58301
+shape = SubResource("CapsuleShape2D_mrr2r")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 libraries = {
@@ -56,6 +68,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_pqhh5")
 script = ExtResource("4_2tbgm")
@@ -176,6 +189,9 @@ script = ExtResource("11_s5ec2")
 animation_player = NodePath("../../../AnimationPlayer")
 animation_name = &"animal/die"
 
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="state_physics_processing" from="StateChart/Animation/IdleAnim" to="." method="_on_idle_anim_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Animation/RunAnim" to="." method="_on_run_anim_state_physics_processing"]

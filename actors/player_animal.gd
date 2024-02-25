@@ -75,7 +75,8 @@ func _input(event):
 
 func _process(_delta):
     #tilemap.set_cells_terrain_connect(1, [tile], 0, tile_type, false)
-    tilemap.try_set_tile(self.global_position, 1 + tile_type)
+    #tilemap.try_set_tile(self.global_position, 1 + tile_type)
+    pass
 
 
 func _physics_input_process(_delta):
@@ -111,3 +112,36 @@ func _on_idle_anim_state_physics_processing(delta):
     _physics_input_process(delta)
     if not velocity.length_squared() <= MOVING_THRESHOLD:
         state_machine.send_event("is_moving")
+
+
+func _process_tile_enter(collided_tilemap: PfTileMap, body_rid: RID) -> void:
+    var entered_tile_coords = collided_tilemap.get_coords_for_body_rid(body_rid)
+
+    var tile_data: TileData = collided_tilemap.get_cell_tile_data(PfTileMap.TERRAIN_LAYER, entered_tile_coords)
+
+    var collided_tile_terrain: PfTileMap.TileType = tile_data.terrain as PfTileMap.TileType
+    var new_terrain: PfTileMap.TileType = (1 + tile_type) as PfTileMap.TileType
+    if collided_tile_terrain != new_terrain:
+        collided_tilemap.set_tile(entered_tile_coords, 1 + tile_type)
+    collided_tilemap.invalidate_timer(entered_tile_coords)
+
+
+func _process_tile_exit(collided_tilemap: PfTileMap, body_rid: RID) -> void:
+    var exit_tile_coords = collided_tilemap.get_coords_for_body_rid(body_rid)
+
+    var tile_data: TileData = collided_tilemap.get_cell_tile_data(PfTileMap.TERRAIN_LAYER, exit_tile_coords)
+
+    var collided_tile_terrain: PfTileMap.TileType = tile_data.terrain as PfTileMap.TileType
+
+    if collided_tile_terrain != PfTileMap.TileType.GROUND:
+        collided_tilemap.cooldown_tile(exit_tile_coords)
+
+
+func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+    if body is PfTileMap:
+        _process_tile_enter(body, body_rid)
+
+
+func _on_area_2d_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
+    if body is PfTileMap:
+        _process_tile_exit(body, body_rid)
