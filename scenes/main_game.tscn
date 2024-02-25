@@ -1,14 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqnfq144njjq2"]
+[gd_scene load_steps=13 format=3 uid="uid://bqnfq144njjq2"]
 
 [ext_resource type="Script" path="res://scenes/main_game.gd" id="1_xysvl"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_3xuic"]
 [ext_resource type="PackedScene" uid="uid://bax6uq2yi2cp" path="res://actors/tile_map.tscn" id="2_hmxkn"]
 [ext_resource type="Resource" uid="uid://crgbo8a84f4jd" path="res://data/lifeform_fox.tres" id="4_necrv"]
+[ext_resource type="Script" path="res://scenes/win_scene.gd" id="5_sc7qb"]
 [ext_resource type="Texture2D" uid="uid://6h388o0oeq81" path="res://assets/you_win.png" id="6_iu6qq"]
+[ext_resource type="Texture2D" uid="uid://bj1tvwbelj52y" path="res://assets/iconset_vectorized.png" id="7_74ejf"]
 [ext_resource type="Script" path="res://actors/enemies/enemy_follow_progress_ratio.gd" id="7_khplb"]
 [ext_resource type="PackedScene" uid="uid://cr58cstf8m327" path="res://actors/enemies/enemy_bulldozer.tscn" id="7_mk7ak"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lkjd6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlsls"]
+atlas = ExtResource("7_74ejf")
+region = Rect2(500, 125, 125, 125)
 
 [sub_resource type="Curve2D" id="Curve2D_54806"]
 _data = {
@@ -96,6 +102,7 @@ rounded = true
 [node name="WinScene" type="CanvasLayer" parent="."]
 visible = false
 follow_viewport_enabled = true
+script = ExtResource("5_sc7qb")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="WinScene"]
 anchors_preset = 15
@@ -118,6 +125,14 @@ texture = ExtResource("6_iu6qq")
 expand_mode = 4
 stretch_mode = 5
 
+[node name="Button" type="Button" parent="WinScene"]
+offset_left = 504.0
+offset_top = -8.0
+offset_right = 637.0
+offset_bottom = 125.0
+icon = SubResource("AtlasTexture_vlsls")
+flat = true
+
 [node name="Enemies" type="Node2D" parent="."]
 z_index = 5
 
@@ -130,7 +145,9 @@ rotates = false
 script = ExtResource("7_khplb")
 
 [node name="EnemyBulldozer" parent="Enemies/Path2D/PathFollow2D" instance=ExtResource("7_mk7ak")]
+scale = Vector2(2, 2)
 
 [connection signal="restoration" from="." to="." method="_on_restoration_changed"]
 [connection signal="restoration" from="." to="CanvasLayer/Control/CenterContainer/HBoxContainer/ProgressBar" method="set_value"]
 [connection signal="tile_changed" from="TileMap" to="." method="_on_tile_map_tile_changed"]
+[connection signal="pressed" from="WinScene/Button" to="WinScene" method="_on_button_pressed"]

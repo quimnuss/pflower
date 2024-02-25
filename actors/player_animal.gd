@@ -53,8 +53,6 @@ func _ready():
 
     if get_parent() == get_tree().root:
         print("I'm the main scene.")
-    else:
-        print("I'm an instance in another scene.")
 
     sprite.set_texture(resource.texture)
     sprite.hframes = resource.texture_shape[0]

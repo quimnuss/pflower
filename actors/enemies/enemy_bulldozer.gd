@@ -19,8 +19,6 @@ func _ready():
         tilemap = PfTileMap.new()
         tilemap.tile_set = load("res://actors/pflower_tileset.tres")
         get_tree().get_root().add_child(tilemap)
-    else:
-        prints("I'm not root scene")
 
 
 func _process(delta):
