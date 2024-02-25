@@ -9,7 +9,7 @@ const COOLDOWN: int = 3
 const TERRAIN_LAYER: int = 1
 const TERRAIN_SET: int = 1
 
-var last_tile: Vector2i = Vector2i(50, 50)
+#var last_tile: Vector2i = Vector2i(50, 50)
 
 var unstable_tiles: Dictionary
 
@@ -39,14 +39,8 @@ func set_tile(tile_coords: Vector2i, tile_type: TileType):
 
 func try_set_tile(world_position: Vector2, tile_type: TileType, timer_to_ground: bool = true):
     var tile_coords: Vector2i = self.local_to_map(world_position)
-    if last_tile == tile_coords:
-        if Constants.debug:
-            for t: Timer in unstable_tiles.values():
-                if t:
-                    print(t.wait_time)
-        return
     var paint_coords: Vector2i = tile_coords
-    last_tile = paint_coords
+    #last_tile = paint_coords
     set_tile_consequences(paint_coords, tile_type)
     set_tile(paint_coords, tile_type)
 
@@ -94,12 +88,11 @@ func check_tile_survival(tile_coords: Vector2i) -> bool:
 
 
 func cooldown_timeout(timer: Timer, tile_coords: Vector2i):
-    # check that the player moved
-    if tile_coords != last_tile:
-        var has_sinergy: bool = check_tile_survival(tile_coords)
-        if not has_sinergy:
-            reset_tile(timer, tile_coords)
-    else:
-        var t: Timer = unstable_tiles[tile_coords]
-        if t:
-            t.start(COOLDOWN)
+    var has_sinergy: bool = check_tile_survival(tile_coords)
+    if not has_sinergy:
+        reset_tile(timer, tile_coords)
+
+
+func _on_enemy_bulldozer_set_ground_tile(new_position):
+    var tile_coords: Vector2i = self.local_to_map(new_position)
+    set_tile(tile_coords, TileType.GROUND)

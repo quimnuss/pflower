@@ -158,3 +158,4 @@ script = ExtResource("7_khplb")
 [connection signal="restoration" from="." to="." method="_on_restoration_changed"]
 [connection signal="restoration" from="." to="CanvasLayer/Control/CenterContainer/HBoxContainer/ProgressBar" method="set_value"]
 [connection signal="tile_changed" from="TileMap" to="." method="_on_tile_map_tile_changed"]
+[connection signal="set_ground_tile" from="Enemies/Path2D/PathFollow2D/EnemyBulldozer" to="TileMap" method="_on_enemy_bulldozer_set_ground_tile"]

@@ -27,7 +27,8 @@ func _process(delta):
         return
     last_position = global_position
     set_ground_tile.emit(global_position)
-    tilemap.try_set_tile(global_position, PfTileMap.TileType.GROUND)
+    if is_root_scene:
+        tilemap.try_set_tile(global_position, PfTileMap.TileType.GROUND)
 
 
 func _physics_process(delta):
