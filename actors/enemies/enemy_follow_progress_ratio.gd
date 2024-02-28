@@ -7,8 +7,9 @@ var last_position: Vector2 = Vector2(0, 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-    progress_ratio += 0.1 * delta
-    var direction: Vector2 = position - last_position
-    var goes_right = direction.x > 0
-    enemy_bulldozer.flip_h(goes_right)
-    last_position = position
+    if enemy_bulldozer.can_move:
+        progress_ratio += 0.1 * delta
+        var direction: Vector2 = position - last_position
+        var goes_right = direction.x > 0
+        enemy_bulldozer.flip_h(goes_right)
+        last_position = position

@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://dwbwy34rjug3o"]
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://dwbwy34rjug3o"]
 
 [ext_resource type="Texture2D" uid="uid://bmiwtqsrmadke" path="res://assets/bulldozer.png" id="1_4x4h8"]
+[ext_resource type="Texture2D" uid="uid://bp5sb607f6ym8" path="res://assets/lifeforms/trees/Cherry Blossom Tree.png" id="2_wfwsy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_85b5b"]
 atlas = ExtResource("1_4x4h8")
@@ -13,6 +14,30 @@ region = Rect2(128, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dx0xt"]
 atlas = ExtResource("1_4x4h8")
 region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jscv"]
+atlas = ExtResource("2_wfwsy")
+region = Rect2(0, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrepf"]
+atlas = ExtResource("2_wfwsy")
+region = Rect2(64, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ii1h"]
+atlas = ExtResource("2_wfwsy")
+region = Rect2(128, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51d0k"]
+atlas = ExtResource("2_wfwsy")
+region = Rect2(192, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2x1e7"]
+atlas = ExtResource("2_wfwsy")
+region = Rect2(256, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbugl"]
+atlas = ExtResource("2_wfwsy")
+region = Rect2(320, 0, 64, 96)
 
 [resource]
 animations = [{
@@ -29,4 +54,27 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jscv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrepf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ii1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51d0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2x1e7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbugl")
+}],
+"loop": false,
+"name": &"snooze",
+"speed": 2.0
 }]
