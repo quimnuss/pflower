@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bqnfq144njjq2"]
+[gd_scene load_steps=14 format=3 uid="uid://bqnfq144njjq2"]
 
 [ext_resource type="Script" path="res://scenes/main_game.gd" id="1_xysvl"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_3xuic"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bj1tvwbelj52y" path="res://assets/iconset_vectorized.png" id="7_74ejf"]
 [ext_resource type="Script" path="res://actors/enemies/enemy_follow_progress_ratio.gd" id="7_khplb"]
 [ext_resource type="PackedScene" uid="uid://cr58cstf8m327" path="res://actors/enemies/enemy_bulldozer.tscn" id="7_mk7ak"]
+[ext_resource type="AudioStream" uid="uid://b527rant45myj" path="res://assets/audio/Relax in the Forest.mp3" id="10_dcdka"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lkjd6"]
 
@@ -146,6 +147,11 @@ script = ExtResource("7_khplb")
 
 [node name="EnemyBulldozer" parent="Enemies/Path2D/PathFollow2D" instance=ExtResource("7_mk7ak")]
 scale = Vector2(2, 2)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_dcdka")
+volume_db = -30.0
+autoplay = true
 
 [connection signal="restoration" from="." to="." method="_on_restoration_changed"]
 [connection signal="restoration" from="." to="CanvasLayer/Control/CenterContainer/HBoxContainer/ProgressBar" method="set_value"]

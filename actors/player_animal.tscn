@@ -42,6 +42,7 @@ guard = ExtResource("12_c1cd1")
 y_sort_enabled = true
 collision_mask = 5
 motion_mode = 1
+platform_floor_layers = 4294967288
 script = ExtResource("1_su0uu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

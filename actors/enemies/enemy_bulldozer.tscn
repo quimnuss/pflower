@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr58cstf8m327"]
+[gd_scene load_steps=6 format=3 uid="uid://cr58cstf8m327"]
 
 [ext_resource type="Script" path="res://actors/enemies/enemy_bulldozer.gd" id="1_81ume"]
 [ext_resource type="SpriteFrames" uid="uid://dwbwy34rjug3o" path="res://actors/enemies/bulldozer/bulldozer_spriteframes.tres" id="1_u7gqk"]
+[ext_resource type="AudioStream" uid="uid://cw34700vudsby" path="res://assets/audio/leaves.wav" id="4_lru0b"]
+[ext_resource type="AudioStream" uid="uid://b38cv3opnfmbj" path="res://assets/audio/voice_motor.mp3" id="4_uvhlu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_64p87"]
 radius = 8.96269
@@ -25,5 +27,17 @@ collision_mask = 7
 position = Vector2(-1.19209e-07, 8)
 rotation = 1.58301
 shape = SubResource("CapsuleShape2D_64p87")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="motor" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("4_uvhlu")
+volume_db = 7.0
+autoplay = true
+max_distance = 200.0
+attenuation = 2.2974
+
+[node name="leaves" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("4_lru0b")
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

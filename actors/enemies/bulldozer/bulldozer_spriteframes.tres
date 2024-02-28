@@ -76,5 +76,5 @@ animations = [{
 }],
 "loop": false,
 "name": &"snooze",
-"speed": 2.0
+"speed": 5.0
 }]

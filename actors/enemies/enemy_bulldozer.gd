@@ -2,6 +2,8 @@ extends Node2D
 
 @export var tilemap: PfTileMap
 @onready var animated_sprite_2d = $AnimatedSprite2D
+@onready var motor = $Node2D/motor
+@onready var leaves = $Node2D/leaves
 
 signal set_ground_tile(new_position: Vector2)
 
@@ -24,11 +26,7 @@ func _ready():
 
 
 func _input(event):
-    if event.is_action_pressed("jump_0"):
-        print("started")
-        $AnimatedSprite2D.play("snooze")
-        await $AnimatedSprite2D.animation_finished
-        print("finished")
+    pass
 
 
 func _process(delta):
@@ -48,11 +46,15 @@ func flip_h(flip_h: bool):
 
 func snooze():
     self.can_move = false
+    motor.stop()
     animated_sprite_2d.play("snooze")
+    leaves.play()
     await animated_sprite_2d.animation_finished
+    # stay a tree for three seconds
     await get_tree().create_timer(3).timeout
     animated_sprite_2d.play("default")
     self.can_move = true
+    motor.play()
 
 
 func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
