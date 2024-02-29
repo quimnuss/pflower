@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cr58cstf8m327"]
 
-[ext_resource type="Script" path="res://actors/enemies/enemy_bulldozer.gd" id="1_81ume"]
+[ext_resource type="Script" path="res://actors/enemies/bulldozer/enemy_bulldozer.gd" id="1_81ume"]
 [ext_resource type="SpriteFrames" uid="uid://dwbwy34rjug3o" path="res://actors/enemies/bulldozer/bulldozer_spriteframes.tres" id="1_u7gqk"]
 [ext_resource type="AudioStream" uid="uid://cw34700vudsby" path="res://assets/audio/leaves.wav" id="4_lru0b"]
 [ext_resource type="AudioStream" uid="uid://b38cv3opnfmbj" path="res://assets/audio/voice_motor.mp3" id="4_uvhlu"]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpi8boveloyyg"]
+
+[ext_resource type="Texture2D" uid="uid://bfhanouf3wdej" path="res://assets/boot.png" id="1_lrma4"]
+[ext_resource type="Script" path="res://actors/enemies/foot/foot_down.gd" id="2_cvjxq"]
+[ext_resource type="Texture2D" uid="uid://cgedrhl2l1de7" path="res://assets/boot_shadow.png" id="3_8tocs"]
+[ext_resource type="AudioStream" uid="uid://6s7xovf2eto5" path="res://assets/audio/stomp.wav" id="4_n4dq3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ssl5h"]
+radius = 33.6108
+height = 126.269
+
+[node name="Foot" type="Node2D"]
+script = ExtResource("2_cvjxq")
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_8tocs")
+
+[node name="BootSprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -300)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_lrma4")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -300)
+
+[node name="stomp_audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_n4dq3")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(6, 33)
+rotation = 1.05592
+shape = SubResource("CapsuleShape2D_ssl5h")
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
