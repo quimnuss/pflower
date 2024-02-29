@@ -13,6 +13,7 @@ height = 126.269
 script = ExtResource("2_cvjxq")
 
 [node name="ShadowSprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.560784)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_8tocs")
 
