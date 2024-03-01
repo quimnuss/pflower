@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bqnfq144njjq2"]
+[gd_scene load_steps=16 format=3 uid="uid://bqnfq144njjq2"]
 
 [ext_resource type="Script" path="res://scenes/main_game.gd" id="1_xysvl"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_3xuic"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cr58cstf8m327" path="res://actors/enemies/bulldozer/enemy_bulldozer.tscn" id="7_mk7ak"]
 [ext_resource type="AudioStream" uid="uid://b527rant45myj" path="res://assets/audio/Relax in the Forest.mp3" id="10_dcdka"]
 [ext_resource type="Script" path="res://actors/foot_spawner.gd" id="10_xkoea"]
+[ext_resource type="Script" path="res://components/movement_tail.gd" id="11_j6oly"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lkjd6"]
 
@@ -154,6 +155,14 @@ script = ExtResource("10_xkoea")
 
 [node name="FootSpawnTimer" type="Timer" parent="Enemies/FootSpawner"]
 wait_time = 30.0
+
+[node name="MovementTail" type="Node2D" parent="Enemies" node_paths=PackedStringArray("targets")]
+position = Vector2(64, 324)
+script = ExtResource("11_j6oly")
+targets = [NodePath("../../Animal"), NodePath("../../Animal2")]
+cant_touch_this = false
+
+[node name="EnemyBulldozer" parent="Enemies/MovementTail" instance=ExtResource("7_mk7ak")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_dcdka")

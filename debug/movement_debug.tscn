@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmr38v1sru6ay"]
+
+[ext_resource type="Script" path="res://components/movement_tail.gd" id="1_2rbqp"]
+[ext_resource type="Script" path="res://debug/follow_mouse.gd" id="2_p4n62"]
+
+[node name="MovementDebug" type="Node2D"]
+
+[node name="MovementTail" type="Node2D" parent="."]
+position = Vector2(284, 151)
+script = ExtResource("1_2rbqp")
+
+[node name="Polygon2D" type="Polygon2D" parent="MovementTail"]
+color = Color(0, 0.87451, 0.87451, 1)
+polygon = PackedVector2Array(24, 20, -18, 11, -19, -30, 25, -17)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(139, 79)
+script = ExtResource("2_p4n62")
+
+[node name="Polygon2D" type="Polygon2D" parent="Marker2D"]
+polygon = PackedVector2Array(3, -14, -16, -2, -2, 22, 12, 14, 21, -5)

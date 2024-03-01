@@ -28,6 +28,10 @@ window/size/initial_screen=2
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 ui_left={
