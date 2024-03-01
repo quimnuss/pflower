@@ -59,3 +59,5 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
         var collided_tilemap = body as PfTileMap
         var tile_coords = collided_tilemap.get_coords_for_body_rid(body_rid)
         collided_tilemap.set_tile(tile_coords, PfTileMap.TileType.GROUND)
+    elif stomp_ended and body is Animal:
+        body.die()

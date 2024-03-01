@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://b215hr3wjtjj2"]
+[gd_scene load_steps=19 format=3 uid="uid://b215hr3wjtjj2"]
 
 [ext_resource type="Script" path="res://actors/player_animal.gd" id="1_su0uu"]
 [ext_resource type="Texture2D" uid="uid://bh3kruda7jagj" path="res://assets/lifeforms/outline/MiniDeer2.png" id="2_qchi3"]
 [ext_resource type="AnimationLibrary" uid="uid://qr4hkr5vsu6l" path="res://imports/animations/stag_animation_library.tres" id="3_48afk"]
-[ext_resource type="Script" path="res://imports/components/draggable.gd" id="4_2tbgm"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="5_tfg4b"]
 [ext_resource type="Texture2D" uid="uid://bwmrywg6b78xc" path="res://imports/Generic Status Icons.png" id="6_m10ie"]
 [ext_resource type="Texture2D" uid="uid://ddidvo4s4pjl" path="res://imports/Egg item.png" id="7_8bs3n"]
@@ -54,7 +53,6 @@ vframes = 7
 frame = 42
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 6
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -69,10 +67,8 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_pqhh5")
-script = ExtResource("4_2tbgm")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
@@ -185,10 +181,26 @@ script = ExtResource("10_6ful7")
 to = NodePath("../../IdleAnim")
 delay_seconds = 3.0
 
+[node name="UnDeathAnim" type="Node" parent="StateChart/Animation"]
+script = ExtResource("11_s5ec2")
+animation_player = NodePath("../../../AnimationPlayer")
+animation_name = &"animal/die"
+custom_speed = -1.0
+from_end = true
+
+[node name="ToIdle" type="Node" parent="StateChart/Animation/UnDeathAnim"]
+script = ExtResource("10_6ful7")
+to = NodePath("../../IdleAnim")
+
 [node name="DeathAnim" type="Node" parent="StateChart/Animation"]
 script = ExtResource("11_s5ec2")
 animation_player = NodePath("../../../AnimationPlayer")
 animation_name = &"animal/die"
+
+[node name="ToUndeath" type="Node" parent="StateChart/Animation/DeathAnim"]
+script = ExtResource("10_6ful7")
+to = NodePath("../../UnDeathAnim")
+delay_seconds = 6.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

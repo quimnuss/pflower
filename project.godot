@@ -13,7 +13,8 @@ config_version=5
 config/name="pflower"
 run/main_scene="res://scenes/main_game.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/image="res://assets/pixel_splash.png"
+config/icon="res://pixel_splash.svg"
 
 [autoload]
 
@@ -27,6 +28,10 @@ window/size/initial_position_type=2
 window/size/initial_screen=2
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
 [filesystem]
 

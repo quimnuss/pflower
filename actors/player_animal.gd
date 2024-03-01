@@ -14,7 +14,7 @@ var tile_type = 1
 
 @export var resource: LifeformAnimalResource = preload("res://data/lifeform_bear.tres")
 
-@export var mouse_movement : bool = false
+@export var mouse_movement: bool = false
 
 @onready var state_machine = $StateChart
 @onready var animation_player = $AnimationPlayer
@@ -25,6 +25,8 @@ var tile_type = 1
     set(value):
         player_num_str = str(value)
         player_num = value
+
+var can_move: bool = true
 
 var player_num_str: String = "0"
 
@@ -80,7 +82,8 @@ func _process(_delta):
 func _physics_input_process(_delta):
     var input_direction: Vector2
     if mouse_movement:
-        input_direction = (get_global_mouse_position() - global_position).normalized()
+        if global_position.distance_to(get_global_mouse_position()) > 5:
+            input_direction = (get_global_mouse_position() - global_position).normalized()
     else:
         input_direction = Input.get_vector(
             "move_left_" + player_num_str, "move_right_" + player_num_str, "move_up_" + player_num_str, "move_down_" + player_num_str
@@ -93,9 +96,9 @@ func _physics_input_process(_delta):
         #velocity = velocity.move_toward(Vector2(0,0), delta*speed)
 
     # this logic should be in the state machine somehow
-    if velocity.x < -0.01:
+    if velocity.x < -0.03:
         sprite.set_flip_h(true)
-    elif velocity.x > 0.01:
+    elif velocity.x > 0.03:
         sprite.set_flip_h(false)
 
     move_and_slide()
@@ -147,3 +150,7 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 func _on_area_2d_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
     if body is PfTileMap:
         _process_tile_exit(body, body_rid)
+
+
+func die():
+    state_machine.send_event("death")
