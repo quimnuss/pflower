@@ -41,6 +41,7 @@ z_index = 5
 position = Vector2(397, 193)
 motion_mode = 0
 resource = ExtResource("4_necrv")
+mouse_movement = true
 player_num = 1
 
 [node name="Wall" type="StaticBody2D" parent="."]
@@ -150,19 +151,18 @@ script = ExtResource("7_khplb")
 [node name="EnemyBulldozer" parent="Enemies/Path2D/PathFollow2D" instance=ExtResource("7_mk7ak")]
 scale = Vector2(2, 2)
 
+[node name="MovementTail" type="Node2D" parent="Enemies" node_paths=PackedStringArray("targets")]
+position = Vector2(64, 324)
+script = ExtResource("11_j6oly")
+targets = [NodePath("../../Animal"), NodePath("../../Animal2")]
+
+[node name="EnemyBulldozer" parent="Enemies/MovementTail" instance=ExtResource("7_mk7ak")]
+
 [node name="FootSpawner" type="Node2D" parent="Enemies"]
 script = ExtResource("10_xkoea")
 
 [node name="FootSpawnTimer" type="Timer" parent="Enemies/FootSpawner"]
 wait_time = 30.0
-
-[node name="MovementTail" type="Node2D" parent="Enemies" node_paths=PackedStringArray("targets")]
-position = Vector2(64, 324)
-script = ExtResource("11_j6oly")
-targets = [NodePath("../../Animal"), NodePath("../../Animal2")]
-cant_touch_this = false
-
-[node name="EnemyBulldozer" parent="Enemies/MovementTail" instance=ExtResource("7_mk7ak")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_dcdka")

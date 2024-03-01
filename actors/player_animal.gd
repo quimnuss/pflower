@@ -14,6 +14,8 @@ var tile_type = 1
 
 @export var resource: LifeformAnimalResource = preload("res://data/lifeform_bear.tres")
 
+@export var mouse_movement : bool = false
+
 @onready var state_machine = $StateChart
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
@@ -76,9 +78,13 @@ func _process(_delta):
 
 
 func _physics_input_process(_delta):
-    var input_direction: Vector2 = Input.get_vector(
-        "move_left_" + player_num_str, "move_right_" + player_num_str, "move_up_" + player_num_str, "move_down_" + player_num_str
-    )
+    var input_direction: Vector2
+    if mouse_movement:
+        input_direction = (get_global_mouse_position() - global_position).normalized()
+    else:
+        input_direction = Input.get_vector(
+            "move_left_" + player_num_str, "move_right_" + player_num_str, "move_up_" + player_num_str, "move_down_" + player_num_str
+        )
     if input_direction:
         velocity = Vector2(speed, speed) * input_direction
         #velocity = velocity.move_toward(Vector2(speed,speed)*input_direction, delta * speed)
