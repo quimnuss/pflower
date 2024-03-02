@@ -70,9 +70,12 @@ func _ready():
 
 
 func _input(event):
-    if event.is_action_pressed("jump_" + player_num_str) or event.is_action_pressed("switch_skill_" + player_num_str):
+    if event.is_action_pressed("switch_skill_" + player_num_str):
         tile_type = (tile_type + 1) % 2
         prints("changed tile type", 1 + tile_type)
+
+    if event.is_action_pressed("jump_" + player_num_str):
+        state_machine.send_event("jump")
 
 
 func _process(_delta):
@@ -88,8 +91,11 @@ func _physics_input_process(_delta):
         input_direction = Input.get_vector(
             "move_left_" + player_num_str, "move_right_" + player_num_str, "move_up_" + player_num_str, "move_down_" + player_num_str
         )
+
+    var final_speed: float = speed
+
     if input_direction:
-        velocity = Vector2(speed, speed) * input_direction
+        velocity = Vector2(final_speed, final_speed) * input_direction
         #velocity = velocity.move_toward(Vector2(speed,speed)*input_direction, delta * speed)
     else:  # stop
         velocity = Vector2(0, 0)
@@ -154,3 +160,18 @@ func _on_area_2d_body_shape_exited(body_rid, body, body_shape_index, local_shape
 
 func die():
     state_machine.send_event("death")
+
+
+var jump_multiplier: float = 4
+
+
+func _on_jump_anim_state_entered():
+    speed = jump_multiplier * speed
+
+
+func _on_jump_anim_state_exited():
+    speed = int(speed / jump_multiplier)
+
+
+func _on_jump_anim_state_physics_processing(delta):
+    _physics_input_process(delta)

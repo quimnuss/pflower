@@ -171,6 +171,21 @@ script = ExtResource("10_6ful7")
 to = NodePath("../../IdleAnim")
 event = &"stopped"
 
+[node name="ToJump" type="Node" parent="StateChart/Animation/RunAnim"]
+script = ExtResource("10_6ful7")
+to = NodePath("../../JumpAnim")
+event = &"jump"
+
+[node name="JumpAnim" type="Node" parent="StateChart/Animation"]
+script = ExtResource("11_s5ec2")
+animation_player = NodePath("../../../AnimationPlayer")
+animation_name = &"animal/jump"
+
+[node name="ToIdle" type="Node" parent="StateChart/Animation/JumpAnim"]
+script = ExtResource("10_6ful7")
+to = NodePath("../../IdleAnim")
+delay_seconds = 0.5
+
 [node name="AttackAnim" type="Node" parent="StateChart/Animation"]
 script = ExtResource("11_s5ec2")
 animation_player = NodePath("../../../AnimationPlayer")
@@ -208,3 +223,6 @@ delay_seconds = 6.0
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="state_physics_processing" from="StateChart/Animation/IdleAnim" to="." method="_on_idle_anim_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Animation/RunAnim" to="." method="_on_run_anim_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Animation/JumpAnim" to="." method="_on_jump_anim_state_entered"]
+[connection signal="state_exited" from="StateChart/Animation/JumpAnim" to="." method="_on_jump_anim_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/Animation/JumpAnim" to="." method="_on_jump_anim_state_physics_processing"]
