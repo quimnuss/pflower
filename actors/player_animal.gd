@@ -162,15 +162,18 @@ func die():
     state_machine.send_event("death")
 
 
-var jump_multiplier: float = 4
+var jump_multiplier: float = 3
 
 
 func _on_jump_anim_state_entered():
     speed = jump_multiplier * speed
+    await get_tree().create_timer(0.30).timeout
+    speed = int(speed / jump_multiplier)
 
 
 func _on_jump_anim_state_exited():
-    speed = int(speed / jump_multiplier)
+    #speed = int(speed / jump_multiplier)
+    pass
 
 
 func _on_jump_anim_state_physics_processing(delta):

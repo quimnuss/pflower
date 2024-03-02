@@ -2,13 +2,20 @@ extends Node2D
 
 class_name MovementTail
 
-@export var targets : Array[Node2D]
-@export var min_distance : int = 10000
-@export var speed : float = 50
-@export var cant_touch_this : bool = true
+@export var targets: Array[Node2D]
+@export var min_distance: int = 10000
+@export var speed: float = 50
+@export var cant_touch_this: bool = true
+
+var controlled_pawn: Node2D
+
+
+func _ready():
+    controlled_pawn = get_child(0)
+
 
 func _physics_process(delta):
-    if targets:
+    if controlled_pawn.can_move and targets:
         var min_target_distance = 100000
         var tailed_target = targets[0]
         for target in targets:
@@ -20,4 +27,4 @@ func _physics_process(delta):
         if cant_touch_this and distance < min_distance:
             pass
         else:
-            global_position = global_position.move_toward(tailed_target.global_position, delta*speed)
+            global_position = global_position.move_toward(tailed_target.global_position, delta * speed)
