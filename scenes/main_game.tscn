@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bqnfq144njjq2"]
+[gd_scene load_steps=22 format=3 uid="uid://bqnfq144njjq2"]
 
 [ext_resource type="Script" path="res://scenes/main_game.gd" id="1_xysvl"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_3xuic"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://b527rant45myj" path="res://assets/audio/Relax in the Forest.mp3" id="10_dcdka"]
 [ext_resource type="Script" path="res://actors/foot_spawner.gd" id="10_xkoea"]
 [ext_resource type="Script" path="res://components/movement_tail.gd" id="11_j6oly"]
+[ext_resource type="Script" path="res://actors/Camera2D.gd" id="13_qy7y0"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lkjd6"]
 
@@ -27,6 +28,10 @@ point_count = 6
 
 [sub_resource type="Environment" id="Environment_vpuv5"]
 background_mode = 3
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
 glow_enabled = true
 glow_levels/7 = 1.9
 glow_blend_mode = 1
@@ -44,6 +49,9 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 gradient = SubResource("Gradient_ox82o")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2v4lm"]
+noise_type = 3
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_xysvl")
@@ -195,13 +203,23 @@ autoplay = true
 environment = SubResource("Environment_vpuv5")
 camera_attributes = SubResource("CameraAttributesPractical_1f83n")
 
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+color = Color(0.486275, 0.376471, 0.109804, 1)
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(264, 344)
 color = Color(1, 1, 0.466667, 1)
 texture = SubResource("GradientTexture2D_ulw6j")
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-color = Color(0.486275, 0.376471, 0.109804, 1)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 248)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+script = ExtResource("13_qy7y0")
+max_offset = Vector2(150, 200)
+noise = SubResource("FastNoiseLite_2v4lm")
 
 [connection signal="restoration" from="." to="." method="_on_restoration_changed"]
 [connection signal="restoration" from="." to="CanvasLayer/Control/CenterContainer/HBoxContainer/ProgressBar" method="set_value"]

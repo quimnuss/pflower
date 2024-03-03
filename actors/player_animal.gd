@@ -104,8 +104,10 @@ func _physics_input_process(_delta):
     # this logic should be in the state machine somehow
     if velocity.x < -0.03:
         sprite.set_flip_h(true)
+        #self.set_scale(Vector2(-1, 1))
     elif velocity.x > 0.03:
         sprite.set_flip_h(false)
+        #self.set_scale(Vector2(-1, 1))
 
     move_and_slide()
 

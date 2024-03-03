@@ -1,0 +1,5 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://b02yytojbfb0t"]
+
+[resource]
+radial_velocity_max = 78.74
+gravity = Vector3(0, 0, 0)

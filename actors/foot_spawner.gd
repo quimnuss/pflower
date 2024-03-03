@@ -2,6 +2,7 @@ extends Node2D
 
 var foot_scene = preload("res://actors/enemies/foot/foot.tscn")
 @onready var foot_spawn_timer = $FootSpawnTimer
+@onready var camera_2d = $"../../Camera2D"
 
 const WAIT_TIME: int = 10
 
@@ -29,4 +30,5 @@ func _process(delta):
 func _on_foot_spawn_timer_timeout():
     var foot_enemy: Foot = foot_scene.instantiate()
     foot_enemy.global_position = random_position()
+    foot_enemy.stomped.connect(camera_2d.add_trauma)
     add_child(foot_enemy)
