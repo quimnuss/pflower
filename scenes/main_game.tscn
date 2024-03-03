@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bqnfq144njjq2"]
+[gd_scene load_steps=20 format=3 uid="uid://bqnfq144njjq2"]
 
 [ext_resource type="Script" path="res://scenes/main_game.gd" id="1_xysvl"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_3xuic"]
@@ -24,6 +24,26 @@ _data = {
 "points": PackedVector2Array(-24.6945, -45.3846, 24.6945, 45.3846, 0, 0, -38.0429, 3.00339, 38.0429, -3.00339, 136, 32, -3.67081, 34.0384, 3.67081, -34.0384, 216, -32, 24.3608, 19.3552, -24.3608, -19.3552, 192, -96, 58.733, -3.00339, -58.733, 3.00339, 96, -112, 0, 0, 0, 0, 0, 0)
 }
 point_count = 6
+
+[sub_resource type="Environment" id="Environment_vpuv5"]
+background_mode = 3
+glow_enabled = true
+glow_levels/7 = 1.9
+glow_blend_mode = 1
+glow_hdr_threshold = 0.1
+fog_enabled = true
+adjustment_brightness = 1.6
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_1f83n"]
+
+[sub_resource type="Gradient" id="Gradient_ox82o"]
+offsets = PackedFloat32Array(0, 0.800866)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ulw6j"]
+gradient = SubResource("Gradient_ox82o")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_xysvl")
@@ -170,6 +190,18 @@ wait_time = 30.0
 stream = ExtResource("10_dcdka")
 volume_db = -30.0
 autoplay = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vpuv5")
+camera_attributes = SubResource("CameraAttributesPractical_1f83n")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(264, 344)
+color = Color(1, 1, 0.466667, 1)
+texture = SubResource("GradientTexture2D_ulw6j")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.486275, 0.376471, 0.109804, 1)
 
 [connection signal="restoration" from="." to="." method="_on_restoration_changed"]
 [connection signal="restoration" from="." to="CanvasLayer/Control/CenterContainer/HBoxContainer/ProgressBar" method="set_value"]
