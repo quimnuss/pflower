@@ -8,7 +8,7 @@ const JUMP_VELOCITY = -400.0
 const MOVING_THRESHOLD = 0.05
 const WAIT_FOR_KILLER_TIMEOUT = 6
 
-var tile_type = 1
+@export var tile_type = 1
 
 @export var tilemap: PfTileMap
 

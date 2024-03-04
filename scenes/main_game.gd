@@ -12,12 +12,13 @@ var restored_percent: float = 0
 var game_ended: bool = false
 
 const RESTORATION_MULTIPLIER: float = 2.0
+const WORLD_MARGIN: Vector2i = Vector2i(2, 2)
 
 signal restoration(restoration_percent: float)
 
 
 func _ready():
-    var viewport_size: Vector2i = get_viewport().size / TILESIZE
+    var viewport_size: Vector2i = (get_viewport().size - WORLD_MARGIN) / TILESIZE
     world_size = viewport_size.x * viewport_size.y
 
 
@@ -25,6 +26,9 @@ func _input(event):
     if event is InputEventMouseButton:
         var tile_coords: Vector2i = tilemap.local_to_map(event.global_position)
         var tiledata: TileData = tilemap.get_cell_tile_data(1, tile_coords)
+
+    if event.is_action_pressed("ui_cancel"):
+        get_tree().quit()
 
 
 func cell_changed(tile_coords: Vector2i, previous_terrain_type: PfTileMap.TileType, terrain_type: PfTileMap.TileType):
@@ -49,3 +53,11 @@ func _on_restoration_changed(restoration: float):
 
 func _on_tile_map_tile_changed(tile_coords, previous_tile_type, tile_type):
     cell_changed(tile_coords, previous_tile_type, tile_type)
+
+
+func _on_replay_pressed():
+    get_tree().reload_current_scene()
+
+
+func _on_exit_pressed():
+    get_tree().quit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b215hr3wjtjj2"]
+[gd_scene load_steps=20 format=3 uid="uid://b215hr3wjtjj2"]
 
 [ext_resource type="Script" path="res://actors/player_animal.gd" id="1_su0uu"]
 [ext_resource type="Texture2D" uid="uid://bh3kruda7jagj" path="res://assets/lifeforms/outline/MiniDeer2.png" id="2_qchi3"]
@@ -12,6 +12,9 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="11_s5ec2"]
 [ext_resource type="Resource" uid="uid://brea607hp7eq3" path="res://imports/StateConditions/is_moving.tres" id="12_c1cd1"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="13_3eo3j"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r8750"]
+polygon = PackedVector2Array(-13, -3, -10, -20, 1, -21, 3, -27, 17, -27, 15, -3)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrr2r"]
 radius = 8.96269
@@ -43,6 +46,10 @@ collision_mask = 5
 motion_mode = 1
 platform_floor_layers = 4294967288
 script = ExtResource("1_su0uu")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_r8750")
+occluder_light_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -32)

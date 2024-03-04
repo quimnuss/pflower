@@ -9,13 +9,21 @@
 radius = 8.96269
 height = 32.0465
 
-[node name="EnemyBulldozer" type="Node2D"]
+[node name="EnemyBulldozer" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 0
+collision_mask = 0
+platform_on_leave = 2
 script = ExtResource("1_81ume")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.19209e-07, 8)
+rotation = 1.58301
+shape = SubResource("CapsuleShape2D_64p87")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = ExtResource("1_u7gqk")
-animation = &"snooze"
 autoplay = "default"
 flip_h = true
 
@@ -39,5 +47,6 @@ attenuation = 2.2974
 
 [node name="leaves" type="AudioStreamPlayer2D" parent="Node2D"]
 stream = ExtResource("4_lru0b")
+volume_db = -10.0
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

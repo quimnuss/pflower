@@ -30,5 +30,5 @@ func _process(delta):
 func _on_foot_spawn_timer_timeout():
     var foot_enemy: Foot = foot_scene.instantiate()
     foot_enemy.global_position = random_position()
-    foot_enemy.stomped.connect(camera_2d.add_trauma)
+    foot_enemy.stomped.connect(camera_2d.add_trauma.bind(0.8))
     add_child(foot_enemy)

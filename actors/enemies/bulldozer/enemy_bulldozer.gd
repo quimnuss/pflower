@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 @export var tilemap: PfTileMap
 @onready var animated_sprite_2d = $AnimatedSprite2D
@@ -37,7 +37,7 @@ func _physics_process(delta):
     if is_root_scene:
         var input_direction: Vector2 = Input.get_vector("move_left_0", "move_right_0", "move_up_0", "move_down_0")
         if input_direction:
-            global_position = global_position + delta * Vector2(speed, speed) * input_direction
+            var velocity = delta * Vector2(speed, speed) * input_direction
 
 
 func flip_h(flip_h: bool):

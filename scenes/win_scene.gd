@@ -11,5 +11,5 @@ func _process(delta):
     pass
 
 
-func _on_button_pressed():
+func _on_close_button_pressed():
     self.visible = false
