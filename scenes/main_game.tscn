@@ -101,6 +101,9 @@ resource = ExtResource("4_necrv")
 mouse_movement = true
 player_num = 1
 
+[node name="PlayableRect" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(16, 16, 624, 16, 624, 496, 16, 496)
+
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2(320, 496)
 

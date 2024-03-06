@@ -19,6 +19,7 @@ config/icon="res://pixel_splash.svg"
 [autoload]
 
 Constants="*res://scripts/constants.gd"
+Globals="*res://scripts/globals.gd"
 
 [display]
 

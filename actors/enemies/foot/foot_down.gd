@@ -30,12 +30,17 @@ func _ready():
     collision_shape_2d.disabled = true
 
 
+func smoke():
+    if Globals.use_particles:
+        var smoke = load("res://components/explosion.tscn").instantiate()
+        shadow_sprite_2d.add_child(smoke)
+
+
 func stomp_end():
     stomp_ended = true
     stomp_audio.play()
     stomped.emit()
-    #var smoke = load("res://components/explosion.tscn").instantiate()
-    #shadow_sprite_2d.add_child(smoke)
+    smoke()
     collision_shape_2d.disabled = false
     await get_tree().create_timer(5).timeout
     self.queue_free()
