@@ -1,14 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://jmtk2gh5wi58"]
+[gd_scene load_steps=7 format=3 uid="uid://jmtk2gh5wi58"]
 
+[ext_resource type="Script" path="res://scenes/landing_scene.gd" id="1_i1k2e"]
 [ext_resource type="TileSet" uid="uid://o26012k631mj" path="res://actors/landing_tileset.tres" id="1_x6ere"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_ysoap"]
 [ext_resource type="Theme" uid="uid://cpkq7adpo5sda" path="res://effects/pflower_theme.tres" id="3_dev2m"]
 [ext_resource type="Script" path="res://scripts/input_detector.gd" id="4_7iyl7"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hloui"]
-size = Vector2(96, 20)
+[ext_resource type="PackedScene" uid="uid://11ybh23gwmu3" path="res://ui/settings_node.tscn" id="5_w6x6q"]
 
 [node name="LandingScene" type="Node2D"]
+script = ExtResource("1_i1k2e")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_x6ere")
@@ -21,6 +21,7 @@ layer_1/tile_data = PackedInt32Array(917539, 196609, 4, 983075, 196609, 5, 10486
 [node name="Animal" parent="." instance=ExtResource("2_ysoap")]
 position = Vector2(296, 264)
 collision_mask = 7
+mouse_movement = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -47,21 +48,12 @@ bbcode_enabled = true
 text = "[center] pFlower [/center]"
 fit_content = true
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(128, 160)
+[node name="GraphicsSettingsNode" parent="." instance=ExtResource("5_w6x6q")]
+setting_text = "low graphics"
 
-[node name="Label" type="Label" parent="Node2D"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "low graphics"
-
-[node name="Area2D" type="Area2D" parent="Node2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
-shape = SubResource("RectangleShape2D_hloui")
+[node name="InputSelectionNode" parent="." instance=ExtResource("5_w6x6q")]
+position = Vector2(416, 224)
+setting_text = "follow mouse"
 
 [node name="InputDetector" type="Node2D" parent="."]
 script = ExtResource("4_7iyl7")

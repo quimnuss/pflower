@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://11ybh23gwmu3"]
+
+[ext_resource type="Script" path="res://ui/settings_node.gd" id="1_21llg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hloui"]
+size = Vector2(96, 20)
+
+[node name="GraphicsSettingsNode" type="Node2D"]
+position = Vector2(128, 160)
+script = ExtResource("1_21llg")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "setting"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_hloui")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
