@@ -28,3 +28,7 @@ func flip_use_mouse():
     else:
         animal.mouse_movement = false
     return Globals.use_mouse
+
+
+func _on_input_detector_new_player(device_type : String, player_num : int):
+    prints(device_type, player_num)

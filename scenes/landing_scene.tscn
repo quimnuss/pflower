@@ -57,3 +57,5 @@ setting_text = "follow mouse"
 
 [node name="InputDetector" type="Node2D" parent="."]
 script = ExtResource("4_7iyl7")
+
+[connection signal="new_player" from="InputDetector" to="." method="_on_input_detector_new_player"]
