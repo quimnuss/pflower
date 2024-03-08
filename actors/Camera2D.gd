@@ -25,7 +25,6 @@ func _input(event):
 
 func add_trauma(amount: float = 0.3):
     trauma = min(trauma + amount, 1.0)
-    print(trauma)
 
 
 func _process(delta):

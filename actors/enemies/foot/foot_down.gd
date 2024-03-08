@@ -20,6 +20,7 @@ signal stomped
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    add_to_group("enemies")
     is_root_scene = self == get_tree().current_scene
     if is_root_scene:
         self.global_position = Vector2i(300, 400)
@@ -28,6 +29,13 @@ func _ready():
     print("stomp")
     set_process(true)
     collision_shape_2d.disabled = true
+
+
+func _on_game_won():
+    smoke()
+    collision_shape_2d.disabled = false
+    await get_tree().create_timer(5).timeout
+    self.queue_free()
 
 
 func smoke():

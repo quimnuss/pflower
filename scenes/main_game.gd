@@ -43,12 +43,17 @@ func cell_changed(tile_coords: Vector2i, previous_terrain_type: PfTileMap.TileTy
     restoration.emit(RESTORATION_MULTIPLIER * restored_percent)
 
 
+func win_game():
+    game_ended = true
+    win_scene.visible = true
+    Input.start_joy_vibration(0, 0.25, 0.5, 2)
+    Input.start_joy_vibration(1, 0.25, 0.5, 2)
+    get_tree().call_group("enemies", "_on_game_won")
+
+
 func _on_restoration_changed(restoration: float):
     if restoration >= 100 and not game_ended:
-        game_ended = true
-        win_scene.visible = true
-        Input.start_joy_vibration(0, 0.25, 0.5, 2)
-        Input.start_joy_vibration(1, 0.25, 0.5, 2)
+        win_game()
 
 
 func _on_tile_map_tile_changed(tile_coords, previous_tile_type, tile_type):

@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var motor = $Node2D/motor
 @onready var leaves = $Node2D/leaves
+@onready var respawn_timer = $RespawnTimer
+@onready var collision_shape_2d = $Area2D/CollisionShape2D
 
 signal set_ground_tile(new_position: Vector2)
 
@@ -20,6 +22,7 @@ var respawn_time: int = 6
 
 
 func _ready():
+    add_to_group("enemies")
     is_root_scene = self == get_tree().current_scene
     if is_root_scene:
         prints("I'm root scene")
@@ -45,11 +48,27 @@ func snooze():
     animated_sprite_2d.play("snooze")
     leaves.play()
     await animated_sprite_2d.animation_finished
-    # stay a tree for three seconds
-    await get_tree().create_timer(respawn_time).timeout
+    # stay a tree for respoawn_time seconds
+    respawn_timer.start(respawn_time)
+
+
+func respawn():
     animated_sprite_2d.play("default")
     self.can_move = true
     motor.play()
+
+
+func _on_game_won():
+    print("game won: disable bulldozer")
+    collision_shape_2d.disabled = true
+    respawn_timer.paused = true
+    respawn_timer.stop()
+    self.can_move = false
+    motor.stop()
+    var current_animation: String = animated_sprite_2d.get_animation()
+    if current_animation != "snooze":
+        animated_sprite_2d.play("snooze")
+        leaves.play()
 
 
 func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):

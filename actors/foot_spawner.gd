@@ -10,6 +10,7 @@ var wait_time: int = 20
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    add_to_group("enemies")
     if Globals.hard_difficulty:
         wait_time = HARD_WAIT_TIME
     foot_spawn_timer.start(wait_time)
@@ -23,6 +24,10 @@ func random_position():
     var random_y = randi() % int(y_range[1] - y_range[0]) + 1 + y_range[0]
     var random_pos = Vector2(random_x, random_y)
     return random_pos
+
+
+func _on_game_won():
+    foot_spawn_timer.stop()
 
 
 func _on_foot_spawn_timer_timeout():

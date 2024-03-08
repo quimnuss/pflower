@@ -87,7 +87,7 @@ func check_tile_survival(tile_coords: Vector2i) -> bool:
 
     match dying_tile_data.terrain:
         TileType.GROUND:
-            push_error("Undieable tile type", tile_coords, "type", dying_tile_data.terrain)
+            #push_error("Undieable tile type ", tile_coords, " terrain type ", dying_tile_data.terrain)
             return false
         TileType.GRASS:
             has_sinergy = tile_sinergy(TileType.WATER, tile_coords)
