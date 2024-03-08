@@ -15,6 +15,9 @@ var is_root_scene: bool = false
 
 var can_move: bool = true
 
+var HARD_RESPAWN_TIME: int = 3
+var respawn_time: int = 6
+
 
 func _ready():
     is_root_scene = self == get_tree().current_scene
@@ -23,14 +26,6 @@ func _ready():
         tilemap = PfTileMap.new()
         tilemap.tile_set = load("res://actors/pflower_tileset.tres")
         get_tree().get_root().add_child(tilemap)
-
-
-func _input(event):
-    pass
-
-
-func _process(delta):
-    pass
 
 
 func _physics_process(delta):
@@ -51,7 +46,7 @@ func snooze():
     leaves.play()
     await animated_sprite_2d.animation_finished
     # stay a tree for three seconds
-    await get_tree().create_timer(3).timeout
+    await get_tree().create_timer(respawn_time).timeout
     animated_sprite_2d.play("default")
     self.can_move = true
     motor.play()
