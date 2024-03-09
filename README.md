@@ -6,3 +6,7 @@ Game about spreading an ecosystem faster than evil can destroy it
 ## Now
 
 - [ ] better enemies: bigfoot, better ai
+
+# Attributions
+
+- www.vecteezy.com/members/collaborapix
