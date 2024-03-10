@@ -49,7 +49,9 @@ choices/delay=0.2
 choices/reveal_delay=0
 choices/reveal_by_input=false
 text/autopauses={}
-variables={}
+variables={
+"has_oracle_gift": false
+}
 glossary/default_case_sensitive=true
 text/autocolor_names=true
 translation/enabled=false

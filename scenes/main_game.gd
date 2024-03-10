@@ -18,6 +18,7 @@ signal restoration(restoration_percent: float)
 
 
 func _ready():
+    tilemap.get_used_cells()
     var viewport_size: Vector2i = (get_viewport().size - WORLD_MARGIN) / TILESIZE
     world_size = viewport_size.x * viewport_size.y
 

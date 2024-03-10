@@ -1,5 +1,9 @@
 join bear_character 1 [ z_index="1"]
 join stag_character 3
+if {has_oracle_gift} == true:
+	stag_character: Persist, my friend, persist.
+	[end_timeline]
+else:
 bear_character (bear_character): hello stag!
 stag_character: Oh, bear. Where are you going?
 - To the prairie!
@@ -7,6 +11,7 @@ stag_character: Oh, bear. Where are you going?
 	bear_character: What? There must be something we can do about it.
 	stag_character: I'm too old to try and fight it. But take this.
 	[sound path="res://assets/audio/success_mistery.mp3" volume="0.0"]
+	set {has_oracle_gift} = true
 	bear_character: What is it?
 	stag_character: It will let you keep the ecosystem going.
 - I'm still undecided

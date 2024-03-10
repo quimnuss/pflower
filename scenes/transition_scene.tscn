@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://yxql4e0xnlmh"]
+[gd_scene load_steps=16 format=3 uid="uid://yxql4e0xnlmh"]
 
 [ext_resource type="Script" path="res://scenes/transition_scene.gd" id="1_f2rds"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="1_uqh3b"]
@@ -7,8 +7,9 @@
 [ext_resource type="Script" path="res://actors/npc_animal.gd" id="3_xuxgw"]
 [ext_resource type="Texture2D" uid="uid://bh3kruda7jagj" path="res://assets/lifeforms/outline/MiniDeer2.png" id="4_5hnh8"]
 [ext_resource type="Script" path="res://actors/tilemap.gd" id="4_kgc0k"]
-[ext_resource type="Script" path="res://scripts/spring_camera2d.gd" id="5_5a6nq"]
+[ext_resource type="Script" path="res://scripts/camera_follow.gd" id="5_5a6nq"]
 [ext_resource type="AnimationLibrary" uid="uid://qr4hkr5vsu6l" path="res://imports/animations/stag_animation_library.tres" id="5_e2fo7"]
+[ext_resource type="Script" path="res://scripts/spring_camera.gd" id="10_sfile"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r8750"]
 polygon = PackedVector2Array(-13, -3, -10, -20, 1, -21, 3, -27, 17, -27, 15, -3)
@@ -103,13 +104,17 @@ z_index = 5
 position = Vector2(4, 8)
 shape = SubResource("RectangleShape2D_r5v37")
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("tile_map", "target")]
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 script = ExtResource("5_5a6nq")
+tile_map = NodePath("../TileMap")
 target = NodePath("../Animal")
+
+[node name="SpringCamera" type="Node2D" parent="Camera2D"]
+script = ExtResource("10_sfile")
 
 [node name="ToLevel1" type="Area2D" parent="."]
 position = Vector2(960, 272)
