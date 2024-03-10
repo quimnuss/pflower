@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var tilemap = $TileMap
+@onready var tilemap: PfTileMap = $TileMap
 @onready var win_scene = $WinScene
 
 const TILESIZE: int = 16
@@ -18,7 +18,8 @@ signal restoration(restoration_percent: float)
 
 
 func _ready():
-    tilemap.get_used_cells()
+    #var num_cells = len(tilemap.get_used_cells(tilemap.TERRAIN_LAYER))
+
     var viewport_size: Vector2i = (get_viewport().size - WORLD_MARGIN) / TILESIZE
     world_size = viewport_size.x * viewport_size.y
 
