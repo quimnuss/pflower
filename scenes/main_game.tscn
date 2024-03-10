@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bqnfq144njjq2"]
+[gd_scene load_steps=25 format=3 uid="uid://bqnfq144njjq2"]
 
 [ext_resource type="Script" path="res://scenes/main_game.gd" id="1_xysvl"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_3xuic"]
@@ -23,8 +23,6 @@ gradient = SubResource("Gradient_3bgph")
 fill = 1
 fill_from = Vector2(0.5, 0.512821)
 fill_to = Vector2(1, 1)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lkjd6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l13th"]
 atlas = ExtResource("7_74ejf")
@@ -103,33 +101,6 @@ player_num = 1
 
 [node name="PlayableRect" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(16, 16, 624, 16, 624, 496, 16, 496)
-
-[node name="Wall" type="StaticBody2D" parent="."]
-position = Vector2(320, 496)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
-shape = SubResource("WorldBoundaryShape2D_lkjd6")
-
-[node name="Wall2" type="StaticBody2D" parent="."]
-position = Vector2(16, 256)
-rotation = 1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
-shape = SubResource("WorldBoundaryShape2D_lkjd6")
-
-[node name="Wall3" type="StaticBody2D" parent="."]
-position = Vector2(320, 16)
-rotation = 3.14159
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
-shape = SubResource("WorldBoundaryShape2D_lkjd6")
-
-[node name="Wall4" type="StaticBody2D" parent="."]
-position = Vector2(624, 256)
-rotation = 4.71239
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
-shape = SubResource("WorldBoundaryShape2D_lkjd6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

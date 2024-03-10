@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://yxql4e0xnlmh"]
+[gd_scene load_steps=17 format=3 uid="uid://yxql4e0xnlmh"]
 
 [ext_resource type="Script" path="res://scenes/transition_scene.gd" id="1_f2rds"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="1_uqh3b"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://actors/tilemap.gd" id="4_kgc0k"]
 [ext_resource type="Script" path="res://scripts/camera_follow.gd" id="5_5a6nq"]
 [ext_resource type="AnimationLibrary" uid="uid://qr4hkr5vsu6l" path="res://imports/animations/stag_animation_library.tres" id="5_e2fo7"]
+[ext_resource type="FontFile" uid="uid://6eyijpelyowj" path="res://assets/promptfont.otf" id="9_q8dra"]
 [ext_resource type="Script" path="res://scripts/spring_camera.gd" id="10_sfile"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r8750"]
@@ -103,6 +104,23 @@ shape = SubResource("CapsuleShape2D_pqhh5")
 z_index = 5
 position = Vector2(4, 8)
 shape = SubResource("RectangleShape2D_r5v37")
+
+[node name="Interact" type="Label" parent="OracleAnimal"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -8.0
+offset_top = -64.0
+offset_right = 8.0
+offset_bottom = -44.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.529412, 0.00784314, 0.0941176, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_q8dra")
+theme_override_font_sizes/font_size = 20
+text = "⇓"
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("tile_map", "target")]
 position_smoothing_enabled = true

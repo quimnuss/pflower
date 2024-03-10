@@ -27,6 +27,7 @@ func start_dialog():
 func _on_area_2d_2_body_entered(body):
     if body is Animal:
         start_dialog()
+        #prints("has gift:", Dialogic.VAR.has_oracle_gift)
 
 
 func _on_to_level_1_body_entered(body):

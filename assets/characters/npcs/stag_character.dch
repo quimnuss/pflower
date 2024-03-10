@@ -13,7 +13,7 @@
 "display_name": "Stag",
 "mirror": false,
 "nicknames": [""],
-"offset": Vector2(0, 0),
+"offset": Vector2(0, 50),
 "portraits": {
 "stag_character": {
 "export_overrides": {

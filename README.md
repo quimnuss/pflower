@@ -10,3 +10,4 @@ Game about spreading an ecosystem faster than evil can destroy it
 # Attributions
 
 - www.vecteezy.com/members/collaborapix
+- PromptFont by Yukari "Shinmera" Hafner, available at https://shinmera.com/promptfont
