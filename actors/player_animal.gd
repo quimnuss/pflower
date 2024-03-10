@@ -10,11 +10,9 @@ const WAIT_FOR_KILLER_TIMEOUT = 6
 
 @export var tile_type = 1
 
-@export var tilemap: PfTileMap
-
 @export var resource: LifeformAnimalResource = preload("res://data/lifeform_bear.tres")
 
-@export var mouse_movement: bool = false
+var mouse_movement: bool = false
 
 @onready var state_machine = $StateChart
 @onready var animation_player = $AnimationPlayer
@@ -22,14 +20,9 @@ const WAIT_FOR_KILLER_TIMEOUT = 6
 @onready var highlight = $Highlight
 @onready var terrain_transform_collision = $Area2D/CollisionShape2D
 
-@export var player_num: int = 0:
-    set(value):
-        player_num_str = str(value)
-        player_num = value
-
 var player_controlled: bool = true
 
-var player_num_str: String = "0"
+@export var player_suffix: String = "keyboard_0"
 
 signal dying
 
@@ -41,6 +34,7 @@ static func New(_resource: Resource) -> Animal:
 
 
 static func from_resource(player: Animal, _resource: Resource):
+    player.resource = _resource
     player.set_name.call_deferred(_resource.name)
     player.set_scale(Vector2(_resource.scale, _resource.scale))
     player.speed = _resource.speed
@@ -50,11 +44,9 @@ static func from_resource(player: Animal, _resource: Resource):
 
 
 func _ready():
-    if not tilemap:
-        tilemap = PfTileMap.new()
-        get_tree().get_root().add_child(tilemap)
-
     Animal.from_resource(self, resource)
+
+    mouse_movement = "mouse" in player_suffix
 
     if get_parent() == get_tree().root:
         print("I'm the main scene.")
@@ -72,11 +64,11 @@ func _ready():
 
 func _input(event):
     if player_controlled:
-        if event.is_action_pressed("switch_skill_" + player_num_str):
+        if event.is_action_pressed("switch_skill_" + player_suffix):
             tile_type = (tile_type + 1) % 2
             prints("changed tile type", 1 + tile_type)
 
-        if event.is_action_pressed("jump_" + player_num_str):
+        if event.is_action_pressed("jump_" + player_suffix):
             state_machine.send_event("jump")
 
 
@@ -96,7 +88,7 @@ func _physics_input_process(_delta):
                 input_direction = (get_global_mouse_position() - global_position).normalized()
         else:
             input_direction = Input.get_vector(
-                "move_left_" + player_num_str, "move_right_" + player_num_str, "move_up_" + player_num_str, "move_down_" + player_num_str
+                "move_left_" + player_suffix, "move_right_" + player_suffix, "move_up_" + player_suffix, "move_down_" + player_suffix
             )
 
         var final_speed: float = speed
@@ -157,12 +149,12 @@ func _process_tile_exit(collided_tilemap: PfTileMap, body_rid: RID) -> void:
         collided_tilemap.cooldown_tile(exit_tile_coords)
 
 
-func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_area_2d_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
     if body is PfTileMap:
         _process_tile_enter(body, body_rid)
 
 
-func _on_area_2d_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
+func _on_area_2d_body_shape_exited(body_rid, body, _body_shape_index, _local_shape_index):
     if body is PfTileMap:
         _process_tile_exit(body, body_rid)
 

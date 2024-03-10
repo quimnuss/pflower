@@ -35,11 +35,11 @@ func _physics_process(delta):
     if is_root_scene:
         var input_direction: Vector2 = Input.get_vector("move_left_0", "move_right_0", "move_up_0", "move_down_0")
         if input_direction:
-            var velocity = delta * Vector2(speed, speed) * input_direction
+            velocity = delta * Vector2(speed, speed) * input_direction
 
 
-func flip_h(flip_h: bool):
-    animated_sprite_2d.flip_h = flip_h
+func flip_h(_flip_h: bool):
+    animated_sprite_2d.flip_h = _flip_h
 
 
 func snooze():
@@ -71,7 +71,7 @@ func _on_game_won():
         leaves.play()
 
 
-func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_area_2d_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
     if body is PfTileMap:
         var collided_tilemap = body as PfTileMap
         var entered_tile_coords = collided_tilemap.get_coords_for_body_rid(body_rid)

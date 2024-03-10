@@ -28,9 +28,9 @@ func _physics_process(delta):
         var min_target_distance = 100000
         var tailed_target = targets[0]
         for target in targets:
-            var distance = global_position.distance_squared_to(target.global_position)
-            if min_target_distance > distance:
-                min_target_distance = distance
+            var distance_aux = global_position.distance_squared_to(target.global_position)
+            if min_target_distance > distance_aux:
+                min_target_distance = distance_aux
                 tailed_target = target
         var distance = global_position.distance_squared_to(tailed_target.global_position)
         if cant_touch_this and distance < min_distance:

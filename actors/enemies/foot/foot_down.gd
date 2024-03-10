@@ -40,8 +40,8 @@ func _on_game_won():
 
 func smoke():
     if Globals.use_particles:
-        var smoke = load("res://components/explosion.tscn").instantiate()
-        shadow_sprite_2d.add_child(smoke)
+        var smoke_scene = load("res://components/explosion.tscn").instantiate()
+        shadow_sprite_2d.add_child(smoke_scene)
 
 
 func stomp_end():
@@ -73,7 +73,7 @@ func _process(delta):
             stomp(delta)
 
 
-func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_area_2d_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
     if body is PfTileMap:
         var collided_tilemap = body as PfTileMap
         var tile_coords = collided_tilemap.get_coords_for_body_rid(body_rid)

@@ -25,15 +25,11 @@ func _ready():
 
 
 func _input(event):
-    if event is InputEventMouseButton:
-        var tile_coords: Vector2i = tilemap.local_to_map(event.global_position)
-        var tiledata: TileData = tilemap.get_cell_tile_data(1, tile_coords)
-
     if event.is_action_pressed("ui_cancel"):
         get_tree().quit()
 
 
-func cell_changed(tile_coords: Vector2i, previous_terrain_type: PfTileMap.TileType, terrain_type: PfTileMap.TileType):
+func cell_changed(_tile_coords: Vector2i, previous_terrain_type: PfTileMap.TileType, terrain_type: PfTileMap.TileType):
     if terrain_type == PfTileMap.TileType.GROUND:
         restored_world -= 1
     elif previous_terrain_type == PfTileMap.TileType.GROUND and terrain_type != PfTileMap.TileType.GROUND:
@@ -41,6 +37,7 @@ func cell_changed(tile_coords: Vector2i, previous_terrain_type: PfTileMap.TileTy
     else:
         # global cound didnt change
         return
+    @warning_ignore("integer_division")
     restored_percent = 100 * restored_world / world_size
     restoration.emit(RESTORATION_MULTIPLIER * restored_percent)
 
@@ -53,8 +50,8 @@ func win_game():
     get_tree().call_group("enemies", "_on_game_won")
 
 
-func _on_restoration_changed(restoration: float):
-    if restoration >= 100 and not game_ended:
+func _on_restoration_changed(_restoration: float):
+    if _restoration >= 100 and not game_ended:
         win_game()
 
 
