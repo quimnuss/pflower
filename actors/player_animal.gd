@@ -20,13 +20,14 @@ const WAIT_FOR_KILLER_TIMEOUT = 6
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
 @onready var highlight = $Highlight
+@onready var terrain_transform_collision = $Area2D/CollisionShape2D
 
 @export var player_num: int = 0:
     set(value):
         player_num_str = str(value)
         player_num = value
 
-var can_move: bool = true
+var player_controlled: bool = true
 
 var player_num_str: String = "0"
 
@@ -70,36 +71,42 @@ func _ready():
 
 
 func _input(event):
-    if event.is_action_pressed("switch_skill_" + player_num_str):
-        tile_type = (tile_type + 1) % 2
-        prints("changed tile type", 1 + tile_type)
+    if player_controlled:
+        if event.is_action_pressed("switch_skill_" + player_num_str):
+            tile_type = (tile_type + 1) % 2
+            prints("changed tile type", 1 + tile_type)
 
-    if event.is_action_pressed("jump_" + player_num_str):
-        state_machine.send_event("jump")
+        if event.is_action_pressed("jump_" + player_num_str):
+            state_machine.send_event("jump")
 
 
 func _process(_delta):
     pass
 
 
+func stop():
+    velocity = Vector2(0, 0)
+
+
 func _physics_input_process(_delta):
-    var input_direction: Vector2
-    if mouse_movement:
-        if global_position.distance_to(get_global_mouse_position()) > 5:
-            input_direction = (get_global_mouse_position() - global_position).normalized()
-    else:
-        input_direction = Input.get_vector(
-            "move_left_" + player_num_str, "move_right_" + player_num_str, "move_up_" + player_num_str, "move_down_" + player_num_str
-        )
+    if player_controlled:
+        var input_direction: Vector2
+        if mouse_movement:
+            if global_position.distance_to(get_global_mouse_position()) > 5:
+                input_direction = (get_global_mouse_position() - global_position).normalized()
+        else:
+            input_direction = Input.get_vector(
+                "move_left_" + player_num_str, "move_right_" + player_num_str, "move_up_" + player_num_str, "move_down_" + player_num_str
+            )
 
-    var final_speed: float = speed
+        var final_speed: float = speed
 
-    if input_direction:
-        velocity = Vector2(final_speed, final_speed) * input_direction
-        #velocity = velocity.move_toward(Vector2(speed,speed)*input_direction, delta * speed)
-    else:  # stop
-        velocity = Vector2(0, 0)
-        #velocity = velocity.move_toward(Vector2(0,0), delta*speed)
+        if input_direction:
+            velocity = Vector2(final_speed, final_speed) * input_direction
+            #velocity = velocity.move_toward(Vector2(speed,speed)*input_direction, delta * speed)
+        else:  # stop
+            stop()
+            #velocity = velocity.move_toward(Vector2(0,0), delta*speed)
 
     # this logic should be in the state machine somehow
     if velocity.x < -0.03:
@@ -158,6 +165,10 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 func _on_area_2d_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
     if body is PfTileMap:
         _process_tile_exit(body, body_rid)
+
+
+func set_terrain_transform(activate: bool):
+    terrain_transform_collision.disabled = not activate
 
 
 func die():

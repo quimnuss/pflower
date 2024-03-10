@@ -42,7 +42,7 @@ guard = ExtResource("12_c1cd1")
 
 [node name="Animal" type="CharacterBody2D"]
 y_sort_enabled = true
-collision_mask = 5
+collision_mask = 13
 motion_mode = 1
 platform_floor_layers = 4294967288
 script = ExtResource("1_su0uu")

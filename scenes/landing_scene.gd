@@ -43,4 +43,4 @@ func _on_input_detector_new_player(device_type: String, player_num: int):
 
 
 func _on_play_game_body_entered(body):
-    get_tree().change_scene_to_file("res://scenes/main_game.tscn")
+    get_tree().change_scene_to_file("res://scenes/transition_scene.tscn")

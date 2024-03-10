@@ -8,16 +8,16 @@
 "sound_moods": {},
 "style": ""
 },
-"default_portrait": "bear_character",
+"default_portrait": "stag_character",
 "description": "",
-"display_name": "Bear",
+"display_name": "Stag",
 "mirror": false,
 "nicknames": [""],
-"offset": Vector2(-100, 50),
+"offset": Vector2(0, 0),
 "portraits": {
-"bear_character": {
+"stag_character": {
 "export_overrides": {
-"image": "\"res://assets/characters/bear/bear_character.png\""
+"image": "\"res://assets/characters/npcs/stag_character.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),

@@ -25,7 +25,8 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 [dialogic]
 
 directories/dch_directory={
-"bear_character": "res://dialog/bear_character.dch"
+"bear_character": "res://dialog/bear_character.dch",
+"stag_character": "res://assets/characters/npcs/stag_character.dch"
 }
 directories/dtl_directory={
 "timeline": "res://dialog/timeline.dtl"
@@ -50,6 +51,13 @@ choices/reveal_by_input=false
 text/autopauses={}
 variables={}
 glossary/default_case_sensitive=true
+text/autocolor_names=true
+translation/enabled=false
+translation/original_locale="en"
+translation/file_mode=1
+translation/translation_folder=""
+translation/save_mode=0
+translation/add_separator=false
 
 [display]
 
@@ -193,6 +201,7 @@ dialogic_default_action={
 2d_physics/layer_1="player"
 2d_physics/layer_2="terrain"
 2d_physics/layer_3="enemy"
+2d_physics/layer_4="limits"
 
 [rendering]
 

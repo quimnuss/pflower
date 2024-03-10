@@ -39,3 +39,5 @@ func _ready():
     for library in animation_player.get_animation_library_list():
         animation_player.remove_animation_library(library)
     animation_player.add_animation_library("animal", resource.animation_library)
+
+    animation_player.play("animal/idle")

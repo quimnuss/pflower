@@ -1,0 +1,12 @@
+join bear_character 1 [ z_index="1"]
+join stag_character 3
+bear_character (bear_character): hello stag!
+stag_character: Oh, bear. Where are you going?
+- To the prairie!
+	stag_character: Oh bear... The machines are destroying it all... I have little hope for us.
+	bear_character: What? There must be something we can do about it.
+	stag_character: I'm too old to try and fight it. But take this.
+	[sound path="res://assets/audio/success_mistery.mp3" volume="0.0"]
+	bear_character: What is it?
+	stag_character: It will let you keep the ecosystem going.
+- I'm still undecided
