@@ -5,10 +5,16 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    if not Globals.players:
+        Globals.players.append(PlayerData.new())
     oracle_animal.sprite.set_flip_h(true)
     animal.set_terrain_transform(false)
 
     animal.mouse_movement = Globals.use_mouse
+
+    for player_data in Globals.players:
+        var animal: Animal = Animal.from_settings(player_data)
+        add_child(animal)
 
 
 func start_dialog():

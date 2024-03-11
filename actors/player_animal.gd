@@ -2,6 +2,20 @@ extends CharacterBody2D
 
 class_name Animal
 
+enum Species { NONE, BEAR, FOX, BOAR, WOLF, STAG, DOE, BIRD, FISH }
+
+const species_name: Dictionary = {
+    Species.NONE: "",
+    Species.BEAR: "bear",
+    Species.FOX: "fox",
+    Species.BOAR: "boar",
+    Species.WOLF: "wolf",
+    Species.STAG: "stag",
+    Species.DOE: "doe",
+    Species.BIRD: "bird",
+    Species.FISH: "fish"
+}
+
 var speed = 200.0
 var acceleration = 100.0
 const JUMP_VELOCITY = -400.0
@@ -10,7 +24,7 @@ const WAIT_FOR_KILLER_TIMEOUT = 6
 
 @export var tile_type = 1
 
-@export var resource: LifeformAnimalResource = preload("res://data/lifeform_bear.tres")
+@export var resource: LifeformAnimalResource
 
 var mouse_movement: bool = false
 
@@ -43,10 +57,27 @@ static func from_resource(player: Animal, _resource: Resource):
         player.set_collision_mask_value(2, false)
 
 
-func _ready():
-    Animal.from_resource(self, resource)
+static func from_settings(player_data: PlayerData) -> Animal:
+    var species: Species = player_data.species
+    var player_suffix: String = player_data.player_suffix
 
-    mouse_movement = "mouse" in player_suffix
+    if species == Species.NONE:
+        push_error("Instantiating NONE animal species")
+        return null
+    var player: Animal = load("res://actors/player_animal.tscn").instantiate()
+    var _resource: Resource = load("res://data/lifeform_" + species_name[species] + ".tres")
+    from_resource(player, _resource)
+    if player_suffix == "mouse_0":
+        player.mouse_movement = true
+    else:
+        player.player_suffix = player_suffix
+    player.mouse_movement = player_data.mouse_movement
+    return player
+
+
+func _ready():
+    if resource:
+        Animal.from_resource(self, resource)
 
     if get_parent() == get_tree().root:
         print("I'm the main scene.")

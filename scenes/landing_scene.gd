@@ -39,21 +39,20 @@ func flip_use_mouse():
     return Globals.use_mouse
 
 
-func add_animal(animal_type: String, player_suffix: String):
-    var animal_resource: Resource = load("res://data/lifeform_" + animal_type + ".tres")
-    var new_animal: Animal = load("res://actors/player_animal.tscn").instantiate()
-    Animal.from_resource(new_animal, animal_resource)
-    new_animal.player_suffix = player_suffix
+func add_animal(species: Animal.Species, player_suffix: String):
+    var animal_resource: Resource = load("res://data/lifeform_" + Animal.species_name[species] + ".tres")
+    var mouse_movement = "mouse_0" == player_suffix
+    var player_data: PlayerData = PlayerData.New(species, player_suffix, mouse_movement)
+    var new_animal: Animal = Animal.from_settings(player_data)
     new_animal.global_position = spawn_marker.global_position
     add_child(new_animal)
 
 
-func _on_input_detector_new_player(device_type: String, player_num: int):
-    prints(device_type, player_num)
-    var animal_types: Array[String] = ["fox", "boar", "rabbit", "stag", "wolf", "doe"]
-    var animal_type: String = animal_types.pick_random()
-    var player_suffix = device_type + "_" + str(player_num)
-    add_animal(animal_type, player_suffix)
+func _on_input_detector_new_player(device_type: String, device_num: int):
+    var species: Animal.Species = randi_range(Animal.Species.BEAR, Animal.Species.DOE)
+    prints("new player", device_type, device_num, Animal.species_name[species])
+    var player_suffix = device_type + "_" + str(device_num)
+    add_animal(species, player_suffix)
 
 
 func _on_play_game_body_entered(body):

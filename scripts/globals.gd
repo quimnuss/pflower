@@ -22,6 +22,8 @@ var hard_difficulty: bool = false:
         hard_difficulty = new_hard_difficulty
         config.save(SAVEFILE)
 
+var players: Array[PlayerData]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,3 +49,7 @@ func load_config():
 
 func show_config():
     prints("use_particles", use_particles, "use_mouse", use_mouse, "hard_difficulty", hard_difficulty)
+
+
+func add_player(player_data: PlayerData):
+    players.append(player_data)
