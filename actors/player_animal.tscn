@@ -41,6 +41,7 @@ script = ExtResource("13_3eo3j")
 guard = ExtResource("12_c1cd1")
 
 [node name="Animal" type="CharacterBody2D"]
+z_index = 5
 y_sort_enabled = true
 collision_mask = 13
 motion_mode = 1

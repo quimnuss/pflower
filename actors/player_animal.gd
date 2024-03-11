@@ -24,9 +24,9 @@ const WAIT_FOR_KILLER_TIMEOUT = 6
 
 @export var tile_type = 1
 
-@export var resource: LifeformAnimalResource
+@export var resource: LifeformAnimalResource = preload("res://data/lifeform_bear.tres")
 
-var mouse_movement: bool = false
+@export var mouse_movement: bool = false
 
 @onready var state_machine = $StateChart
 @onready var animation_player = $AnimationPlayer
@@ -72,15 +72,16 @@ static func from_settings(player_data: PlayerData) -> Animal:
     else:
         player.player_suffix = player_suffix
     player.mouse_movement = player_data.mouse_movement
+
     return player
 
 
 func _ready():
-    if resource:
-        Animal.from_resource(self, resource)
-
     if get_parent() == get_tree().root:
         print("I'm the main scene.")
+
+    # TODO when instantiated this has already been done
+    Animal.from_resource(self, resource)
 
     sprite.set_texture(resource.texture)
     sprite.hframes = resource.texture_shape[0]

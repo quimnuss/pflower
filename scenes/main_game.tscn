@@ -86,16 +86,15 @@ shadow_color = Color(0, 0, 0, 1)
 texture = SubResource("GradientTexture2D_j604l")
 
 [node name="Animal" parent="." instance=ExtResource("2_3xuic")]
-z_index = 5
 position = Vector2(192, 192)
 motion_mode = 0
 tile_type = 0
 
 [node name="Animal2" parent="." instance=ExtResource("2_3xuic")]
-z_index = 5
 position = Vector2(397, 193)
 motion_mode = 0
 resource = ExtResource("4_necrv")
+mouse_movement = true
 player_suffix = "mouse_0"
 
 [node name="PlayableRect" type="Polygon2D" parent="."]
