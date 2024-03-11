@@ -83,5 +83,8 @@ text = "Play Game"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayGame/Area2D"]
 shape = SubResource("RectangleShape2D_hloui")
 
+[node name="SpawnMarker" type="Marker2D" parent="."]
+position = Vector2(296, 176)
+
 [connection signal="new_player" from="InputDetector" to="." method="_on_input_detector_new_player"]
 [connection signal="body_entered" from="PlayGame/Area2D" to="." method="_on_play_game_body_entered"]

@@ -4,6 +4,7 @@ extends Node2D
 @onready var animal = $Animal
 @onready var input_selection_node = $InputSelectionNode
 @onready var hard_difficulty_node = $HardDifficultyNode
+@onready var spawn_marker = $SpawnMarker
 
 
 func _ready():
@@ -43,12 +44,13 @@ func add_animal(animal_type: String, player_suffix: String):
     var new_animal: Animal = load("res://actors/player_animal.tscn").instantiate()
     Animal.from_resource(new_animal, animal_resource)
     new_animal.player_suffix = player_suffix
+    new_animal.global_position = spawn_marker.global_position
     add_child(new_animal)
 
 
 func _on_input_detector_new_player(device_type: String, player_num: int):
     prints(device_type, player_num)
-    var animal_types: Array[String] = ["fox", "boar", "rabbit", "stag", "wolf"]
+    var animal_types: Array[String] = ["fox", "boar", "rabbit", "stag", "wolf", "doe"]
     var animal_type: String = animal_types.pick_random()
     var player_suffix = device_type + "_" + str(player_num)
     add_animal(animal_type, player_suffix)
