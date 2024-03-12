@@ -1,5 +1,5 @@
 join bear_character 1 [ z_index="1"]
-join stag_character 3
+join stag_character 4
 if {has_oracle_gift} == true:
 	stag_character: Persist, my friend, persist.
 	[end_timeline]
