@@ -55,7 +55,6 @@ layer_3/tile_data = PackedInt32Array()
 script = ExtResource("4_kgc0k")
 
 [node name="Animal" parent="." instance=ExtResource("1_uqh3b")]
-z_index = 5
 position = Vector2(40, 280)
 
 [node name="OracleAnimal" type="CharacterBody2D" parent="."]

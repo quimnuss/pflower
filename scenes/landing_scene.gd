@@ -8,12 +8,13 @@ extends Node2D
 
 
 func _ready():
+    animal.queue_free()
+    Globals.players.clear()
+
     graphics_settings_node.setting_change = flip_graphics
-    input_selection_node.setting_change = flip_use_mouse
     hard_difficulty_node.setting_change = flip_hard_difficulty
 
     graphics_settings_node.activate(Globals.use_particles)
-    input_selection_node.activate(Globals.use_mouse)
     hard_difficulty_node.activate(Globals.hard_difficulty)
 
 
@@ -28,15 +29,6 @@ func flip_graphics():
         var smoke = load("res://components/explosion.tscn").instantiate()
         graphics_settings_node.add_child(smoke)
     return Globals.use_particles
-
-
-func flip_use_mouse():
-    Globals.use_mouse = not Globals.use_mouse
-    if Globals.use_mouse:
-        animal.mouse_movement = true
-    else:
-        animal.mouse_movement = false
-    return Globals.use_mouse
 
 
 func add_animal(species: Animal.Species, player_suffix: String):
