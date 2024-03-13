@@ -6,6 +6,10 @@ extends Node2D
 @onready var hard_difficulty_node = $HardDifficultyNode
 @onready var spawn_marker = $SpawnMarker
 
+@onready var tilemap = $TileMap
+
+var next_skill: int = 1
+
 
 func _ready():
     animal.queue_free()
@@ -34,10 +38,11 @@ func flip_graphics():
 func add_animal(species: Animal.Species, player_suffix: String):
     var animal_resource: Resource = load("res://data/lifeform_" + Animal.species_name[species] + ".tres")
     var mouse_movement = "mouse_0" == player_suffix
-    var player_data: PlayerData = PlayerData.New(species, player_suffix, mouse_movement)
+    var player_data: PlayerData = PlayerData.New(species, player_suffix, mouse_movement, next_skill)
     var new_animal: Animal = Animal.from_settings(player_data)
     new_animal.global_position = spawn_marker.global_position
     add_child(new_animal)
+    next_skill = (next_skill + 1) % 2
 
 
 func _on_input_detector_new_player(device_type: String, device_num: int):

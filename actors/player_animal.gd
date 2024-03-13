@@ -67,6 +67,7 @@ static func from_settings(player_data: PlayerData) -> Animal:
     var player: Animal = load("res://actors/player_animal.tscn").instantiate()
     var _resource: Resource = load("res://data/lifeform_" + species_name[species] + ".tres")
     from_resource(player, _resource)
+    player.tile_type = player_data.skill
     if player_suffix == "mouse_0":
         player.mouse_movement = true
     else:

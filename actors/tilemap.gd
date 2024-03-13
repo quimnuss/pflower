@@ -16,6 +16,10 @@ var unstable_tiles: Dictionary
 signal tile_changed(tile_coords: Vector2i, previous_tile_type: TileType, tile_type: TileType)
 
 
+func _ready():
+    prints("layers:", self.get_layer_name(0), self.get_layer_name(1))
+
+
 func set_tile_consequences(tile_coords: Vector2i, tile_type: TileType):
     pass
 
