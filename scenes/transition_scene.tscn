@@ -55,6 +55,9 @@ layer_3/z_index = 10
 layer_3/tile_data = PackedInt32Array()
 script = ExtResource("4_kgc0k")
 
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(40, 296)
+
 [node name="Animal" parent="." instance=ExtResource("1_uqh3b")]
 position = Vector2(40, 280)
 

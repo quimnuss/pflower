@@ -2,23 +2,29 @@ extends Node2D
 @onready var oracle_animal = $OracleAnimal
 @onready var animal = $Animal
 @onready var camera_2d = $Camera2D
+@onready var marker_2d = $Marker2D
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    oracle_animal.sprite.set_flip_h(true)
+
     if not Globals.players:
         Globals.players.append(PlayerData.new())
-    oracle_animal.sprite.set_flip_h(true)
-    animal.set_terrain_transform(false)
+        animal.set_terrain_transform(false)
+    else:
+        animal.queue_free()
 
+    var player_count: int = 0
     for player_data in Globals.players:
         var player_animal: Animal = Animal.from_settings(player_data)
-        player_animal.global_position = animal.global_position
-        animal.queue_free()
-        add_child(player_animal)
-        animal = player_animal
-        camera_2d.target = player_animal
         player_animal.set_terrain_transform(false)
+        player_animal.global_position = marker_2d.global_position + Vector2(player_count * 75, 0)
+        player_count += 1
+        add_child(player_animal)
+        if player_count == 0:
+            animal = player_animal
+            camera_2d.target = player_animal
 
 
 func start_dialog():
