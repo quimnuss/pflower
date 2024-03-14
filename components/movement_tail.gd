@@ -2,7 +2,7 @@ extends Node2D
 
 class_name MovementTail
 
-@export var targets: Array[Node2D]
+@export var targets: Array[Node]
 @export var min_distance: int = 10000
 @export var flee_distance: int = 7000
 @export var speed: float = 50

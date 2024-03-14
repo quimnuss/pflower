@@ -2,6 +2,11 @@ extends Node2D
 
 @onready var tilemap: PfTileMap = $TileMap
 @onready var win_scene = $WinScene
+@onready var animal = $Animal
+@onready var animal_2 = $Animal2
+@onready var marker_2d = $Marker2D
+@onready var camera_2d = $Camera2D
+@onready var movement_tail = $Enemies/MovementTail
 
 const TILESIZE: int = 16
 
@@ -22,6 +27,19 @@ func _ready():
 
     var viewport_size: Vector2i = (get_viewport().size - WORLD_MARGIN) / TILESIZE
     world_size = viewport_size.x * viewport_size.y
+
+    if Globals.players:
+        animal.queue_free()
+        animal_2.queue_free()
+
+        var animals: Array[Animal] = Globals.load_players(marker_2d.global_position)
+        for animal in animals:
+            self.add_child(animal)
+    else:
+        animal.add_to_group("players")
+        animal_2.add_to_group("players")
+
+    movement_tail.targets = get_tree().get_nodes_in_group("players")
 
 
 func _input(event):

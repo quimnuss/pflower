@@ -16,7 +16,7 @@ var hard_difficulty: bool = false:
         hard_difficulty = new_hard_difficulty
         config.save(SAVEFILE)
 
-var players: Array[PlayerData] = [PlayerData.new()]
+var players: Array[PlayerData] = []
 
 
 # Called when the node enters the scene tree for the first time.
@@ -45,3 +45,15 @@ func show_config():
 
 func add_player(player_data: PlayerData):
     players.append(player_data)
+
+
+func load_players(spawn_position: Vector2) -> Array[Animal]:
+    var animals: Array[Animal] = []
+    var player_count: int = 0
+    for player_data in self.players:
+        var player_animal: Animal = Animal.from_settings(player_data)
+        player_animal.global_position = spawn_position + Vector2(player_count * 75, 0)
+        player_count += 1
+        animals.append(player_animal)
+        player_animal.add_to_group("players")
+    return animals

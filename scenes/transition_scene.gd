@@ -10,21 +10,16 @@ func _ready():
     oracle_animal.sprite.set_flip_h(true)
 
     if not Globals.players:
-        Globals.players.append(PlayerData.new())
         animal.set_terrain_transform(false)
     else:
         animal.queue_free()
 
-    var player_count: int = 0
-    for player_data in Globals.players:
-        var player_animal: Animal = Animal.from_settings(player_data)
-        player_animal.set_terrain_transform(false)
-        player_animal.global_position = marker_2d.global_position + Vector2(player_count * 75, 0)
-        player_count += 1
-        add_child(player_animal)
-        if player_count == 0:
-            animal = player_animal
-            camera_2d.target = player_animal
+        var animals: Array[Animal] = Globals.load_players(marker_2d.global_position)
+        for animal: Animal in animals:
+            self.add_child(animal)
+            animal.set_terrain_transform(false)
+        animal = animals[0]
+        camera_2d.target = animals[0]
 
 
 func start_dialog():

@@ -47,7 +47,9 @@ func add_animal(species: Animal.Species, player_suffix: String):
 
 
 func _on_input_detector_new_player(device_type: String, device_num: int):
-    var species: Animal.Species = randi_range(Animal.Species.BEAR, Animal.Species.DOE)
+    var species: Animal.Species = randi_range(Animal.Species.FOX, Animal.Species.DOE)
+    if not Globals.players:
+        species = Animal.Species.BEAR
     prints("new player", device_type, device_num, Animal.species_name[species])
     var player_suffix = device_type + "_" + str(device_num)
     add_animal(species, player_suffix)
