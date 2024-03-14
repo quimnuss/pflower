@@ -59,7 +59,7 @@ static func from_resource(player: Animal, _resource: Resource):
 
 static func from_settings(player_data: PlayerData) -> Animal:
     var species: Species = player_data.species
-    var player_suffix: String = player_data.player_suffix
+    var _player_suffix: String = player_data.player_suffix
 
     if species == Species.NONE:
         push_error("Instantiating NONE animal species")
@@ -68,10 +68,10 @@ static func from_settings(player_data: PlayerData) -> Animal:
     var _resource: Resource = load("res://data/lifeform_" + species_name[species] + ".tres")
     from_resource(player, _resource)
     player.tile_type = player_data.skill
-    if player_suffix == "mouse_0":
+    if _player_suffix == "mouse_0":
         player.mouse_movement = true
     else:
-        player.player_suffix = player_suffix
+        player.player_suffix = _player_suffix
     player.mouse_movement = player_data.mouse_movement
 
     return player

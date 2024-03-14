@@ -60,7 +60,7 @@ func respawn():
 
 func _on_game_won():
     print("game won: disable bulldozer")
-    collision_shape_2d.disabled = true
+    collision_shape_2d.call_deferred("set_disabled", true)
     respawn_timer.paused = true
     respawn_timer.stop()
     self.can_move = false

@@ -8,8 +8,6 @@ extends Node2D
 @onready var camera_2d = $Camera2D
 @onready var movement_tail = $Enemies/MovementTail
 
-const TILESIZE: int = 16
-
 var world_size: int = 100
 
 var restored_world: int = 0
@@ -17,24 +15,20 @@ var restored_percent: float = 0
 var game_ended: bool = false
 
 const RESTORATION_MULTIPLIER: float = 2.0
-const WORLD_MARGIN: Vector2i = Vector2i(2, 2)
 
 signal restoration(restoration_percent: float)
 
 
 func _ready():
-    #var num_cells = len(tilemap.get_used_cells(tilemap.TERRAIN_LAYER))
-
-    var viewport_size: Vector2i = (get_viewport().size - WORLD_MARGIN) / TILESIZE
-    world_size = viewport_size.x * viewport_size.y
+    world_size = len(tilemap.get_used_cells(tilemap.TERRAIN_LAYER))
 
     if Globals.players:
         animal.queue_free()
         animal_2.queue_free()
 
         var animals: Array[Animal] = Globals.load_players(marker_2d.global_position)
-        for animal in animals:
-            self.add_child(animal)
+        for _animal in animals:
+            self.add_child(_animal)
     else:
         animal.add_to_group("players")
         animal_2.add_to_group("players")
@@ -45,6 +39,8 @@ func _ready():
 func _input(event):
     if event.is_action_pressed("ui_cancel"):
         get_tree().quit()
+    if event.is_action_pressed("cheat_action"):
+        win_game()
 
 
 func cell_changed(_tile_coords: Vector2i, previous_terrain_type: PfTileMap.TileType, terrain_type: PfTileMap.TileType):
@@ -66,6 +62,7 @@ func win_game():
     Input.start_joy_vibration(0, 0.25, 0.5, 2)
     Input.start_joy_vibration(1, 0.25, 0.5, 2)
     get_tree().call_group("enemies", "_on_game_won")
+    tilemap.auto_restore()
 
 
 func _on_restoration_changed(_restoration: float):

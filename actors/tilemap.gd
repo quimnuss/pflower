@@ -105,3 +105,21 @@ func cooldown_timeout(timer: Timer, tile_coords: Vector2i):
     var has_sinergy: bool = check_tile_survival(tile_coords)
     if not has_sinergy:
         reset_tile(timer, tile_coords)
+
+
+func auto_restore():
+    var cells: Array[Vector2i] = get_used_cells(TERRAIN_LAYER)
+    randomize()
+    cells.shuffle()
+    var restored_tile_types: Array[TileType] = [TileType.WATER, TileType.GRASS]
+    var timer: Timer = Timer.new()
+    add_child(timer)
+    for cell in cells:
+        var tile_data: TileData = self.get_cell_tile_data(TERRAIN_LAYER, cell)
+        if tile_data.terrain != TileType.GROUND:
+            continue
+        var tile_type: TileType = restored_tile_types.pick_random()
+        self.set_cells_terrain_connect(TERRAIN_LAYER, [cell], TERRAIN_SET, tile_type, false)
+        timer.start(0.005)
+        await timer.timeout
+    timer.queue_free()
