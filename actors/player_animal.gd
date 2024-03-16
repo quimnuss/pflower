@@ -36,7 +36,7 @@ const WAIT_FOR_KILLER_TIMEOUT = 6
 
 var player_controlled: bool = true
 
-@export var player_suffix: String = "keyboard_0"
+@export var player_suffix: String = Globals.KEYBOARD_0
 
 signal dying
 
@@ -99,14 +99,9 @@ func _input(event):
     if player_controlled:
         if event.is_action_pressed("switch_skill_" + player_suffix):
             tile_type = (tile_type + 1) % 2
-            prints("changed tile type", 1 + tile_type)
 
         if event.is_action_pressed("jump_" + player_suffix):
             state_machine.send_event("jump")
-
-
-func _process(_delta):
-    pass
 
 
 func stop():

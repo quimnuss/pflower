@@ -16,6 +16,6 @@ func activate(is_activated: bool):
         label.set("theme_override_colors/font_color", Color(0.5, 0.5, 0.5, 1))
 
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(_body):
     var is_activated: bool = setting_change.call()
     activate(is_activated)

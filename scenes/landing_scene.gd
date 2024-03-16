@@ -10,6 +10,8 @@ extends Node2D
 
 var next_skill: int = 1
 
+var is_exiting: bool = false
+
 
 func _ready():
     animal.queue_free()
@@ -36,7 +38,6 @@ func flip_graphics():
 
 
 func add_animal(species: Animal.Species, player_suffix: String):
-    var animal_resource: Resource = load("res://data/lifeform_" + Animal.species_name[species] + ".tres")
     var mouse_movement = "mouse_0" == player_suffix
     var player_data: PlayerData = PlayerData.New(species, player_suffix, mouse_movement, next_skill)
     Globals.players.append(player_data)
@@ -47,7 +48,7 @@ func add_animal(species: Animal.Species, player_suffix: String):
 
 
 func _on_input_detector_new_player(device_type: String, device_num: int):
-    var species: Animal.Species = randi_range(Animal.Species.FOX, Animal.Species.DOE)
+    var species: Animal.Species = randi_range(Animal.Species.FOX, Animal.Species.DOE) as Animal.Species
     if not Globals.players:
         species = Animal.Species.BEAR
     prints("new player", device_type, device_num, Animal.species_name[species])
@@ -55,5 +56,7 @@ func _on_input_detector_new_player(device_type: String, device_num: int):
     add_animal(species, player_suffix)
 
 
-func _on_play_game_body_entered(body):
-    get_tree().change_scene_to_file("res://scenes/transition_scene.tscn")
+func _on_play_game_body_entered(_body):
+    if not is_exiting:
+        is_exiting = true
+        get_tree().change_scene_to_file("res://scenes/transition_scene.tscn")

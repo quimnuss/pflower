@@ -15,9 +15,9 @@ func _ready():
         animal.queue_free()
 
         var animals: Array[Animal] = Globals.load_players(marker_2d.global_position)
-        for animal: Animal in animals:
-            self.add_child(animal)
-            animal.set_terrain_transform(false)
+        for _animal: Animal in animals:
+            self.add_child(_animal)
+            _animal.set_terrain_transform(false)
         animal = animals[0]
         camera_2d.target = animals[0]
 
@@ -28,7 +28,7 @@ func start_dialog():
 
     animal.player_controlled = false
     animal.stop()
-    var dialog = Dialogic.start("timeline")
+    Dialogic.start("timeline")
     get_viewport().set_input_as_handled()
     await Dialogic.timeline_ended
     animal.player_controlled = true
@@ -41,9 +41,9 @@ func _on_area_2d_2_body_entered(body):
         #prints("has gift:", Dialogic.VAR.has_oracle_gift)
 
 
-func _on_to_level_1_body_entered(body):
+func _on_to_level_1_body_entered(_body):
     animal.player_controlled = false
     animal.stop()
     animal.velocity = Vector2(animal.speed, 0)
     await get_tree().create_timer(1.0).timeout
-    get_tree().change_scene_to_file("res://scenes/main_game.tscn")
+    get_tree().change_scene_to_file("res://scenes/level0.tscn")

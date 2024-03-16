@@ -10,18 +10,18 @@ func _input(event):
         var player_side = 0
         if event.as_text_keycode().to_lower() in ["h", "j", "k", "u"]:
             player_side = 1
-        var device_num = player_inputs.find("keyboard_" + str(player_side))
+        var device_num = player_inputs.find(Globals.KEYBOARD + "_" + str(player_side))
         if device_num < 0:
-            player_inputs.append("keyboard_" + str(player_side))
-            new_player.emit("keyboard", player_side)
+            player_inputs.append(Globals.KEYBOARD + "_" + str(player_side))
+            new_player.emit(Globals.KEYBOARD, player_side)
     elif event is InputEventMouseButton:
-        var device_num = player_inputs.find("mouse")
+        var device_num = player_inputs.find(Globals.MOUSE)
         if device_num < 0:
-            player_inputs.append("mouse")
-            new_player.emit("mouse", 0)
+            player_inputs.append(Globals.MOUSE)
+            new_player.emit(Globals.MOUSE, 0)
     elif event is InputEventJoypadButton:
         event.get_rid()
-        var device_num = player_inputs.find("joy" + str(event.device))
+        var device_num = player_inputs.find(Globals.JOY + "_" + str(event.device))
         if device_num < 0:
-            player_inputs.append("joy" + str(event.device))
-            new_player.emit("joy", event.device)
+            player_inputs.append(Globals.JOY + "_" + str(event.device))
+            new_player.emit(Globals.JOY, event.device)

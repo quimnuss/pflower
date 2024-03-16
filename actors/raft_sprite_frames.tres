@@ -1,0 +1,73 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://bx6n2a45un5hq"]
+
+[ext_resource type="Texture2D" uid="uid://cbhyno0wgc8k6" path="res://assets/raft/floss-idle-no-sail-transp.png" id="1_uae2v"]
+[ext_resource type="Texture2D" uid="uid://bto7bsc7f0mco" path="res://assets/raft/floss-move-no-sail-transp.png" id="2_nk1b6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twm1k"]
+atlas = ExtResource("1_uae2v")
+region = Rect2(0, 224, 163, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_so7s3"]
+atlas = ExtResource("1_uae2v")
+region = Rect2(163, 224, 163, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48817"]
+atlas = ExtResource("1_uae2v")
+region = Rect2(326, 224, 163, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj4t0"]
+atlas = ExtResource("1_uae2v")
+region = Rect2(489, 224, 163, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pftx"]
+atlas = ExtResource("2_nk1b6")
+region = Rect2(0, 224, 163, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hoj2"]
+atlas = ExtResource("2_nk1b6")
+region = Rect2(163, 224, 163, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbh37"]
+atlas = ExtResource("2_nk1b6")
+region = Rect2(326, 224, 163, 224)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g26v6"]
+atlas = ExtResource("2_nk1b6")
+region = Rect2(489, 224, 163, 224)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twm1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_so7s3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48817")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj4t0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pftx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hoj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbh37")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g26v6")
+}],
+"loop": true,
+"name": &"move_right",
+"speed": 5.0
+}]

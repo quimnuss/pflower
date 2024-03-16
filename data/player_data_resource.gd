@@ -4,7 +4,7 @@ class_name PlayerData
 
 var species: Animal.Species = Animal.Species.BEAR
 
-var player_suffix: String = "keyboard_0"
+var player_suffix: String = Globals.KEYBOARD_0
 
 var mouse_movement: bool = true
 

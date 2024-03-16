@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dut87gxv0f1sf"]
+
+[ext_resource type="Script" path="res://scripts/camera_follow.gd" id="1_pvn5j"]
+[ext_resource type="Script" path="res://scripts/spring_camera.gd" id="2_nsjrk"]
+
+[node name="Camera2D" type="Camera2D"]
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("1_pvn5j")
+
+[node name="SpringCamera" type="Node2D" parent="."]
+script = ExtResource("2_nsjrk")

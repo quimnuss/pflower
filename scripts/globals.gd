@@ -2,6 +2,15 @@ extends Node
 
 const SAVEFILE = "user://pflower.cfg"
 
+const PLAYERS_GROUP = "players"
+
+const KEYBOARD: String = "keyboard"
+const MOUSE: String = "mouse"
+const JOY: String = "joy"
+
+const MOUSE_0: String = "mouse_0"
+const KEYBOARD_0: String = "keyboard_0"
+
 var config = ConfigFile.new()
 
 var use_particles: bool = true:
@@ -55,5 +64,5 @@ func load_players(spawn_position: Vector2) -> Array[Animal]:
         player_animal.global_position = spawn_position + Vector2(player_count * 75, 0)
         player_count += 1
         animals.append(player_animal)
-        player_animal.add_to_group("players")
+        player_animal.add_to_group(PLAYERS_GROUP)
     return animals

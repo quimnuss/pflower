@@ -80,7 +80,7 @@ import/blender/enabled=false
 
 [gui]
 
-theme/custom_font="res://assets/GlacialIndifference-Regular.ttf"
+theme/custom_font="res://assets/GlacialIndifference-Bold.ttf"
 
 [input]
 
