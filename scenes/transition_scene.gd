@@ -1,25 +1,33 @@
 extends Node2D
 @onready var oracle_animal = $OracleAnimal
 @onready var animal = $Animal
-@onready var camera_2d = $Camera2D
-@onready var marker_2d = $Marker2D
+@onready var camera = $Camera2D
+@onready var area_2d_2 = $OracleAnimal/Area2D2
+@onready var collision_shape_2d = $OracleAnimal/Area2D2/CollisionShape2D
+@onready var progress_block = $ToLevel1/StaticBody2D/ProgressBlock
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     oracle_animal.sprite.set_flip_h(true)
 
-    if not Globals.players:
-        animal.set_terrain_transform(false)
+    var animals: Array = get_tree().get_nodes_in_group(Globals.PLAYERS_GROUP)
+    if not animals:
+        push_error("No players in group players")
+        return
     else:
-        animal.queue_free()
+        prints("Animals", animals)
 
-        var animals: Array[Animal] = Globals.load_players(marker_2d.global_position)
-        for _animal: Animal in animals:
-            self.add_child(_animal)
-            _animal.set_terrain_transform(false)
-        animal = animals[0]
-        camera_2d.target = animals[0]
+    camera.target = animals[0]
+    camera.global_position = camera.target.global_position
+
+    get_tree().call_group("players", "set_terrain_transform", true)
+
+
+func give_abilities_and_unlock_exit():
+    get_tree().call_group("players", "set_terrain_transform", true)
+    collision_shape_2d.disabled = true
+    progress_block.disabled = true
 
 
 func start_dialog():
@@ -28,17 +36,24 @@ func start_dialog():
 
     animal.player_controlled = false
     animal.stop()
+    get_tree().call_group("players", "set_player_controlled", false)
+    get_tree().call_group("players", "stop")
     Dialogic.start("timeline")
     get_viewport().set_input_as_handled()
     await Dialogic.timeline_ended
     animal.player_controlled = true
-    animal.set_terrain_transform(true)
+    get_tree().call_group("players", "set_player_controlled", true)
+    if Dialogic.VAR.has_oracle_gift:
+        give_abilities_and_unlock_exit()
 
 
 func _on_area_2d_2_body_entered(body):
-    if body is Animal:
+    if body is Animal and not Dialogic.VAR.has_oracle_gift:
         start_dialog()
         #prints("has gift:", Dialogic.VAR.has_oracle_gift)
+    else:
+        #TODO activate speak interactible area button
+        pass
 
 
 func _on_to_level_1_body_entered(_body):

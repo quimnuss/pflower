@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://yxql4e0xnlmh"]
+[gd_scene load_steps=18 format=3 uid="uid://yxql4e0xnlmh"]
 
 [ext_resource type="Script" path="res://scenes/transition_scene.gd" id="1_f2rds"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="1_uqh3b"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://yhyyvxi35nun" path="res://data/lifeform_stag.tres" id="3_uoh1l"]
 [ext_resource type="Script" path="res://actors/npc_animal.gd" id="3_xuxgw"]
 [ext_resource type="Texture2D" uid="uid://bh3kruda7jagj" path="res://assets/lifeforms/outline/MiniDeer2.png" id="4_5hnh8"]
+[ext_resource type="Script" path="res://components/player_spawn.gd" id="4_ag2ss"]
 [ext_resource type="Script" path="res://actors/tilemap.gd" id="4_kgc0k"]
 [ext_resource type="AnimationLibrary" uid="uid://qr4hkr5vsu6l" path="res://imports/animations/stag_animation_library.tres" id="5_e2fo7"]
 [ext_resource type="FontFile" uid="uid://6eyijpelyowj" path="res://assets/promptfont.otf" id="9_q8dra"]
@@ -24,6 +25,9 @@ height = 24.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r5v37"]
 size = Vector2(72, 272)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0513o"]
+size = Vector2(20, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hhme8"]
 size = Vector2(72, 408)
@@ -56,6 +60,10 @@ script = ExtResource("4_kgc0k")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(40, 296)
+
+[node name="SpawnMarker2D" type="Marker2D" parent="."]
+position = Vector2(8, 376)
+script = ExtResource("4_ag2ss")
 
 [node name="Animal" parent="." instance=ExtResource("1_uqh3b")]
 position = Vector2(40, 280)
@@ -129,7 +137,15 @@ tile_map = NodePath("../TileMap")
 target = NodePath("../Animal")
 
 [node name="ToLevel1" type="Area2D" parent="."]
-position = Vector2(960, 272)
+position = Vector2(1112, 272)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ToLevel1"]
+z_index = 5
+position = Vector2(-80, 8)
+
+[node name="ProgressBlock" type="CollisionShape2D" parent="ToLevel1/StaticBody2D"]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_0513o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ToLevel1"]
 z_index = 5
