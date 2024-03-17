@@ -4,12 +4,14 @@ extends Node2D
 @onready var win_scene = $win_scene
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
     var animals: Array = get_tree().get_nodes_in_group(Globals.PLAYERS_GROUP)
     if not animals:
         push_error("No players in group players")
         return
+    else:
+        prints("Animals", animals)
+
     camera.target = animals[0]
     camera.global_position = camera.target.global_position
 

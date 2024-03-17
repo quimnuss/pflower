@@ -14,9 +14,9 @@ func _ready():
 func set_limits():
     var map_limits = tile_map.get_used_rect()
     self.limit_left = int(tile_map.map_to_local(map_limits.position).x) + MARGIN
-    self.limit_top = tile_map.map_to_local(map_limits.position).y + MARGIN
-    self.limit_right = tile_map.map_to_local(map_limits.end).x - MARGIN
-    self.limit_bottom = tile_map.map_to_local(map_limits.end).y - MARGIN
+    self.limit_top = int(tile_map.map_to_local(map_limits.position).y) + MARGIN
+    self.limit_right = int(tile_map.map_to_local(map_limits.end).x) - MARGIN
+    self.limit_bottom = int(tile_map.map_to_local(map_limits.end).y) - MARGIN
 
 
 func _process(_delta):

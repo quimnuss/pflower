@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var tilemap: PfTileMap = $TileMap
+@onready var spawn_marker_2d = $SpawnMarker2D
 
 var world_size: int = 100
 

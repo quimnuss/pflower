@@ -56,7 +56,7 @@ func add_player(player_data: PlayerData):
     players.append(player_data)
 
 
-func load_players(spawn_position: Vector2) -> Array[Animal]:
+func load_players(spawn_position: Vector2 = Vector2i(0, 0)) -> Array[Animal]:
     var animals: Array[Animal] = []
     var player_count: int = 0
     for player_data in self.players:
