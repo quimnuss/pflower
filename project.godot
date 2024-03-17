@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="pflower"
-run/main_scene="res://scenes/main_game.tscn"
+run/main_scene="res://scenes/landing_scene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/image="res://assets/pixel_splash.png"
 config/icon="res://pixel_splash.svg"
@@ -20,8 +20,8 @@ config/icon="res://pixel_splash.svg"
 
 Constants="*res://scripts/constants.gd"
 Globals="*res://scripts/globals.gd"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 BackgroundMusic="*res://actors/BackgroundMusic.tscn"
+Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 
@@ -55,12 +55,16 @@ variables={
 }
 glossary/default_case_sensitive=true
 text/autocolor_names=true
-translation/enabled=false
+translation/enabled=true
 translation/original_locale="en"
 translation/file_mode=1
-translation/translation_folder=""
+translation/translation_folder="res://i18n/dialogic"
 translation/save_mode=0
 translation/add_separator=false
+translation/intern/save_mode=0
+translation/intern/file_mode=1
+translation/intern/translation_folder="res://i18n/dialogic"
+translation/id_counter=28
 
 [display]
 
@@ -331,6 +335,10 @@ cheat_action={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":45,"key_label":0,"unicode":63,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://i18n/pflower_i18n.ca.translation", "res://i18n/pflower_i18n.en.translation", "res://i18n/dialogic/dialogic_character_translations.en.translation", "res://i18n/dialogic/dialogic_timeline_translation.ca.translation", "res://i18n/dialogic/dialogic_timeline_translation.en.translation", "res://i18n/dialogic/dialogic_character_translations.ca.translation")
 
 [layer_names]
 

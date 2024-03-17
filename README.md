@@ -5,10 +5,13 @@ Game about spreading an ecosystem faster than evil can destroy it
 
 ## Now
 
-- [ ] enemy-free level to learn the restoration mechanic
+- [ ] indicate the inputs available at start (up to 4P!)
+- [ ] i18n
 
 ## Then
 
+- [ ] put a time limit
+- [ ] better show we're approaching the end of the level / end of the level
 - [ ] light indicating level change
 - [ ] interaction keypress / mouse-click to talk
 - [ ] Story ending
@@ -16,10 +19,11 @@ Game about spreading an ecosystem faster than evil can destroy it
 
 ## Later
 
-- [ ] boat level change
+- [~] boat level change
 
 ## Done
 
+- [x] enemy-free level to learn the restoration mechanic
 - [x] better enemies: bigfoot, better ai
 
 # Attributions

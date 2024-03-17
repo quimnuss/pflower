@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c6scb7423wtgx"
+
+[deps]
+
+files=["res://i18n/dialogic/dialogic_character_translations.en.translation", "res://i18n/dialogic/dialogic_character_translations.ca.translation"]
+
+source_file="res://i18n/dialogic/dialogic_character_translations.csv"
+dest_files=["res://i18n/dialogic/dialogic_character_translations.en.translation", "res://i18n/dialogic/dialogic_character_translations.ca.translation"]
+
+[params]
+
+compress=true
+delimiter=0

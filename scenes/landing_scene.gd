@@ -5,6 +5,7 @@ extends Node2D
 @onready var input_selection_node = $InputSelectionNode
 @onready var hard_difficulty_node = $HardDifficultyNode
 @onready var spawn_marker = $SpawnMarker
+@onready var single_player_info_label = $PlayGame/SinglePlayerInfoLabel
 
 @onready var tilemap = $TileMap
 
@@ -51,6 +52,9 @@ func _on_input_detector_new_player(device_type: String, device_num: int):
     var species: Animal.Species = randi_range(Animal.Species.FOX, Animal.Species.DOE) as Animal.Species
     if not Globals.players:
         species = Animal.Species.BEAR
+        single_player_info_label.visible = true
+    else:
+        single_player_info_label.visible = false
     prints("new player", device_type, device_num, Animal.species_name[species])
     var player_suffix = device_type + "_" + str(device_num)
     add_animal(species, player_suffix)

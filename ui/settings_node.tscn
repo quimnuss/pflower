@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hloui"]
 size = Vector2(96, 20)
 
-[node name="GraphicsSettingsNode" type="Node2D"]
+[node name="SettingsNode" type="Node2D"]
 position = Vector2(128, 160)
 script = ExtResource("1_21llg")
 

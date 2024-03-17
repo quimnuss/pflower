@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://jmtk2gh5wi58"]
+[gd_scene load_steps=12 format=3 uid="uid://jmtk2gh5wi58"]
 
 [ext_resource type="Script" path="res://scenes/landing_scene.gd" id="1_i1k2e"]
 [ext_resource type="TileSet" uid="uid://o26012k631mj" path="res://actors/landing_tileset.tres" id="1_x6ere"]
@@ -7,8 +7,13 @@
 [ext_resource type="Theme" uid="uid://cpkq7adpo5sda" path="res://effects/pflower_theme.tres" id="3_dev2m"]
 [ext_resource type="Script" path="res://scripts/input_detector.gd" id="4_7iyl7"]
 [ext_resource type="PackedScene" uid="uid://11ybh23gwmu3" path="res://ui/settings_node.tscn" id="5_w6x6q"]
+[ext_resource type="FontFile" uid="uid://6eyijpelyowj" path="res://assets/promptfont.otf" id="8_13h7b"]
+[ext_resource type="Script" path="res://scripts/language_switcher.gd" id="9_7ee0t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgkqt"]
+size = Vector2(160, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hloui"]
 size = Vector2(96, 20)
 
 [node name="LandingScene" type="Node2D"]
@@ -82,8 +87,51 @@ text = "Play Game"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayGame/Area2D"]
 shape = SubResource("RectangleShape2D_pgkqt")
 
+[node name="SinglePlayerInfoLabel" type="Label" parent="PlayGame"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = 48.0
+offset_right = 144.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("8_13h7b")
+theme_override_font_sizes/font_size = 18
+text = "SKILL_INFO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="SpawnMarker" type="Marker2D" parent="."]
 position = Vector2(296, 176)
 
+[node name="LanguageSwitcherSettingsNode" type="Node2D" parent="."]
+position = Vector2(416, 160)
+script = ExtResource("9_7ee0t")
+
+[node name="Label" type="Label" parent="LanguageSwitcherSettingsNode"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "English"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="LanguageSwitcherSettingsNode"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LanguageSwitcherSettingsNode/Area2D"]
+shape = SubResource("RectangleShape2D_hloui")
+
 [connection signal="new_player" from="InputDetector" to="." method="_on_input_detector_new_player"]
 [connection signal="body_entered" from="PlayGame/Area2D" to="." method="_on_play_game_body_entered"]
+[connection signal="body_entered" from="LanguageSwitcherSettingsNode/Area2D" to="LanguageSwitcherSettingsNode" method="_on_area_2d_body_entered"]

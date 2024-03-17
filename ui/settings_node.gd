@@ -6,7 +6,7 @@ extends Node2D
 
 
 func _ready():
-    label.text = setting_text
+    label.text = tr(setting_text)
 
 
 func activate(is_activated: bool):

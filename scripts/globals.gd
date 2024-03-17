@@ -25,6 +25,12 @@ var hard_difficulty: bool = false:
         hard_difficulty = new_hard_difficulty
         config.save(SAVEFILE)
 
+var language_code: String = "en":
+    set(new_language_code):
+        config.set_value("gameplay", "language", new_language_code)
+        language_code = new_language_code
+        config.save(SAVEFILE)
+
 var players: Array[PlayerData] = []
 
 
@@ -40,16 +46,19 @@ func _ready():
 func config_init():
     config.set_value("graphics", "use_particles", use_particles)
     config.set_value("gameplay", "hard_difficulty", hard_difficulty)
+    config.set_value("gameplay", "language_code", language_code)
     config.save(SAVEFILE)
 
 
 func load_config():
     use_particles = config.get_value("graphics", "use_particles", use_particles)
     hard_difficulty = config.get_value("gameplay", "hard_difficulty", hard_difficulty)
+    language_code = config.get_value("gameplay", "language_code", language_code)
+    TranslationServer.set_locale(language_code)
 
 
 func show_config():
-    prints("use_particles", use_particles, "hard_difficulty", hard_difficulty)
+    prints("use_particles", use_particles, "hard_difficulty", hard_difficulty, "language_code", language_code)
 
 
 func add_player(player_data: PlayerData):
