@@ -1,7 +1,7 @@
-keys,en,ca
-Play Game,Play Game,Comença!
-SKILL_INFO,With one animal press Ｑ ⇐ to change skill,Amb un únic animal pitgeu Ｑ ⇐ per canviar d'habilitat
-high graphics,high graphics,gràfics de qualitat
-hard difficulty,hard difficulty,dificultat alta
-Restoration,Restoration,Restauració
-ECOSYSTEMRESTORED,Ecosystem\nRestored,Ecosistema\nRestaurat
+keys,en,ca,de
+Play Game,Play Game,Comença!,Spielstart
+SKILL_INFO,With one animal press Ｑ ⇐ to change skill,Amb un únic animal pitgeu Ｑ ⇐ per canviar d'habilitat,Mit einem Tier drücke Ｑ ⇐ um die Fähigkeit zu wechseln
+high graphics,high graphics,gràfics de qualitat,Hohe Auflösung
+hard difficulty,hard difficulty,dificultat alta,hoher Schwierigkeitsgrad
+Restoration,Restoration,Restauració,Wiederherstellung
+ECOSYSTEMRESTORED,Ecosystem\nRestored,Ecosistema\nRestaurat,Ökosystem\nwiederhergestellt

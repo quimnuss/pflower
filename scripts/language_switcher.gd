@@ -1,7 +1,7 @@
 extends Node2D
 
-var languages_names: Array[String] = ["English", "Català"]
-var languages: Array[String] = ["en", "ca"]
+var languages_names: Array[String] = ["English", "Català", "Deutsch"]
+var languages: Array[String] = ["en", "ca", "de"]
 
 var language_id: int = 0
 @onready var label = $Label

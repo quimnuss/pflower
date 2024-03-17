@@ -6,10 +6,10 @@ uid="uid://clgxr88fdapsy"
 
 [deps]
 
-files=["res://i18n/dialogic/dialogic_timeline_translation.en.translation", "res://i18n/dialogic/dialogic_timeline_translation.ca.translation"]
+files=["res://i18n/dialogic/dialogic_timeline_translation.en.translation", "res://i18n/dialogic/dialogic_timeline_translation.ca.translation", "res://i18n/dialogic/dialogic_timeline_translation.de.translation"]
 
 source_file="res://i18n/dialogic/dialogic_timeline_translation.csv"
-dest_files=["res://i18n/dialogic/dialogic_timeline_translation.en.translation", "res://i18n/dialogic/dialogic_timeline_translation.ca.translation"]
+dest_files=["res://i18n/dialogic/dialogic_timeline_translation.en.translation", "res://i18n/dialogic/dialogic_timeline_translation.ca.translation", "res://i18n/dialogic/dialogic_timeline_translation.de.translation"]
 
 [params]
 

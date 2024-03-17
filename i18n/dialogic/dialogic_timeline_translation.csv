@@ -1,13 +1,13 @@
-keys,en,ca
-Text/11/text,"Persist, my friend, persist.","Persisteix, amic meu, persisteix."
-Text/12/text,hello stag!,hola cèrvol!
-Text/13/text,"Oh, bear. Where are you going?","Oh, ós. Cap a on vas?"
-Choice/14/text,To the prairie!,A la prada!
-Choice/14/disabled_text,,
-Text/15/text,Oh bear... The machines are destroying it all... I have little hope for us.,Oh ós... Les màquines ho estan destruïnt tot... No em queda ni un bri d'esperança.
-Text/16/text,What? There must be something we can do about it.,Com? Alguna cosa hi hem de poder fer.
-Text/17/text,I'm too old to try and fight it. But take this.,Sóc massa gran per a aquesta lluita. Però agafa això.
-Text/18/text,What is it?,Què és?
-Text/19/text,It will let you keep the ecosystem going.,T'ajudarà a fer proliferar l'ecosistema.
-Choice/1a/text,I'm still undecided,Encara estic indecís
-Choice/1a/disabled_text,,
+keys,en,ca,de
+Text/11/text,"Persist, my friend, persist.","Persisteix, amic meu, persisteix.","Halte durch, mein Freund, halte durch."
+Text/12/text,hello stag!,hola cèrvol!,Hallo Hirsch!
+Text/13/text,"Oh, bear. Where are you going?","Oh, ós. Cap a on vas?","Oh, Bär. Wo gehst du hin?"
+Choice/14/text,To the prairie!,A la prada!,In die Prärie!
+Choice/14/disabled_text,,,
+Text/15/text,Oh bear... The machines are destroying it all... I have little hope for us.,Oh ós... Les màquines ho estan destruïnt tot... No em queda ni un bri d'esperança.,Oh Bär… Die Maschinen zerstören alles… Ich bin ziemlich hoffnungslos…
+Text/16/text,What? There must be something we can do about it.,Com? Alguna cosa hi hem de poder fer.,Was? Etwas müssen wir doch dagegen tun können.
+Text/17/text,I'm too old to try and fight it. But take this.,Sóc massa gran per a aquesta lluita. Però agafa això.,"Ich bin zu alt, um in den Kampf zu ziehen. Aber nimm das."
+Text/18/text,What is it?,Què és?,Was ist das?
+Text/19/text,It will let you keep the ecosystem going.,T'ajudarà a fer proliferar l'ecosistema.,"Das hilft dir, das Ökosystem am Laufen zu halten."
+Choice/1a/text,I'm still undecided,Encara estic indecís,Ich bin noch unentschlossen
+Choice/1a/disabled_text,,,

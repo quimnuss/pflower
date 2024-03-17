@@ -338,7 +338,7 @@ cheat_action={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://i18n/pflower_i18n.ca.translation", "res://i18n/pflower_i18n.en.translation", "res://i18n/dialogic/dialogic_character_translations.en.translation", "res://i18n/dialogic/dialogic_timeline_translation.ca.translation", "res://i18n/dialogic/dialogic_timeline_translation.en.translation", "res://i18n/dialogic/dialogic_character_translations.ca.translation")
+locale/translations=PackedStringArray("res://i18n/pflower_i18n.ca.translation", "res://i18n/pflower_i18n.en.translation", "res://i18n/dialogic/dialogic_character_translations.en.translation", "res://i18n/dialogic/dialogic_timeline_translation.ca.translation", "res://i18n/dialogic/dialogic_timeline_translation.en.translation", "res://i18n/dialogic/dialogic_character_translations.ca.translation", "res://i18n/pflower_i18n.de.translation", "res://i18n/dialogic/dialogic_timeline_translation.de.translation", "res://i18n/dialogic/dialogic_character_translations.de.translation")
 
 [layer_names]
 
