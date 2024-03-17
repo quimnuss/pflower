@@ -69,7 +69,7 @@ setting_text = "hard difficulty"
 script = ExtResource("4_7iyl7")
 
 [node name="PlayGame" type="Node2D" parent="."]
-position = Vector2(320, 432)
+position = Vector2(312, 336)
 
 [node name="Label" type="Label" parent="PlayGame"]
 anchors_preset = 15
@@ -78,7 +78,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
 text = "Play Game"
 
@@ -87,17 +87,16 @@ text = "Play Game"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayGame/Area2D"]
 shape = SubResource("RectangleShape2D_pgkqt")
 
-[node name="SinglePlayerInfoLabel" type="Label" parent="PlayGame"]
-visible = false
+[node name="SinglePlayerInfoLabel" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -136.0
-offset_top = 48.0
-offset_right = 144.0
-offset_bottom = 73.0
+offset_left = 176.0
+offset_top = 488.0
+offset_right = 456.0
+offset_bottom = 513.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -131,6 +130,62 @@ vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LanguageSwitcherSettingsNode/Area2D"]
 shape = SubResource("RectangleShape2D_hloui")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 144.0
+offset_top = 392.0
+offset_right = 475.0
+offset_bottom = 412.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "This game is better played with two animals"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.5
+offset_top = 20.0
+offset_right = 82.5
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Press to add an Animal"
+horizontal_alignment = 1
+
+[node name="AvailableInputs" type="Label" parent="Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 50.0
+offset_right = 32.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("8_13h7b")
+theme_override_font_sizes/font_size = 28
+text = "➊ＷＨ⇓"
+horizontal_alignment = 1
 
 [connection signal="new_player" from="InputDetector" to="." method="_on_input_detector_new_player"]
 [connection signal="body_entered" from="PlayGame/Area2D" to="." method="_on_play_game_body_entered"]

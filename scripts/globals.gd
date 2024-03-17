@@ -10,6 +10,7 @@ const JOY: String = "joy"
 
 const MOUSE_0: String = "mouse_0"
 const KEYBOARD_0: String = "keyboard_0"
+const KEYBOARD_1: String = "keyboard_1"
 
 var config = ConfigFile.new()
 

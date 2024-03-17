@@ -5,7 +5,9 @@ extends Node2D
 @onready var input_selection_node = $InputSelectionNode
 @onready var hard_difficulty_node = $HardDifficultyNode
 @onready var spawn_marker = $SpawnMarker
-@onready var single_player_info_label = $PlayGame/SinglePlayerInfoLabel
+@onready var single_player_info_label = $SinglePlayerInfoLabel
+@onready var available_inputs = $Label/AvailableInputs
+@onready var input_detector = $InputDetector
 
 @onready var tilemap = $TileMap
 
@@ -58,6 +60,7 @@ func _on_input_detector_new_player(device_type: String, device_num: int):
     prints("new player", device_type, device_num, Animal.species_name[species])
     var player_suffix = device_type + "_" + str(device_num)
     add_animal(species, player_suffix)
+    available_inputs.text = "".join(input_detector.available_inputs.values())
 
 
 func _on_play_game_body_entered(_body):
