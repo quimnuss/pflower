@@ -7,6 +7,7 @@
 size = Vector2(160, 112)
 
 [node name="Raft" type="Node2D"]
+z_index = 4
 script = ExtResource("1_veb83")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

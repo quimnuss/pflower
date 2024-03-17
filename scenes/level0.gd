@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var camera: PfCamera = $RestorationGame/Camera2D
 @onready var win_scene = $win_scene
+@onready var raft = $Raft
+@onready var raft_spawn = $RaftSpawn
 
 
 func _ready():
@@ -21,6 +23,10 @@ func win_game():
     Input.start_joy_vibration(0, 0.25, 0.5, 2)
     Input.start_joy_vibration(1, 0.25, 0.5, 2)
     get_tree().call_group("enemies", "_on_game_won")
+    var raft: Raft = load("res://actors/raft.tscn").instantiate()
+    raft.exit_level.connect(_on_raft_exit_level)
+    raft.global_position = raft_spawn.global_position
+    add_child(raft)
 
 
 func _on_restoration_game_restoration_complete():

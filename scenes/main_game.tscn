@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bqnfq144njjq2"]
+[gd_scene load_steps=25 format=3 uid="uid://bqnfq144njjq2"]
 
 [ext_resource type="Script" path="res://scenes/main_game.gd" id="1_xysvl"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_3xuic"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bj1tvwbelj52y" path="res://assets/iconset_vectorized.png" id="7_74ejf"]
 [ext_resource type="Script" path="res://actors/enemies/bulldozer/enemy_follow_progress_ratio.gd" id="7_khplb"]
 [ext_resource type="PackedScene" uid="uid://cr58cstf8m327" path="res://actors/enemies/bulldozer/enemy_bulldozer.tscn" id="7_mk7ak"]
-[ext_resource type="AudioStream" uid="uid://b527rant45myj" path="res://assets/audio/Relax in the Forest.mp3" id="10_dcdka"]
 [ext_resource type="Script" path="res://actors/foot_spawner.gd" id="10_xkoea"]
 [ext_resource type="Script" path="res://components/movement_tail.gd" id="11_j6oly"]
 [ext_resource type="Script" path="res://actors/Camera2D.gd" id="13_qy7y0"]
@@ -189,11 +188,6 @@ script = ExtResource("10_xkoea")
 
 [node name="FootSpawnTimer" type="Timer" parent="Enemies/FootSpawner"]
 wait_time = 30.0
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_dcdka")
-volume_db = -30.0
-autoplay = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vpuv5")

@@ -32,7 +32,7 @@ func avengers_assemble():
     var animals = get_tree().get_nodes_in_group(Globals.PLAYERS_GROUP)
     for animal in animals:
         passengers.append(animal)
-        animal.reparent(self)
+        animal.call_deferred("reparent", self)
         animal.player_controlled = false
         animal.stop()
         animal.set_process(false)

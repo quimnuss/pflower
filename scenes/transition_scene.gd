@@ -66,5 +66,6 @@ func _on_to_level_1_body_entered(_body):
         animal.global_position = _body.global_position + count * OFFSET * Vector2(1, 0)
         animal.velocity = Vector2(EXIT_SPEED, 0)
         count += 1
-    await get_tree().create_timer(1.0).timeout
+    camera.target = null
+    await get_tree().create_timer(3.0).timeout
     get_tree().change_scene_to_file("res://scenes/level0.tscn")
