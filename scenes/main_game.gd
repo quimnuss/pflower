@@ -75,7 +75,7 @@ func _on_tile_map_tile_changed(tile_coords, previous_tile_type, tile_type):
 
 
 func _on_replay_pressed():
-    get_tree().reload_current_scene()
+    get_tree().change_scene_to_file("res://scenes/landing_scene.tscn")
 
 
 func _on_exit_pressed():

@@ -28,13 +28,19 @@ func _process(delta):
             passenger.global_position = global_position
 
 
+func avengers_assemble():
+    var animals = get_tree().get_nodes_in_group(Globals.PLAYERS_GROUP)
+    for animal in animals:
+        passengers.append(animal)
+        animal.reparent(self)
+        animal.player_controlled = false
+        animal.stop()
+        animal.set_process(false)
+        animal.global_position = self.global_position
+
+
 func _on_area_2d_body_entered(body):
     if body is Animal and len(passengers) == 0:
-        passengers.append(body)
-        body.reparent(self)
-        body.player_controlled = false
-        body.stop()
-        body.set_process(false)
-        body.global_position = global_position
+        avengers_assemble()
         move()
         exit_level.emit()
