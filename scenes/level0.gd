@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var camera: PfCamera = $RestorationGame/Camera2D
 @onready var win_scene = $win_scene
-@onready var raft = $Raft
 @onready var raft_spawn = $RaftSpawn
 
 

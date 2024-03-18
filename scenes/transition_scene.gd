@@ -33,7 +33,6 @@ func start_dialog():
     if Dialogic.current_timeline != null:
         return
 
-    var players = get_tree().get_nodes_in_group(Globals.PLAYERS_GROUP)
     get_tree().set_group(Globals.PLAYERS_GROUP, "player_controlled", false)
     get_tree().call_group(Globals.PLAYERS_GROUP, "stop")
     Dialogic.start("timeline")
