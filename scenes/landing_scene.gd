@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var graphics_settings_node = $GraphicsSettingsNode
 @onready var animal = $Animal
-@onready var input_selection_node = $InputSelectionNode
 @onready var hard_difficulty_node = $HardDifficultyNode
 @onready var spawn_marker = $SpawnMarker
 @onready var single_player_info_label = $SinglePlayerInfoLabel
