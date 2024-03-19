@@ -5,10 +5,13 @@ Game about spreading an ecosystem faster than evil can destroy it
 
 ## Now
 
+- [ ] put a time limit
+
 ## Then
 
+- [ ] "scene" the ending animation e.g. spawn plenty of animals running around
+- [ ] end level and outro
 - [ ] trees growing on restoration
-- [ ] put a time limit
 - [ ] better show we're approaching the end of the level / end of the level
 - [ ] interaction keypress / mouse-click to talk
 - [ ] Story ending
