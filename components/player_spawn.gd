@@ -5,8 +5,10 @@ func _ready():
     if not Globals.players:
         var player_data: PlayerData = PlayerData.New(Animal.Species.BEAR, Globals.KEYBOARD_0, false, 0)
         Globals.players.append(player_data)
-        var player_data2: PlayerData = PlayerData.New(Animal.Species.FOX, "keyboard_1", true, 1)
+        var player_data2: PlayerData = PlayerData.New(Animal.Species.FOX, Globals.KEYBOARD_1, true, 1)
         Globals.players.append(player_data2)
+        #player_data2 = PlayerData.New(Animal.Species.WOLF, Globals.KEYBOARD_1, false, 1)
+        #Globals.players.append(player_data2)
 
     var animals: Array[Animal] = Globals.load_players()
     var offset: int = 30
