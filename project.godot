@@ -22,6 +22,8 @@ Constants="*res://scripts/constants.gd"
 Globals="*res://scripts/globals.gd"
 BackgroundMusic="*res://actors/BackgroundMusic.tscn"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+ANIMA="*res://addons/anima/core/constants.gd"
+Anima="*res://addons/anima/core/anima.gd"
 
 [dialogic]
 
@@ -77,7 +79,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/anima/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
 [filesystem]
 
