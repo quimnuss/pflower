@@ -70,6 +70,7 @@ static func from_settings(player_data: PlayerData) -> Animal:
     player.tile_type = player_data.skill
     if _player_suffix == "mouse_0":
         player.mouse_movement = true
+        player.player_suffix = _player_suffix
     else:
         player.player_suffix = _player_suffix
     player.mouse_movement = player_data.mouse_movement
@@ -97,7 +98,7 @@ func _ready():
 
 func _input(event):
     if player_controlled:
-        if event.is_action_pressed("switch_skill_" + player_suffix):
+        if event.is_action_pressed("switch_skill_" + player_suffix) or mouse_movement and event is InputEventMouseButton and event.double_click:
             tile_type = (tile_type + 1) % 2
 
         if event.is_action_pressed("jump_" + player_suffix):
