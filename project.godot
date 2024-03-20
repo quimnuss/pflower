@@ -21,9 +21,9 @@ config/icon="res://pixel_splash.svg"
 Constants="*res://scripts/constants.gd"
 Globals="*res://scripts/globals.gd"
 BackgroundMusic="*res://actors/BackgroundMusic.tscn"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 ANIMA="*res://addons/anima/core/constants.gd"
 Anima="*res://addons/anima/core/anima.gd"
+Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 

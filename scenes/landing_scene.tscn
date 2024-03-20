@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://jmtk2gh5wi58"]
+[gd_scene load_steps=13 format=3 uid="uid://jmtk2gh5wi58"]
 
 [ext_resource type="Script" path="res://scenes/landing_scene.gd" id="1_i1k2e"]
 [ext_resource type="TileSet" uid="uid://o26012k631mj" path="res://actors/landing_tileset.tres" id="1_x6ere"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://cpkq7adpo5sda" path="res://effects/pflower_theme.tres" id="3_dev2m"]
 [ext_resource type="Script" path="res://scripts/input_detector.gd" id="4_7iyl7"]
 [ext_resource type="PackedScene" uid="uid://11ybh23gwmu3" path="res://ui/settings_node.tscn" id="5_w6x6q"]
+[ext_resource type="Script" path="res://scripts/anima_wave.gd" id="6_82bno"]
 [ext_resource type="FontFile" uid="uid://6eyijpelyowj" path="res://assets/promptfont.otf" id="8_13h7b"]
 [ext_resource type="Script" path="res://scripts/language_switcher.gd" id="9_7ee0t"]
 
@@ -55,8 +56,9 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 65
 bbcode_enabled = true
-text = "[center] pFlower [/center]"
+text = "[center] [wave] pFlower [/wave][/center]"
 fit_content = true
+script = ExtResource("6_82bno")
 
 [node name="GraphicsSettingsNode" parent="." instance=ExtResource("5_w6x6q")]
 setting_text = "high graphics"
