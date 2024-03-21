@@ -10,6 +10,8 @@ radius = 33.6108
 height = 126.269
 
 [node name="Foot" type="Node2D"]
+z_index = 5
+y_sort_enabled = true
 script = ExtResource("2_cvjxq")
 
 [node name="ShadowSprite2D" type="Sprite2D" parent="."]

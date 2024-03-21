@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bac3yu22j43dy"]
+
+[ext_resource type="Script" path="res://scripts/level_changer.gd" id="1_nubip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lr5y4"]
+size = Vector2(64, 20)
+
+[node name="LevelChanger" type="Node2D"]
+visible = false
+z_index = 4
+position = Vector2(280, 208)
+script = ExtResource("1_nubip")
+level_name = "main_game"
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.5
+offset_top = -9.5
+offset_right = 23.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "level"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_lr5y4")
+disabled = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

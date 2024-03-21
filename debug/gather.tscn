@@ -19,10 +19,11 @@ point_count = 2
 position = Vector2(314, 200)
 script = ExtResource("1_veu8j")
 
-[node name="Path2D" type="Path2D" parent="Source"]
+[node name="Path2D" type="Path2D" parent="Source" node_paths=PackedStringArray("destination")]
 position = Vector2(-314, -200)
 curve = SubResource("Curve2D_mjxeq")
 script = ExtResource("1_n8ilc")
+destination = NodePath("../../Destination")
 velocity_profile = SubResource("Curve_76ykj")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Source/Path2D"]

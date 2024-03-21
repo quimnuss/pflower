@@ -220,4 +220,5 @@ noise = SubResource("FastNoiseLite_2v4lm")
 [connection signal="pressed" from="WinScene/VBoxContainer/HBoxContainer/Replay" to="." method="_on_replay_pressed"]
 [connection signal="pressed" from="WinScene/VBoxContainer/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="WinScene/CloseButton" to="WinScene" method="_on_close_button_pressed"]
+[connection signal="add_trauma" from="Enemies/FootSpawner" to="Camera2D" method="add_trauma"]
 [connection signal="timeout" from="Enemies/FootSpawner/FootSpawnTimer" to="Enemies/FootSpawner" method="_on_foot_spawn_timer_timeout"]

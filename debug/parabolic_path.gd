@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var destination = $"../Destination"
+@export var destination: Node2D
 @onready var path_follow_2d = $PathFollow2D
 
 @export var duration: float = 3

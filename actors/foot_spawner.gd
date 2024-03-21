@@ -5,7 +5,9 @@ var foot_scene = preload("res://actors/enemies/foot/foot.tscn")
 @onready var camera_2d = $"../../Camera2D"
 
 const HARD_WAIT_TIME: int = 10
-var wait_time: int = 20
+@export var wait_time: int = 20
+
+signal add_trauma(amount: float)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +28,10 @@ func random_position():
     return random_pos
 
 
+func add_trauma_proxy(amount: float):
+    add_trauma.emit(amount)
+
+
 func _on_game_won():
     foot_spawn_timer.stop()
 
@@ -33,5 +39,5 @@ func _on_game_won():
 func _on_foot_spawn_timer_timeout():
     var foot_enemy: Foot = foot_scene.instantiate()
     foot_enemy.global_position = random_position()
-    foot_enemy.stomped.connect(camera_2d.add_trauma.bind(0.8))
+    foot_enemy.stomped.connect(add_trauma_proxy)
     add_child(foot_enemy)

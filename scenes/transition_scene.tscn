@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://yxql4e0xnlmh"]
+[gd_scene load_steps=20 format=3 uid="uid://yxql4e0xnlmh"]
 
 [ext_resource type="Script" path="res://scenes/transition_scene.gd" id="1_f2rds"]
 [ext_resource type="TileSet" uid="uid://3wqiompnxjn0" path="res://actors/pflower_tileset.tres" id="3_rx4rp"]
@@ -10,6 +10,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://qr4hkr5vsu6l" path="res://imports/animations/stag_animation_library.tres" id="5_e2fo7"]
 [ext_resource type="FontFile" uid="uid://6eyijpelyowj" path="res://assets/promptfont.otf" id="9_q8dra"]
 [ext_resource type="PackedScene" uid="uid://dut87gxv0f1sf" path="res://actors/pfcamera.tscn" id="10_ajb6r"]
+[ext_resource type="PackedScene" uid="uid://bac3yu22j43dy" path="res://actors/level_changer.tscn" id="11_c5goc"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r8750"]
 polygon = PackedVector2Array(-13, -3, -10, -20, 1, -21, 3, -27, 17, -27, 15, -3)
@@ -156,6 +157,14 @@ position = Vector2(1344.75, 256)
 scale = Vector2(1.86133, -31)
 texture = SubResource("CurveTexture_17ne4")
 
+[node name="LevelChangerBoss" parent="." instance=ExtResource("11_c5goc")]
+
+[node name="LevelChanger1" parent="." instance=ExtResource("11_c5goc")]
+position = Vector2(152, 368)
+level_name = "level0"
+
+[connection signal="cheats" from="." to="LevelChangerBoss" method="activate_cheats"]
+[connection signal="cheats" from="." to="LevelChanger1" method="activate_cheats"]
 [connection signal="body_entered" from="OracleAnimal/Area2D" to="OracleAnimal" method="_on_area_2d_body_entered"]
 [connection signal="body_shape_entered" from="OracleAnimal/Area2D" to="OracleAnimal" method="_on_area_2d_body_shape_entered"]
 [connection signal="body_shape_exited" from="OracleAnimal/Area2D" to="OracleAnimal" method="_on_area_2d_body_shape_exited"]

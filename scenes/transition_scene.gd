@@ -5,6 +5,10 @@ extends Node2D
 @onready var collision_shape_2d = $OracleAnimal/Area2D2/CollisionShape2D
 @onready var progress_block = $ToLevel1/StaticBody2D/ProgressBlock
 
+const EXIT_SPEED: int = 100
+
+signal cheats
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,6 +47,12 @@ func start_dialog():
         give_abilities_and_unlock_exit()
 
 
+func _input(event):
+    if event.is_action_pressed("cheat_action"):
+        prints("cheats activated")
+        cheats.emit()
+
+
 func _on_area_2d_2_body_entered(body):
     if body is Animal and not Dialogic.VAR.has_oracle_gift:
         start_dialog()
@@ -50,9 +60,6 @@ func _on_area_2d_2_body_entered(body):
     else:
         #TODO activate speak interactible area button
         pass
-
-
-const EXIT_SPEED: int = 100
 
 
 func _on_to_level_1_body_entered(_body):
