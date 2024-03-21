@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8lq6ebqmtmra"]
+
+[ext_resource type="Script" path="res://debug/parabolic_path.gd" id="1_n8ilc"]
+[ext_resource type="Script" path="res://debug/parabolic_spawner.gd" id="1_veu8j"]
+
+[sub_resource type="Curve2D" id="Curve2D_mjxeq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 311, 202, 191.034, 143.088, -191.034, -143.088, 221, 34, 0, 0, 0, 0, 221, 34)
+}
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_76ykj"]
+_data = [Vector2(0.0105263, 0), 0.0, 2.78388, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Gather" type="Node2D"]
+
+[node name="Source" type="Marker2D" parent="."]
+position = Vector2(314, 200)
+script = ExtResource("1_veu8j")
+
+[node name="Path2D" type="Path2D" parent="Source"]
+position = Vector2(-314, -200)
+curve = SubResource("Curve2D_mjxeq")
+script = ExtResource("1_n8ilc")
+velocity_profile = SubResource("Curve_76ykj")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Source/Path2D"]
+position = Vector2(311, 202)
+rotation = -2.06261
+loop = false
+
+[node name="Polygon2D" type="Polygon2D" parent="Source/Path2D/PathFollow2D"]
+position = Vector2(0.346313, 3.58888)
+rotation = 2.06261
+color = Color(0, 0.8, 0.8, 1)
+polygon = PackedVector2Array(-12, 7, 7, 17, 26, -6, 0, -21, -15, -11)
+
+[node name="Timer" type="Timer" parent="Source"]
+wait_time = 2.0
+autostart = true
+
+[node name="Destination" type="Marker2D" parent="."]
+position = Vector2(218, 31)
+
+[connection signal="timeout" from="Source/Timer" to="Source" method="_on_timer_timeout"]
