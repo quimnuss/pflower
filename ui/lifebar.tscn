@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://feditakosn3f"]
+
+[ext_resource type="Script" path="res://ui/lifebar.gd" id="1_kf11o"]
+[ext_resource type="Texture2D" uid="uid://cvlpoyesjm2qt" path="res://assets/heart.png" id="2_2jc8n"]
+
+[node name="Lifebar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_kf11o")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HealthContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Heart0" type="TextureRect" parent="MarginContainer/HealthContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_2jc8n")
+expand_mode = 2
+
+[node name="Heart1" type="TextureRect" parent="MarginContainer/HealthContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_2jc8n")
+expand_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="MarginContainer/HealthContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_2jc8n")
+expand_mode = 2

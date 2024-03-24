@@ -39,6 +39,7 @@ var player_controlled: bool = true
 @export var player_suffix: String = Globals.KEYBOARD_0
 
 signal dying
+signal hit
 
 
 static func New(_resource: Resource) -> Animal:
@@ -212,3 +213,7 @@ func _on_jump_anim_state_exited():
 
 func _on_jump_anim_state_physics_processing(delta):
     _physics_input_process(delta)
+
+
+func _on_death_anim_state_entered():
+    hit.emit()

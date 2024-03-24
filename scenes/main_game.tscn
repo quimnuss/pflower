@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bqnfq144njjq2"]
+[gd_scene load_steps=28 format=3 uid="uid://bqnfq144njjq2"]
 
 [ext_resource type="Script" path="res://scenes/main_game.gd" id="1_xysvl"]
 [ext_resource type="PackedScene" uid="uid://b215hr3wjtjj2" path="res://actors/player_animal.tscn" id="2_3xuic"]
@@ -6,10 +6,12 @@
 [ext_resource type="Resource" uid="uid://crgbo8a84f4jd" path="res://data/lifeform_fox.tres" id="4_necrv"]
 [ext_resource type="PackedScene" uid="uid://cxc7pvmxvkq66" path="res://ui/ui_restoration.tscn" id="5_gj2hb"]
 [ext_resource type="Script" path="res://scenes/win_scene.gd" id="5_sc7qb"]
+[ext_resource type="PackedScene" uid="uid://feditakosn3f" path="res://ui/lifebar.tscn" id="6_ihsqc"]
 [ext_resource type="Texture2D" uid="uid://6h388o0oeq81" path="res://assets/you_win.png" id="6_iu6qq"]
 [ext_resource type="Texture2D" uid="uid://bj1tvwbelj52y" path="res://assets/iconset_vectorized.png" id="7_74ejf"]
 [ext_resource type="Script" path="res://actors/enemies/bulldozer/enemy_follow_progress_ratio.gd" id="7_khplb"]
 [ext_resource type="PackedScene" uid="uid://cr58cstf8m327" path="res://actors/enemies/bulldozer/enemy_bulldozer.tscn" id="7_mk7ak"]
+[ext_resource type="Texture2D" uid="uid://b6lmptuhwsdrh" path="res://assets/you_lose.png" id="9_h5wvo"]
 [ext_resource type="Script" path="res://actors/foot_spawner.gd" id="10_xkoea"]
 [ext_resource type="Script" path="res://components/movement_tail.gd" id="11_j6oly"]
 [ext_resource type="Script" path="res://actors/Camera2D.gd" id="13_qy7y0"]
@@ -23,6 +25,10 @@ gradient = SubResource("Gradient_3bgph")
 fill = 1
 fill_from = Vector2(0.5, 0.512821)
 fill_to = Vector2(1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14ejm"]
+atlas = ExtResource("7_74ejf")
+region = Rect2(500, 0, 125, 125)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l13th"]
 atlas = ExtResource("7_74ejf")
@@ -109,6 +115,10 @@ polygon = PackedVector2Array(16, 16, 624, 16, 624, 496, 16, 496)
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource("5_gj2hb")]
 
+[node name="Lifebar" parent="CanvasLayer" instance=ExtResource("6_ihsqc")]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
 [node name="WinScene" type="CanvasLayer" parent="."]
 visible = false
 follow_viewport_enabled = true
@@ -134,16 +144,29 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="TextureRect" type="TextureRect" parent="WinScene/VBoxContainer/AspectRatioContainer/MarginContainer"]
+[node name="YouWin" type="TextureRect" parent="WinScene/VBoxContainer/AspectRatioContainer/MarginContainer"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 texture = ExtResource("6_iu6qq")
 expand_mode = 2
 stretch_mode = 5
 
+[node name="YouLose" type="TextureRect" parent="WinScene/VBoxContainer/AspectRatioContainer/MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+texture = ExtResource("9_h5wvo")
+expand_mode = 4
+stretch_mode = 5
+
 [node name="HBoxContainer" type="HBoxContainer" parent="WinScene/VBoxContainer"]
 layout_mode = 2
 alignment = 1
+
+[node name="Retry" type="Button" parent="WinScene/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = SubResource("AtlasTexture_14ejm")
+flat = true
 
 [node name="Replay" type="Button" parent="WinScene/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -217,6 +240,7 @@ noise = SubResource("FastNoiseLite_2v4lm")
 [connection signal="restoration" from="." to="." method="_on_restoration_changed"]
 [connection signal="restoration" from="." to="CanvasLayer/Control" method="_on_main_game_restoration"]
 [connection signal="tile_changed" from="TileMap" to="." method="_on_tile_map_tile_changed"]
+[connection signal="pressed" from="WinScene/VBoxContainer/HBoxContainer/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="WinScene/VBoxContainer/HBoxContainer/Replay" to="." method="_on_replay_pressed"]
 [connection signal="pressed" from="WinScene/VBoxContainer/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="WinScene/CloseButton" to="WinScene" method="_on_close_button_pressed"]

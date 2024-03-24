@@ -12,6 +12,11 @@ const MOUSE_0: String = "mouse_0"
 const KEYBOARD_0: String = "keyboard_0"
 const KEYBOARD_1: String = "keyboard_1"
 
+const MAX_HEALTH: int = 3
+var health: int = MAX_HEALTH
+
+signal health_changed(new_health: int)
+
 var config = ConfigFile.new()
 
 var use_particles: bool = true:
@@ -62,6 +67,20 @@ func show_config():
     prints("use_particles", use_particles, "hard_difficulty", hard_difficulty, "language_code", language_code)
 
 
+func lower_health():
+    health -= 1
+    health_changed.emit(health)
+
+
+func increase_health():
+    health += 1
+    health_changed.emit(health)
+
+
+func reset_health():
+    health = MAX_HEALTH
+
+
 func add_player(player_data: PlayerData):
     players.append(player_data)
 
@@ -73,6 +92,7 @@ func load_players(spawn_position: Vector2 = Vector2i(0, 0)) -> Array[Animal]:
         var player_animal: Animal = Animal.from_settings(player_data)
         player_animal.global_position = spawn_position + Vector2(player_count * 75, 0)
         player_count += 1
+        player_animal.hit.connect(lower_health)
         animals.append(player_animal)
         player_animal.add_to_group(PLAYERS_GROUP)
     return animals

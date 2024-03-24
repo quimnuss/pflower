@@ -7,6 +7,7 @@ extends Node2D
 @onready var marker_2d = $Marker2D
 @onready var camera_2d = $Camera2D
 @onready var movement_tail = $Enemies/MovementTail
+@onready var lifebar = $CanvasLayer/Lifebar
 
 var world_size: int = 100
 
@@ -30,8 +31,13 @@ func _ready():
         for _animal in animals:
             self.add_child(_animal)
     else:
+        animal.hit.connect(Globals.lower_health)
         animal.add_to_group("players")
+        animal_2.hit.connect(Globals.lower_health)
         animal_2.add_to_group("players")
+
+    Globals.health_changed.connect(lifebar.set_health)
+    Globals.health_changed.connect(check_death)
 
     movement_tail.targets = get_tree().get_nodes_in_group("players")
 
@@ -58,11 +64,26 @@ func cell_changed(_tile_coords: Vector2i, previous_terrain_type: PfTileMap.TileT
 
 func win_game():
     game_ended = true
+    win_scene.set_has_won(true)
     win_scene.visible = true
     Input.start_joy_vibration(0, 0.25, 0.5, 2)
     Input.start_joy_vibration(1, 0.25, 0.5, 2)
     get_tree().call_group("enemies", "_on_game_won")
     tilemap.auto_restore()
+
+
+func lose_game():
+    game_ended = true
+    win_scene.set_has_won(false)
+    win_scene.visible = true
+    Input.start_joy_vibration(0, 0.25, 0.5, 2)
+    Input.start_joy_vibration(1, 0.25, 0.5, 2)
+    get_tree().call_group("enemies", "_on_game_won")
+
+
+func check_death(health: int):
+    if health == 0:
+        lose_game()
 
 
 func _on_restoration_changed(_restoration: float):
@@ -80,3 +101,8 @@ func _on_replay_pressed():
 
 func _on_exit_pressed():
     get_tree().quit()
+
+
+func _on_retry_pressed():
+    Globals.reset_health()
+    get_tree().reload_current_scene()
