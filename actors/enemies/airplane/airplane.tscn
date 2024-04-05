@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://clvgusfffirom"]
+
+[ext_resource type="Script" path="res://actors/enemies/airplane/airplane.gd" id="1_4g6hv"]
+[ext_resource type="SpriteFrames" uid="uid://bu4bt32eybubn" path="res://actors/enemies/airplane/airplane_sprite_frames.tres" id="1_bb3gq"]
+
+[node name="Airplane" type="Node2D"]
+z_index = 10
+script = ExtResource("1_4g6hv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+sprite_frames = ExtResource("1_bb3gq")
+frame = 3
+frame_progress = 0.172269
