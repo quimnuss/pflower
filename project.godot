@@ -342,10 +342,12 @@ locale/translations=PackedStringArray("res://i18n/pflower_i18n.ca.translation", 
 
 [layer_names]
 
+2d_render/layer_3="Enemies"
 2d_physics/layer_1="player"
 2d_physics/layer_2="terrain"
 2d_physics/layer_3="enemy"
 2d_physics/layer_4="limits"
+2d_physics/layer_5="player_hitbox"
 
 [rendering]
 

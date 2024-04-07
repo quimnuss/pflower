@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b215hr3wjtjj2"]
+[gd_scene load_steps=21 format=3 uid="uid://b215hr3wjtjj2"]
 
 [ext_resource type="Script" path="res://actors/player_animal.gd" id="1_su0uu"]
 [ext_resource type="Texture2D" uid="uid://bh3kruda7jagj" path="res://assets/lifeforms/outline/MiniDeer2.png" id="2_qchi3"]
@@ -19,6 +19,9 @@ polygon = PackedVector2Array(-13, -3, -10, -20, 1, -21, 3, -27, 17, -27, 15, -3)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrr2r"]
 radius = 8.96269
 height = 32.0465
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74xx0"]
+radius = 16.0312
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pqhh5"]
 radius = 12.0
@@ -67,6 +70,15 @@ collision_mask = 7
 position = Vector2(-1, -8)
 rotation = 1.58301
 shape = SubResource("CapsuleShape2D_mrr2r")
+
+[node name="DashHitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DashHitbox"]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_74xx0")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")

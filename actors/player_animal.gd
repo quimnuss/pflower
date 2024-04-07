@@ -33,6 +33,7 @@ const WAIT_FOR_KILLER_TIMEOUT = 6
 @onready var sprite = $Sprite2D
 @onready var highlight = $Highlight
 @onready var terrain_transform_collision = $Area2D/CollisionShape2D
+@onready var dash_hitbox_collision = $DashHitbox/CollisionShape2D
 
 var player_controlled: bool = true
 
@@ -202,8 +203,12 @@ var jump_multiplier: float = 3
 
 func _on_jump_anim_state_entered():
     speed = jump_multiplier * speed
+    dash_hitbox_collision.disabled = false
+    print("collisions", dash_hitbox_collision.disabled)
     await get_tree().create_timer(0.30).timeout
     speed = int(speed / jump_multiplier)
+    dash_hitbox_collision.disabled = true
+    print("collisions", dash_hitbox_collision.disabled)
 
 
 func _on_jump_anim_state_exited():

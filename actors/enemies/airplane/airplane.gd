@@ -1,6 +1,6 @@
 extends Node2D
 
-var hit_animation = preload("res://components/beast_hit.tscn")
+@onready var animation_player = $Hit/AnimationPlayer
 
 var speed = 100
 
@@ -22,16 +22,21 @@ func _input(event):
         hit()
 
 
-func destroyed():
-    queue_free()
-
-
 func hit():
-    var hit_scene: BeastHit = hit_animation.instantiate()
-    hit_scene.destroyed.connect(destroyed)
-    add_child(hit_scene)
+    animation_player.play("hit")
 
 
 func _on_area_2d_body_entered(body):
+    print(body)
     if body is Animal:
         hit()
+
+
+func _on_animation_player_animation_finished(anim_name):
+    match anim_name:
+        "hit":
+            queue_free()
+
+
+func _on_hurt_box_area_entered(area):
+    hit()
