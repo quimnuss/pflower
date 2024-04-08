@@ -153,8 +153,7 @@ script = ExtResource("1_4g6hv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
 sprite_frames = ExtResource("1_bb3gq")
-frame = 3
-frame_progress = 0.172269
+autoplay = "default"
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0

@@ -133,13 +133,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Airplane2" parent="." instance=ExtResource("9_2psmo")]
-position = Vector2(104, 224)
+position = Vector2(168, 528)
 
 [node name="Airplane" parent="." instance=ExtResource("9_2psmo")]
 position = Vector2(96, 656)
 
 [node name="Pollution" parent="." instance=ExtResource("10_0lonn")]
-position = Vector2(288, 248)
+position = Vector2(312, 304)
 
 [connection signal="restoration" from="RestorationGame" to="RestorationGame" method="_on_restoration_changed"]
 [connection signal="restoration" from="RestorationGame" to="CanvasLayer/Control" method="_on_restoration_changed"]

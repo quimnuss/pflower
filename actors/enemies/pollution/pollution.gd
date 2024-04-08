@@ -19,9 +19,6 @@ func _physics_process(delta):
 
 func _on_area_2d_body_entered(body):
     pass
-    print("hitcloud")
-    collision_shape_2d.disabled = true
-    animation_player.play("hit")
 
 
 func _on_animation_player_animation_finished(anim_name):
@@ -32,6 +29,5 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_area_2d_area_entered(area):
-    print("hitcloud")
     collision_shape_2d.disabled = true
     animation_player.play("hit")
