@@ -34,4 +34,4 @@ func _on_restoration_game_restoration_complete():
 
 func _on_raft_exit_level():
     await get_tree().create_timer(3).timeout
-    get_tree().change_scene_to_file("res://scenes/level1.tscn")
+    get_tree().change_scene_to_file("res://scenes/main_game.tscn")

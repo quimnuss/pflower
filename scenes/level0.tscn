@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://b821h6gtb3t5o"]
+[gd_scene load_steps=10 format=3 uid="uid://b13orhb8d1swo"]
 
-[ext_resource type="Script" path="res://scenes/level0.gd" id="1_2fcsr"]
+[ext_resource type="Script" path="res://scenes/level0.gd" id="1_d6p5w"]
 [ext_resource type="PackedScene" uid="uid://bax6uq2yi2cp" path="res://actors/tile_map.tscn" id="1_vejjh"]
 [ext_resource type="Script" path="res://actors/restoration_game.gd" id="2_5bfax"]
 [ext_resource type="Script" path="res://components/player_spawn.gd" id="2_k7vx5"]
@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cxc7pvmxvkq66" path="res://ui/ui_restoration.tscn" id="5_fsc5r"]
 [ext_resource type="Script" path="res://scenes/win_scene_mid.gd" id="7_1acrw"]
 [ext_resource type="Texture2D" uid="uid://6h388o0oeq81" path="res://assets/you_win.png" id="8_3t2tj"]
-[ext_resource type="PackedScene" uid="uid://clvgusfffirom" path="res://actors/enemies/airplane/airplane.tscn" id="9_tromg"]
-[ext_resource type="PackedScene" uid="uid://ycaelg30yfoe" path="res://actors/enemies/pollution/pollution.tscn" id="10_bce34"]
 
 [sub_resource type="Curve" id="Curve_ad3ia"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.8, 0.4), 1.15301, 1.15301, 0, 0, Vector2(1, 1), 3.42891, 0.0, 0, 0]
@@ -17,7 +15,7 @@ point_count = 3
 metadata/_snap_enabled = true
 
 [node name="Level0" type="Node2D"]
-script = ExtResource("1_2fcsr")
+script = ExtResource("1_d6p5w")
 
 [node name="RestorationGame" type="Node2D" parent="."]
 script = ExtResource("2_5bfax")
@@ -112,15 +110,6 @@ theme_override_font_sizes/font_size = 50
 text = "ECOSYSTEMRESTORED"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Airplane2" parent="." instance=ExtResource("9_tromg")]
-position = Vector2(42, 432)
-
-[node name="Airplane" parent="." instance=ExtResource("9_tromg")]
-position = Vector2(96, 656)
-
-[node name="Pollution" parent="." instance=ExtResource("10_bce34")]
-position = Vector2(163, 366)
 
 [connection signal="restoration" from="RestorationGame" to="RestorationGame" method="_on_restoration_changed"]
 [connection signal="restoration" from="RestorationGame" to="CanvasLayer/Control" method="_on_restoration_changed"]

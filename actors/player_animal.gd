@@ -103,7 +103,7 @@ func _input(event):
         if event.is_action_pressed("switch_skill_" + player_suffix) or mouse_movement and event is InputEventMouseButton and event.double_click:
             tile_type = (tile_type + 1) % 2
 
-        if event.is_action_pressed("jump_" + player_suffix):
+        elif event.is_action_pressed("jump_" + player_suffix) or mouse_movement and event is InputEventMouseButton and not event.double_click:
             state_machine.send_event("jump")
 
 

@@ -13,7 +13,7 @@ func _ready():
         self.global_position = Vector2i(500, 500)
 
 
-func _process(delta):
+func _physics_process(delta):
     position -= delta * Vector2(0, speed).rotated(rotation)
 
 
