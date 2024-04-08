@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=5 format=3 uid="uid://cnfrav1iraafw"]
+[gd_resource type="AnimationLibrary" load_steps=6 format=3 uid="uid://cnfrav1iraafw"]
 
 [sub_resource type="Animation" id="Animation_3djlv"]
 resource_name = "die"
@@ -66,10 +66,25 @@ tracks/0/keys = {
 "values": [Vector2i(0, 1), Vector2i(5, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_0cscx"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2i(0, 2), Vector2i(2, 2)]
+}
+
 [resource]
 _data = {
 "die": SubResource("Animation_3djlv"),
 "eat": SubResource("Animation_66pjr"),
 "idle": SubResource("Animation_rv8pb"),
+"jump": SubResource("Animation_0cscx"),
 "run": SubResource("Animation_6hotj")
 }
