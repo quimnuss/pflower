@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=5 format=3 uid="uid://ciy65nsqy47fc"]
+[gd_resource type="AnimationLibrary" load_steps=6 format=3 uid="uid://ciy65nsqy47fc"]
 
 [sub_resource type="Animation" id="Animation_kd156"]
 resource_name = "die"
@@ -71,10 +71,25 @@ tracks/0/keys = {
 "values": [Vector2i(0, 1), Vector2i(3, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_hitab"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2i(0, 1), Vector2i(0, 1)]
+}
+
 [resource]
 _data = {
 "die": SubResource("Animation_kd156"),
 "eat": SubResource("Animation_o34wm"),
 "idle": SubResource("Animation_0g4gu"),
+"jump": SubResource("Animation_hitab"),
 "run": SubResource("Animation_hisjf")
 }
