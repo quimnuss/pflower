@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b821h6gtb3t5o"]
+[gd_scene load_steps=14 format=3 uid="uid://b821h6gtb3t5o"]
 
 [ext_resource type="Script" path="res://scenes/level1.gd" id="1_0deof"]
 [ext_resource type="Script" path="res://actors/restoration_game.gd" id="2_w2nfk"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://components/player_spawn.gd" id="4_mh7fe"]
 [ext_resource type="PackedScene" uid="uid://dut87gxv0f1sf" path="res://actors/pfcamera.tscn" id="5_aqnnd"]
 [ext_resource type="PackedScene" uid="uid://cxc7pvmxvkq66" path="res://ui/ui_restoration.tscn" id="6_4mbcu"]
+[ext_resource type="Script" path="res://actors/edge_spawner.gd" id="7_pahkw"]
 [ext_resource type="Script" path="res://scenes/win_scene_mid.gd" id="7_sif5b"]
 [ext_resource type="Texture2D" uid="uid://6h388o0oeq81" path="res://assets/you_win.png" id="8_sjouq"]
 [ext_resource type="PackedScene" uid="uid://clvgusfffirom" path="res://actors/enemies/airplane/airplane.tscn" id="9_2psmo"]
@@ -53,6 +54,16 @@ script = ExtResource("4_mh7fe")
 [node name="Camera2D" parent="RestorationGame" node_paths=PackedStringArray("tile_map") instance=ExtResource("5_aqnnd")]
 position = Vector2(360, 312)
 tile_map = NodePath("../TileMap")
+
+[node name="Enemies" type="Node2D" parent="RestorationGame"]
+
+[node name="EdgeSpawner" type="Node2D" parent="RestorationGame/Enemies"]
+script = ExtResource("7_pahkw")
+enemy_scene = ExtResource("9_2psmo")
+
+[node name="EdgeSpawnTimer" type="Timer" parent="RestorationGame/Enemies/EdgeSpawner"]
+wait_time = 5.0
+autostart = true
 
 [node name="RaftSpawn" type="Marker2D" parent="."]
 position = Vector2(720, 384)
@@ -133,7 +144,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Airplane2" parent="." instance=ExtResource("9_2psmo")]
-position = Vector2(168, 528)
+position = Vector2(672, 632)
 
 [node name="Airplane" parent="." instance=ExtResource("9_2psmo")]
 position = Vector2(96, 656)
@@ -146,3 +157,4 @@ position = Vector2(312, 304)
 [connection signal="restoration_complete" from="RestorationGame" to="." method="_on_restoration_game_restoration_complete"]
 [connection signal="restoration_complete" from="RestorationGame" to="win_scene" method="_on_restoration_game_restoration_complete"]
 [connection signal="tile_changed" from="RestorationGame/TileMap" to="RestorationGame" method="_on_tile_map_tile_changed"]
+[connection signal="timeout" from="RestorationGame/Enemies/EdgeSpawner/EdgeSpawnTimer" to="RestorationGame/Enemies/EdgeSpawner" method="_on_edge_spawn_timer_timeout"]
