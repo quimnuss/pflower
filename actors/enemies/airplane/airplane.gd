@@ -24,7 +24,10 @@ func _ready():
     else:
         label.visible = false
 
-    var target = get_tree().get_nodes_in_group("players").pick_random()
+    painter_node_2d.visible = false
+
+    var players = get_tree().get_nodes_in_group("players")
+    var target = players.pick_random() if players else null
     if target:
         look_at(target.global_position)
 
@@ -38,7 +41,7 @@ func _process(delta):
 
     elapsed += delta
     if is_blinking and fmod(elapsed, 2) != blink_on:
-        blink_on = fmod(elapsed, 2)
+        blink_on = fmod(elapsed, 2) as int
         blink_status(blink_on)
 
 
@@ -97,7 +100,7 @@ func _on_animation_player_animation_finished(anim_name):
             queue_free()
 
 
-func _on_hurt_box_area_entered(area):
+func _on_hurt_box_area_entered(_area):
     hit()
 
 

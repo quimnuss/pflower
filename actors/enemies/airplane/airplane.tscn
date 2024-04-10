@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://clvgusfffirom"]
+[gd_scene load_steps=27 format=3 uid="uid://clvgusfffirom"]
 
 [ext_resource type="Script" path="res://actors/enemies/airplane/airplane.gd" id="1_4g6hv"]
 [ext_resource type="SpriteFrames" uid="uid://bu4bt32eybubn" path="res://actors/enemies/airplane/airplane_sprite_frames.tres" id="1_bb3gq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c8m7x2mhyfklk" path="res://assets/claw_hit.png" id="3_6sa3n"]
 [ext_resource type="Texture2D" uid="uid://c2xmjll0osln2" path="res://assets/spray.png" id="3_57t4e"]
 [ext_resource type="Texture2D" uid="uid://cxk5yaceuawth" path="res://assets/explosion_1_sheet.png" id="4_kjmnw"]
+[ext_resource type="AudioStream" uid="uid://cqhslxlgviklw" path="res://assets/audio/airplane.wav" id="7_3fkpc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xrsm"]
 atlas = ExtResource("3_57t4e")
@@ -110,7 +111,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rd74c"]
-size = Vector2(20, 59)
+size = Vector2(12, 31.3333)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c2b2e"]
 radius = 12.0
@@ -255,6 +256,7 @@ _data = {
 [node name="Airplane" type="Node2D"]
 light_mask = 4
 z_index = 10
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_4g6hv")
 
 [node name="Label" type="Label" parent="."]
@@ -268,7 +270,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PainterNode2D" type="Node2D" parent="."]
-visible = false
 script = ExtResource("3_3tb8l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PainterNode2D"]
@@ -276,14 +277,14 @@ modulate = Color(0, 1, 0, 1)
 position = Vector2(-39, 0)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_v6tit")
-animation = &"stop"
+animation = &"paint"
 
 [node name="PaintArea2D" type="Area2D" parent="PainterNode2D"]
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PainterNode2D/PaintArea2D"]
-position = Vector2(-54, 0)
+position = Vector2(-54.6667, -0.333333)
 shape = SubResource("RectangleShape2D_rd74c")
 disabled = true
 
@@ -328,6 +329,12 @@ one_shot = true
 [node name="TriggerTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_3fkpc")
+volume_db = -15.0
+pitch_scale = 0.5
+autoplay = true
 
 [connection signal="animation_finished" from="PainterNode2D/AnimatedSprite2D" to="PainterNode2D" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_shape_entered" from="PainterNode2D/PaintArea2D" to="PainterNode2D" method="_on_paint_area_2d_body_shape_entered"]

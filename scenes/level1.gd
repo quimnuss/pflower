@@ -29,6 +29,7 @@ func win_game():
 
 
 func _on_restoration_game_restoration_complete():
+    get_tree().call_group("enemy_spawner", "stop")
     win_game()
 
 

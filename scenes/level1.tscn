@@ -62,7 +62,7 @@ script = ExtResource("7_pahkw")
 enemy_scene = ExtResource("9_2psmo")
 
 [node name="EdgeSpawnTimer" type="Timer" parent="RestorationGame/Enemies/EdgeSpawner"]
-wait_time = 5.0
+wait_time = 8.0
 autostart = true
 
 [node name="RaftSpawn" type="Marker2D" parent="."]

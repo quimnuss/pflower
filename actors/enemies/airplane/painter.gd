@@ -23,7 +23,7 @@ func stop():
     collision_shape_2d.disabled = true
 
 
-func _on_paint_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_paint_area_2d_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
     if body is PfTileMap:
         var collided_tilemap = body as PfTileMap
         var tile_coords = collided_tilemap.get_coords_for_body_rid(body_rid)
