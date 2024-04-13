@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmxsc78yib15r"]
+
+[ext_resource type="Script" path="res://components/ghost.gd" id="1_o2ku6"]
+
+[node name="Ghost" type="Node2D"]
+script = ExtResource("1_o2ku6")
+
+[node name="GhostTimer" type="Timer" parent="."]
