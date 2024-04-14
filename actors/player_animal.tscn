@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://b215hr3wjtjj2"]
+[gd_scene load_steps=22 format=3 uid="uid://b215hr3wjtjj2"]
 
 [ext_resource type="Script" path="res://actors/player_animal.gd" id="1_su0uu"]
 [ext_resource type="Texture2D" uid="uid://bh3kruda7jagj" path="res://assets/lifeforms/outline/MiniDeer2.png" id="2_qchi3"]
+[ext_resource type="PackedScene" uid="uid://dmxsc78yib15r" path="res://components/ghost.tscn" id="3_6vpot"]
 [ext_resource type="AnimationLibrary" uid="uid://qr4hkr5vsu6l" path="res://imports/animations/stag_animation_library.tres" id="3_48afk"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="5_tfg4b"]
 [ext_resource type="Texture2D" uid="uid://bwmrywg6b78xc" path="res://imports/Generic Status Icons.png" id="6_m10ie"]
@@ -79,6 +80,9 @@ collision_mask = 0
 position = Vector2(0, -13)
 shape = SubResource("CircleShape2D_74xx0")
 disabled = true
+
+[node name="Ghost" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("3_6vpot")]
+sprite = NodePath("../Sprite2D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")

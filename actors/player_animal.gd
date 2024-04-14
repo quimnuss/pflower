@@ -204,7 +204,9 @@ var jump_multiplier: float = 3
 func _on_jump_anim_state_entered():
     speed = jump_multiplier * speed
     dash_hitbox_collision.disabled = false
+    $Ghost.set_process(true)
     await get_tree().create_timer(0.30).timeout
+    $Ghost.set_process(false)
     speed = int(speed / jump_multiplier)
     dash_hitbox_collision.disabled = true
 
