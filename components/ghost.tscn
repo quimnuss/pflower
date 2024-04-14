@@ -1,6 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmxsc78yib15r"]
+[gd_scene load_steps=7 format=3 uid="uid://dmxsc78yib15r"]
 
 [ext_resource type="Script" path="res://components/ghost.gd" id="1_o2ku6"]
+[ext_resource type="Texture2D" uid="uid://ch5y181mkhmc2" path="res://assets/dust.png" id="2_770be"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xbv2x"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_4fg1q"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ihsbw"]
+gradient = SubResource("Gradient_4fg1q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h11ak"]
+lifetime_randomness = 0.7
+particle_flag_disable_z = true
+angle_max = 360.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.8
+color_ramp = SubResource("GradientTexture1D_ihsbw")
+anim_speed_max = 1.0
 
 [node name="Ghost" type="Node2D"]
 script = ExtResource("1_o2ku6")
+
+[node name="Dust" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_xbv2x")
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_h11ak")
+texture = ExtResource("2_770be")
+lifetime = 1.2
+explosiveness = 0.8
