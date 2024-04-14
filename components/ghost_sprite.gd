@@ -2,12 +2,10 @@ extends Sprite2D
 
 class_name GhostSprite
 
-var tween: Tween
-
 
 func _ready():
-    tween = get_tree().create_tween()
-    tween.tween_property(self, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN)
+    var tween = get_tree().create_tween()
+    tween.tween_property(self, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
     tween.play()
     tween.finished.connect(destroy)
 
@@ -17,7 +15,7 @@ func destroy():
 
 
 static func Instance(sprite: Sprite2D) -> GhostSprite:
-    var ghost_scene = preload("res://components/GhostSprite.tscn").instantiate()
+    var ghost_scene = load("res://components/ghost_sprite.tscn").instantiate()
     ghost_scene.global_position = sprite.global_position
     ghost_scene.texture = sprite.texture
     ghost_scene.vframes = sprite.vframes

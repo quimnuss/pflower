@@ -21,6 +21,7 @@ size = Vector2(96, 20)
 script = ExtResource("1_i1k2e")
 
 [node name="TileMap" type="TileMap" parent="."]
+z_index = -5
 tile_set = ExtResource("1_x6ere")
 format = 2
 layer_0/name = "Background"

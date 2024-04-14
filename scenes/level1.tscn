@@ -25,6 +25,7 @@ script = ExtResource("1_0deof")
 script = ExtResource("2_w2nfk")
 
 [node name="TileMap" type="TileMap" parent="RestorationGame"]
+z_index = -5
 y_sort_enabled = true
 tile_set = ExtResource("3_4ehvp")
 collision_visibility_mode = 2

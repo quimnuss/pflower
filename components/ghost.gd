@@ -19,7 +19,3 @@ func _process(delta):
 func instance_ghost():
     var ghost: Sprite2D = GhostSprite.Instance(sprite)
     get_parent().get_parent().add_child(ghost)
-
-
-func _on_ghost_timer_timeout():
-    instance_ghost()

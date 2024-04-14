@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7543ntfhvgw"]
+
+[ext_resource type="Material" uid="uid://i6jsxd0bj7wb" path="res://effects/ghost_sprite_shader_material.tres" id="1_kdltn"]
+[ext_resource type="Script" path="res://components/ghost_sprite.gd" id="2_ek6ka"]
+[ext_resource type="Texture2D" uid="uid://dugy8hapw0nyi" path="res://pixel_splash.svg" id="2_p6n4v"]
+
+[node name="GhostSprite" type="Sprite2D"]
+material = ExtResource("1_kdltn")
+texture = ExtResource("2_p6n4v")
+script = ExtResource("2_ek6ka")
