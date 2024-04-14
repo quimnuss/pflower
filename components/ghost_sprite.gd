@@ -4,6 +4,7 @@ class_name GhostSprite
 
 
 func _ready():
+    self.modulate = Color(10, 10, 10, 0.7)
     var tween = get_tree().create_tween()
     tween.tween_property(self, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
     tween.play()

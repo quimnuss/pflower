@@ -205,7 +205,9 @@ func _on_jump_anim_state_entered():
     speed = jump_multiplier * speed
     dash_hitbox_collision.disabled = false
     $Ghost.set_process(true)
+    $Sprite2D.modulate = Color(10, 10, 10, 0.4)
     await get_tree().create_timer(0.30).timeout
+    $Sprite2D.modulate = Color(1, 1, 1, 1)
     $Ghost.set_process(false)
     speed = int(speed / jump_multiplier)
     dash_hitbox_collision.disabled = true
