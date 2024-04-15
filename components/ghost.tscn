@@ -33,7 +33,6 @@ script = ExtResource("1_o2ku6")
 
 [node name="Dust" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_xbv2x")
-position = Vector2(0, 28)
 process_material = SubResource("ParticleProcessMaterial_h11ak")
 texture = ExtResource("2_770be")
 lifetime = 1.2
@@ -41,9 +40,8 @@ explosiveness = 0.8
 
 [node name="DustBurst" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_xbv2x")
-position = Vector2(0, 28)
 amount = 14
 process_material = SubResource("ParticleProcessMaterial_tmks8")
 texture = ExtResource("2_770be")
 lifetime = 1.5
-explosiveness = 0.8
+explosiveness = 1.0

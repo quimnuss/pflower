@@ -1,8 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7543ntfhvgw"]
+[gd_scene load_steps=5 format=3 uid="uid://b7543ntfhvgw"]
 
+[ext_resource type="Shader" uid="uid://c547yvuvjokt4" path="res://effects/ghost_sprite.tres" id="1_qa82c"]
 [ext_resource type="Script" path="res://components/ghost_sprite.gd" id="2_ek6ka"]
 [ext_resource type="Texture2D" uid="uid://dugy8hapw0nyi" path="res://pixel_splash.svg" id="2_p6n4v"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_utyxw"]
+resource_local_to_scene = true
+shader = ExtResource("1_qa82c")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
 [node name="GhostSprite" type="Sprite2D"]
+material = SubResource("ShaderMaterial_utyxw")
 texture = ExtResource("2_p6n4v")
 script = ExtResource("2_ek6ka")
